@@ -3,11 +3,11 @@
   <title>HappyCoder&#39;Home</title>
   
   
-  <link href="https://zhangkaibin0921.github.io/project/atom.xml" rel="self"/>
+  <link href="https://zhangkaibin0921.github.io/atom.xml" rel="self"/>
   
-  <link href="https://zhangkaibin0921.github.io/project/"/>
+  <link href="https://zhangkaibin0921.github.io/"/>
   <updated>2021-10-24T13:24:49.156Z</updated>
-  <id>https://zhangkaibin0921.github.io/project/</id>
+  <id>https://zhangkaibin0921.github.io/</id>
   
   <author>
     <name>zhangkaibin</name>
@@ -18,8 +18,8 @@
   
   <entry>
     <title></title>
-    <link href="https://zhangkaibin0921.github.io/project/2021/10/24/first/"/>
-    <id>https://zhangkaibin0921.github.io/project/2021/10/24/first/</id>
+    <link href="https://zhangkaibin0921.github.io/2021/10/24/first/"/>
+    <id>https://zhangkaibin0921.github.io/2021/10/24/first/</id>
     <published>2021-10-24T13:24:19.532Z</published>
     <updated>2021-10-24T13:24:49.156Z</updated>
     
@@ -38,8 +38,8 @@
   
   <entry>
     <title>Hello World</title>
-    <link href="https://zhangkaibin0921.github.io/project/2021/10/24/hello-world/"/>
-    <id>https://zhangkaibin0921.github.io/project/2021/10/24/hello-world/</id>
+    <link href="https://zhangkaibin0921.github.io/2021/10/24/hello-world/"/>
+    <id>https://zhangkaibin0921.github.io/2021/10/24/hello-world/</id>
     <published>2021-10-24T08:30:40.072Z</published>
     <updated>2021-10-24T08:30:40.072Z</updated>
     
