@@ -22,7 +22,7 @@
 
   
 
-  <title>reverse ez_xor writeup | HappyCoder&#39;Home</title>
+  <title>Crypto在线解密网站 | HappyCoder&#39;Home</title>
 
   
 
@@ -97,11 +97,11 @@
     <div class="header-content">
       <div class="post-text layout-block">
         <div class="layout-margin">
-          <h1 class="title-wrap">reverse ez_xor writeup</h1>
+          <h1 class="title-wrap">Crypto在线解密网站</h1>
           <h2 class="title-sub-wrap">
             <strong>zhangkaibin</strong>
             <span>发布于</span>
-            <time  class="article-date" datetime="2021-11-28T11:17:01.000Z" itemprop="datePublished">2021-11-28</time>
+            <time  class="article-date" datetime="2021-11-28T12:40:20.000Z" itemprop="datePublished">2021-11-28</time>
           </h2>
           <ul class="wrap-list dark">
   
@@ -130,12 +130,8 @@
       
       
       <section class="article-entry markdown-body layout-margin content-padding--large soft-size--large soft-style--box">
-        <p>拿到ez_xor.exe附件直接丢进PE<br><img src="https://img-blog.csdnimg.cn/2a919819266940108748e2605589b227.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA5byA5b-D5pif5Lq6,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
-<p>可以看到是64位exe文件，丢进ida64<br>Shift+F12查看字符串（如果是笔记本电脑的话，F12自带热键，先按Fn，即Fn+Shift+F12）<br><img src="https://img-blog.csdnimg.cn/6204f03ae29740ff9039c7cfc41b3fa8.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA5byA5b-D5pif5Lq6,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"><br>一般在这里找有没有和flag相关的字符串，可以看到这里是有的，双击进入<br><img src="https://img-blog.csdnimg.cn/064b1084cb0745d6b4beb3bdc19f2c8a.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA5byA5b-D5pif5Lq6,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"><br>找到该字符串，点击上图所示，进入main方法<br>会进入流程图界面，按空格进入文本界面<br>可以看到汇编代码了，按F5（同理如果是笔记本记得按Fn+F5）反汇编，转换成C语言<br><img src="https://img-blog.csdnimg.cn/40c5945e9d804f2a8b9ce453e8960077.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA5byA5b-D5pif5Lq6,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"><br>现在就可以分析代码了，这里的C语言可能数据类型之类的会和我们平时的有点不一样<br>比如说这里的v3=0i64，0i64表示int64_t类型的0，其实就基本上可以理解为0<br>这里代码可以看到关键异或代码while ( (char)(v3 ^ v5[v3]) == dword_403020[v3] )<br><img src="https://img-blog.csdnimg.cn/c717f970db7d4487b7eafd0a6e1f18f2.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA5byA5b-D5pif5Lq6,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/6143bf343b1c42e3a388745da52b5818.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA5byA5b-D5pif5Lq6,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"><br>可以看到该字符串每个字符对应的ASCII码（这里按R键即可看到对应的字符）<br>现在已知dword_403020和v3（v3就是0~31），逐个进行异或即可得到flag</p>
-<p>写一个Python脚本</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">s=[<span class="number">0x35</span>, <span class="number">0x62</span>, <span class="number">0x37</span>, <span class="number">0x30</span>, <span class="number">0x33</span>, <span class="number">0x3D</span>, <span class="number">0x60</span>, <span class="number">0x63</span>, <span class="number">0x3F</span>, <span class="number">0x3D</span>, <span class="number">0x6C</span>,<span class="number">0x69</span>, <span class="number">0x6D</span>, <span class="number">0x6F</span>, <span class="number">0x68</span>, <span class="number">0x6D</span>, <span class="number">0x72</span>, <span class="number">0x77</span>, <span class="number">0x20</span>, <span class="number">0x70</span>, <span class="number">0x76</span>, <span class="number">0x73</span>,<span class="number">0x72</span>, <span class="number">0x2F</span>, <span class="number">0x2E</span>, <span class="number">0x21</span>, <span class="number">0x7E</span>, <span class="number">0x2B</span>, <span class="number">0x28</span>, <span class="number">0x25</span>, <span class="number">0x2C</span>, <span class="number">0x29</span>]</span><br><span class="line">flag=[<span class="number">0</span> <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">32</span>)] <span class="comment">#从给出的代码很容易看到flag是32位的</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">32</span>):</span><br><span class="line">    flag[i]=i^s[i]</span><br><span class="line"><span class="built_in">print</span>(flag)</span><br></pre></td></tr></table></figure>
-
-<p>即可得出flag</p>
+        <p><a target="_blank" rel="noopener" href="https://cmd5.com/">MD5</a><br><a target="_blank" rel="noopener" href="http://tool.geekapp.cn/">MD5加密</a><br><a target="_blank" rel="noopener" href="https://www.qqxiuzi.cn/bianma/zhalanmima.php">栏栅密码</a><br><a target="_blank" rel="noopener" href="http://www.urlencode.com.cn/">url</a><br><a target="_blank" rel="noopener" href="http://www.hiencode.com/rot13.html">ROT13</a><br><a target="_blank" rel="noopener" href="http://www.txttool.com/t/?id=Mzg1">morse</a><br><a target="_blank" rel="noopener" href="http://www.hiencode.com/quoted.html">Quoted-printable</a><br><a target="_blank" rel="noopener" href="https://www.qqxiuzi.cn/bianma/kaisamima.php">凯撒</a><br><a target="_blank" rel="noopener" href="https://quipqiup.com/">进阶凯撒爆破</a><br><a target="_blank" rel="noopener" href="https://www.codeeeee.com/encrypt/rabbit.html">Rabbit</a><br><a target="_blank" rel="noopener" href="http://tools.jb51.net/jisuanqi/factor_calc">分解质因数</a><br><a target="_blank" rel="noopener" href="http://tool.geekapp.cn/base64.php">Base64</a><br><a target="_blank" rel="noopener" href="https://ctf.bugku.com/tool/base32">Base32</a><br><a target="_blank" rel="noopener" href="https://ctf.bugku.com/tool/base16">Base16</a><br><a target="_blank" rel="noopener" href="http://code.mcdvisa.com/">中文电码</a><br><a target="_blank" rel="noopener" href="https://www.xiao84.com/tools/103177.html">猪圈密码</a><br><a target="_blank" rel="noopener" href="http://www.hiencode.com/uu.html">UUencode</a><br><a target="_blank" rel="noopener" href="https://www.sojson.com/hexadecimal.html">十六进制转文本</a><br><a target="_blank" rel="noopener" href="https://www.bugku.com/tools/jsfuck/#">jsfuck</a><br><a target="_blank" rel="noopener" href="http://hi.pcmoe.net/buddha.html">与佛论禅+MD5+兽音+熊音+AES+BASE64</a><br><a target="_blank" rel="noopener" href="http://www.hiencode.com/cvencode.html">核心价值观</a><br><a target="_blank" rel="noopener" href="https://www.qqxiuzi.cn/bianma/rot5-13-18-47.php">ROT5/13/18/47编码转换</a></p>
+<hr style=" border:solid; width:100px; height:1px;" color=#0000FF size=3">
 
       </section>
 
@@ -143,28 +139,14 @@
       
         <nav class="article-nav">
           
-            <div class="article-nav-item layout-padding">
-  <article class="card-container article-nav-card content-padding--primary soft-size--large soft-style--box">
-    
-    <div class="card-text">
-      
-        <a href="/2021/11/28/Crypto%E5%9C%A8%E7%BA%BF%E8%A7%A3%E5%AF%86%E7%BD%91%E7%AB%99/" itemprop="url">
-          <h2 class="card-text--title text-ellipsis">Crypto在线解密网站</h2>
-        </a>
-      
-      <div class="card-text--row">Newer</div>
-    </div>
-  </article>
-</div>
-          
           
             <div class="article-nav-item layout-padding">
   <article class="card-container article-nav-card content-padding--primary soft-size--large soft-style--box">
     
     <div class="card-text">
       
-        <a href="/2021/10/24/hello-world/" itemprop="url">
-          <h2 class="card-text--title text-ellipsis">Hello World</h2>
+        <a href="/2021/11/28/reverse-ez-xor-writeup/" itemprop="url">
+          <h2 class="card-text--title text-ellipsis">reverse ez_xor writeup</h2>
         </a>
       
       <div class="card-text--row">Older</div>
