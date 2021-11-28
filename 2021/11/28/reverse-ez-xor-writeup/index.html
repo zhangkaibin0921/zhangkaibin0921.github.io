@@ -22,7 +22,7 @@
 
   
 
-  <title>Hello World | HappyCoder&#39;Home</title>
+  <title>reverse ez_xor writeup | HappyCoder&#39;Home</title>
 
   
 
@@ -97,11 +97,11 @@
     <div class="header-content">
       <div class="post-text layout-block">
         <div class="layout-margin">
-          <h1 class="title-wrap">Hello World</h1>
+          <h1 class="title-wrap">reverse ez_xor writeup</h1>
           <h2 class="title-sub-wrap">
             <strong>zhangkaibin</strong>
             <span>发布于</span>
-            <time  class="article-date" datetime="2021-10-24T08:30:40.072Z" itemprop="datePublished">2021-10-24</time>
+            <time  class="article-date" datetime="2021-11-28T11:17:01.000Z" itemprop="datePublished">2021-11-28</time>
           </h2>
           <ul class="wrap-list dark">
   
@@ -130,19 +130,12 @@
       
       
       <section class="article-entry markdown-body layout-margin content-padding--large soft-size--large soft-style--box">
-        <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+        <p>拿到ez_xor.exe附件直接丢进PE<br><img src="https://img-blog.csdnimg.cn/2a919819266940108748e2605589b227.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA5byA5b-D5pif5Lq6,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
+<p>可以看到是64位exe文件，丢进ida64<br>Shift+F12查看字符串（如果是笔记本电脑的话，F12自带热键，先按Fn，即Fn+Shift+F12）<br><img src="https://img-blog.csdnimg.cn/6204f03ae29740ff9039c7cfc41b3fa8.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA5byA5b-D5pif5Lq6,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"><br>一般在这里找有没有和flag相关的字符串，可以看到这里是有的，双击进入<br><img src="https://img-blog.csdnimg.cn/064b1084cb0745d6b4beb3bdc19f2c8a.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA5byA5b-D5pif5Lq6,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"><br>找到该字符串，点击上图所示，进入main方法<br>会进入流程图界面，按空格进入文本界面<br>可以看到汇编代码了，按F5（同理如果是笔记本记得按Fn+F5）反汇编，转换成C语言<br><img src="https://img-blog.csdnimg.cn/40c5945e9d804f2a8b9ce453e8960077.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA5byA5b-D5pif5Lq6,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"><br>现在就可以分析代码了，这里的C语言可能数据类型之类的会和我们平时的有点不一样<br>比如说这里的v3=0i64，0i64表示int64_t类型的0，其实就基本上可以理解为0<br>这里代码可以看到关键异或代码while ( (char)(v3 ^ v5[v3]) == dword_403020[v3] )<br><img src="https://img-blog.csdnimg.cn/c717f970db7d4487b7eafd0a6e1f18f2.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA5byA5b-D5pif5Lq6,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/6143bf343b1c42e3a388745da52b5818.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA5byA5b-D5pif5Lq6,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"><br>可以看到该字符串每个字符对应的ASCII码（这里按R键即可看到对应的字符）<br>现在已知dword_403020和v3（v3就是0~31），逐个进行异或即可得到flag</p>
+<p>写一个Python脚本</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">s=[<span class="number">0x35</span>, <span class="number">0x62</span>, <span class="number">0x37</span>, <span class="number">0x30</span>, <span class="number">0x33</span>, <span class="number">0x3D</span>, <span class="number">0x60</span>, <span class="number">0x63</span>, <span class="number">0x3F</span>, <span class="number">0x3D</span>, <span class="number">0x6C</span>,<span class="number">0x69</span>, <span class="number">0x6D</span>, <span class="number">0x6F</span>, <span class="number">0x68</span>, <span class="number">0x6D</span>, <span class="number">0x72</span>, <span class="number">0x77</span>, <span class="number">0x20</span>, <span class="number">0x70</span>, <span class="number">0x76</span>, <span class="number">0x73</span>,<span class="number">0x72</span>, <span class="number">0x2F</span>, <span class="number">0x2E</span>, <span class="number">0x21</span>, <span class="number">0x7E</span>, <span class="number">0x2B</span>, <span class="number">0x28</span>, <span class="number">0x25</span>, <span class="number">0x2C</span>, <span class="number">0x29</span>]</span><br><span class="line">flag=[<span class="number">0</span> <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">32</span>)] <span class="comment">#从给出的代码很容易看到flag是32位的</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">32</span>):</span><br><span class="line">    flag[i]=i^s[i]</span><br><span class="line"><span class="built_in">print</span>(flag)</span><br></pre></td></tr></table></figure>
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+<p>即可得出flag</p>
 
       </section>
 
@@ -150,20 +143,20 @@
       
         <nav class="article-nav">
           
+          
             <div class="article-nav-item layout-padding">
   <article class="card-container article-nav-card content-padding--primary soft-size--large soft-style--box">
     
     <div class="card-text">
       
-        <a href="/2021/11/28/reverse-ez-xor-writeup/" itemprop="url">
-          <h2 class="card-text--title text-ellipsis">reverse ez_xor writeup</h2>
+        <a href="/2021/10/24/hello-world/" itemprop="url">
+          <h2 class="card-text--title text-ellipsis">Hello World</h2>
         </a>
       
-      <div class="card-text--row">Newer</div>
+      <div class="card-text--row">Older</div>
     </div>
   </article>
 </div>
-          
           
         </nav>
       
