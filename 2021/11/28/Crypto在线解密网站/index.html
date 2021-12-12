@@ -315,7 +315,7 @@
                             <a href="javascript:;" id="theme-dark">🌛 深色</a>
                             <a href="javascript:;" id="theme-auto">🤖️ 自动</a>
                         </p>
-                        <!-- <span id="sitetime"></span>
+                        <span id="sitetime"></span>
                         <script language=javascript>
                             function siteTime() {
                                 window.setTimeout("siteTime()", 1000);
@@ -341,7 +341,7 @@
                                 seconds - 0-59之间的整数，做为date对象的秒数
                                 microseconds - 0-999之间的整数，做为date对象的毫秒数
                                     */
-                                var t1 = Date.UTC(2020, 02, 13, 15, 00, 00); //北京时间2018-2-13 00:00:00
+                                var t1 = Date.UTC(2021, 10, 24, 15, 00, 00); //北京时间2018-2-13 00:00:00
                                 var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
                                 var diff = t2 - t1;
                                 var diffYears = Math.floor(diff / years);
@@ -349,40 +349,10 @@
                                 var diffHours = Math.floor((diff - (diffYears * 365 + diffDays) * days) / hours);
                                 var diffMinutes = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours) / minutes);
                                 var diffSeconds = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours - diffMinutes * minutes) / seconds);
-                                document.getElementById("sitetime").innerHTML = " 已运行" + /*diffYears+" 年 "+*/ diffDays + " 天 " + diffHours + " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                                document.getElementById("sitetime").innerHTML = " 本站已运行" + /*diffYears+" 年 "+*/ diffDays + " 天 " + diffHours + " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
                             }
                             siteTime();
-                        </script> -->
-                        <span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
-                        <script>
-                            var now = new Date();
-
-                            function createtime() {
-                                var grt = new Date("24/10/2021 17:20:00"); //在此处修改你的建站时间，格式：月/日/年 时:分:秒
-                                now.setTime(now.getTime() + 250);
-                                days = (now - grt) / 1000 / 60 / 60 / 24;
-                                dnum = Math.floor(days);
-                                hours = (now - grt) / 1000 / 60 / 60 - (24 * dnum);
-                                hnum = Math.floor(hours);
-                                if (String(hnum).length == 1) {
-                                    hnum = "0" + hnum;
-                                }
-                                minutes = (now - grt) / 1000 / 60 - (24 * 60 * dnum) - (60 * hnum);
-                                mnum = Math.floor(minutes);
-                                if (String(mnum).length == 1) {
-                                    mnum = "0" + mnum;
-                                }
-                                seconds = (now - grt) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
-                                snum = Math.round(seconds);
-                                if (String(snum).length == 1) {
-                                    snum = "0" + snum;
-                                }
-                                document.getElementById("timeDate").innerHTML = "本站已安全运行 " + dnum + " 天 ";
-                                document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
-                            }
-                            setInterval("createtime()", 250);
                         </script>
-
 
     </div>
 
