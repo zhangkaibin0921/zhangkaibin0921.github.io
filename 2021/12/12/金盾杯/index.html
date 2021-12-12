@@ -22,7 +22,7 @@
 
   
 
-  <title>古典密码原理实现 | HappyCoder&#39;Home</title>
+  <title>金盾杯 | HappyCoder&#39;Home</title>
 
   
 
@@ -97,18 +97,16 @@
     <div class="header-content">
       <div class="post-text layout-block">
         <div class="layout-margin">
-          <h1 class="title-wrap">古典密码原理实现</h1>
+          <h1 class="title-wrap">金盾杯</h1>
           <h2 class="title-sub-wrap">
             <strong>zhangkaibin</strong>
             <span>发布于</span>
-            <time  class="article-date" datetime="2021-11-29T09:23:46.000Z" itemprop="datePublished">2021-11-29</time>
+            <time  class="article-date" datetime="2021-12-12T10:54:28.000Z" itemprop="datePublished">2021-12-12</time>
           </h2>
           <ul class="wrap-list dark">
   
 </ul>
           <ul class="wrap-list dark">
-  
-    <li><a href="/tags/Crypto/">🏷️ Crypto</a></li>
   
 </ul>
         </div>
@@ -132,57 +130,87 @@
       
       
       <section class="article-entry markdown-body layout-margin content-padding--large soft-size--large soft-style--box">
-        <h1 id="1、ceasar"><a href="#1、ceasar" class="headerlink" title="1、ceasar"></a>1、ceasar</h1>
+        <p>这是我的第一次CTF比赛(所有writeup是我们整个队伍的writeup)</p>
+<h3 id="1、hello-world"><a href="#1、hello-world" class="headerlink" title="1、hello_world"></a>1、hello_world</h3><p>拿到文件，看到只有一张图片</p>
+
     <figure class="figure-image">
-      <img src="/picture/kaisa.png" alt="" loading="lazy" />
+      <img src="/picture/金盾杯/hello1.png" alt="" loading="lazy" />
       <figcaption></figcaption>
     </figure>
   
 
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">cipher=<span class="string">&quot;zhongguo&quot;</span>   <span class="comment">#明文</span></span><br><span class="line">move=<span class="number">3</span>              <span class="comment">#移位数</span></span><br><span class="line">t=<span class="string">&quot;&quot;</span>                <span class="comment">#密文</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> cipher:</span><br><span class="line">    <span class="keyword">if</span> <span class="string">&#x27;a&#x27;</span>&lt;=i&lt;=<span class="string">&#x27;z&#x27;</span>:</span><br><span class="line">        t+=<span class="built_in">chr</span>(<span class="built_in">ord</span>(<span class="string">&#x27;a&#x27;</span>)+((<span class="built_in">ord</span>(i)-<span class="built_in">ord</span>(<span class="string">&#x27;a&#x27;</span>)+move)%<span class="number">26</span>))</span><br><span class="line">    <span class="keyword">elif</span> <span class="string">&#x27;A&#x27;</span>&lt;=i&lt;=<span class="string">&#x27;Z&#x27;</span>:</span><br><span class="line">        t+=<span class="built_in">chr</span>(<span class="built_in">ord</span>(<span class="string">&#x27;A&#x27;</span>)+((<span class="built_in">ord</span>(i)-<span class="built_in">ord</span>(<span class="string">&#x27;A&#x27;</span>)+move)%<span class="number">26</span>))</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        t+=i</span><br><span class="line"><span class="built_in">print</span>(t)</span><br><span class="line">        </span><br><span class="line"><span class="comment">#如果要解密的话，秘钥变为负数</span></span><br><span class="line"><span class="comment">#如zhongguo加密后得到ckrqjjxr</span></span><br><span class="line"><span class="comment">#现需要解密，则直接将move取-3即可</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>常规操作，一般首先查看图片属性</p>
 
-
-
-<h1 id="2、affine"><a href="#2、affine" class="headerlink" title="2、affine"></a>2、affine</h1>
     <figure class="figure-image">
-      <img src="/picture/affine.png" alt="" loading="lazy" />
+      <img src="/picture/金盾杯/hello2.png" alt="" loading="lazy" />
       <figcaption></figcaption>
     </figure>
   
 
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#加密</span></span><br><span class="line">cipher=<span class="string">&#x27;zhongguo&#x27;</span><span class="comment">#明文</span></span><br><span class="line">t=<span class="string">&#x27;&#x27;</span><span class="comment">#密文</span></span><br><span class="line">a=<span class="number">3</span></span><br><span class="line">b=<span class="number">4</span> <span class="comment">#E(x)=ax+b,gcd(a,26)</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> cipher:</span><br><span class="line">    <span class="keyword">if</span> <span class="string">&#x27;a&#x27;</span>&lt;=i&lt;=<span class="string">&#x27;z&#x27;</span>:</span><br><span class="line">        t+=<span class="built_in">chr</span>(<span class="built_in">ord</span>(<span class="string">&#x27;a&#x27;</span>)+((a*(<span class="built_in">ord</span>(i)-<span class="built_in">ord</span>(<span class="string">&#x27;a&#x27;</span>))+b)%<span class="number">26</span>))</span><br><span class="line">    <span class="keyword">elif</span> <span class="string">&#x27;A&#x27;</span>&lt;=i&lt;=<span class="string">&#x27;Z&#x27;</span>:</span><br><span class="line">        t+=<span class="built_in">chr</span>(<span class="built_in">ord</span>(<span class="string">&#x27;A&#x27;</span>)+((a*(<span class="built_in">ord</span>(i)-<span class="built_in">ord</span>(<span class="string">&#x27;A&#x27;</span>))+b)%<span class="number">26</span>))</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        t+=i</span><br><span class="line"><span class="built_in">print</span>(t)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">#解密</span></span><br><span class="line">t = <span class="string">&#x27;bzurwwmu&#x27;</span>  <span class="comment"># 密文</span></span><br><span class="line">cipher = <span class="string">&#x27;&#x27;</span>  <span class="comment"># 明文</span></span><br><span class="line">a = <span class="number">3</span></span><br><span class="line">b = <span class="number">4</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, <span class="number">26</span>):</span><br><span class="line">    <span class="keyword">if</span> (i*a) % <span class="number">26</span> == <span class="number">1</span>:</span><br><span class="line">        a1 = i</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> t:</span><br><span class="line">    <span class="keyword">if</span> <span class="string">&#x27;a&#x27;</span> &lt;= i &lt;= <span class="string">&#x27;z&#x27;</span>:</span><br><span class="line">        cipher += <span class="built_in">chr</span>(<span class="built_in">ord</span>(<span class="string">&#x27;a&#x27;</span>)+((a1*(<span class="built_in">ord</span>(i)-<span class="built_in">ord</span>(<span class="string">&#x27;a&#x27;</span>)-b)) % <span class="number">26</span>))</span><br><span class="line">    <span class="keyword">elif</span> <span class="string">&#x27;A&#x27;</span> &lt;= i &lt;= <span class="string">&#x27;Z&#x27;</span>:</span><br><span class="line">        cipher += <span class="built_in">chr</span>(<span class="built_in">ord</span>(<span class="string">&#x27;A&#x27;</span>)+((a1*(<span class="built_in">ord</span>(i)-<span class="built_in">ord</span>(<span class="string">&#x27;A&#x27;</span>)-b)) % <span class="number">26</span>))</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        cipher += i</span><br><span class="line"><span class="built_in">print</span>(cipher)</span><br><span class="line"></span><br><span class="line">    </span><br></pre></td></tr></table></figure>
-
-<h1 id="3、多表代换密码"><a href="#3、多表代换密码" class="headerlink" title="3、多表代换密码"></a>3、多表代换密码</h1><p>先说下这个方法必要的基础知识</p>
-<p>因为解密的时候需要矩阵求逆，所以写下方法，这个是最基本的方法</p>
+<p>有提示信息666c61677b35383561626436653435316134623466393665636630343036303136376264397d<br>0~f之间，首先猜测是十六进制数（如果不行的话备选方案是Base64）<br>十六进制转字符串得到flag{585abd6e451a4b4f96ecf04060167bd9}</p>
+<hr>
+<h3 id="2、Hi-There"><a href="#2、Hi-There" class="headerlink" title="2、Hi There"></a>2、Hi There</h3><p>拿到文件，里面只有一个txt文档Hhbe1cie93bfTFbcc2hl94e2ea1c91rgab5fei3432Tse498<br>仔细观察看到这串看到这串字符有题目的标题和’F’’l’’a’’g’</p>
+<p>==H==hbe1c==i==e93bf==T==Fbcc2==h==l94e2==e==a1c91==r==gab5f==e==i3432Tsesza5498<br>Hhbe1cie93bfT==F==bcc2h==l==94e2e==a==1c91r==g==ab5fei3432Tse498</p>
+<p>且都是隔五个出现一次的，所以就猜测是栏栅加密，且栏数是5</p>
 
     <figure class="figure-image">
-      <img src="/picture/keniju1.jpg" alt="" loading="lazy" />
+      <img src="/picture/金盾杯/there1.png" alt="" loading="lazy" />
       <figcaption></figcaption>
     </figure>
   
 
-<p>行列式怎么求好像也不太记得了，看个例子应该就能马上想起来了</p>
+<p>但发现只是普通的栏栅加密好像不行<br>试一下枚举解密</p>
 
     <figure class="figure-image">
-      <img src="/picture/keniju2.jpg" alt="" loading="lazy" />
+      <img src="/picture/金盾杯/there2.png" alt="" loading="lazy" />
       <figcaption></figcaption>
     </figure>
   
 
-<p>可逆矩阵另一种比较简单一点的求法</p>
+<p>所以提交flag{b9b91a3ee3c4cb441bce9539cf221f28}</p>
+<hr>
+<h3 id="3、低音吉他谱"><a href="#3、低音吉他谱" class="headerlink" title="3、低音吉他谱"></a>3、低音吉他谱</h3><p>拿到文件，里面有一张图片和一个txt文档</p>
 
     <figure class="figure-image">
-      <img src="/picture/keniju3.jpg" alt="" loading="lazy" />
+      <img src="/picture/金盾杯/music1.png" alt="" loading="lazy" />
       <figcaption></figcaption>
     </figure>
   
 
 
     <figure class="figure-image">
-      <img src="/picture/duobiao.jpg" alt="" loading="lazy" />
+      <img src="/picture/金盾杯/music2.png" alt="" loading="lazy" />
       <figcaption></figcaption>
     </figure>
   
+
+<p>打开图片，是一张乐谱（暂时看不出什么玄机，猜测会不会是之后通过文本解密后再和乐谱对照得到最终的flag）</p>
+<p>再看看txt文档</p>
+
+    <figure class="figure-image">
+      <img src="/picture/金盾杯/music3.png" alt="" loading="lazy" />
+      <figcaption></figcaption>
+    </figure>
+  
+
+<p>由大写字母和数字构成猜测是Base32<br>解密后得到的文本由大小写字母和数字组成猜测是Base64<br>再次解密后的文本由大写字母和数字构成猜测是Base32<br>再次解密后的文本由大写字母和数字构成猜测是Base32</p>
+<p>发现全是Base加密，直接上Base全家桶<br><a href="#api">mufeedvh/basecrack: Decode All Bases - Base Scheme Decoder (github.com)</a></p>
+
+    <figure class="figure-image">
+      <img src="/picture/金盾杯/music4.png" alt="" loading="lazy" />
+      <figcaption></figcaption>
+    </figure>
+  
+
+<p>这一步是个关键，用一般的在线加密软件解不出来这个Base85，直接让用户在basecrack里面输入也是解不出来的，在反复尝试之后放到一个文本文档中在进行解密，即可</p>
+
+    <figure class="figure-image">
+      <img src="/picture/金盾杯/music5.png" alt="" loading="lazy" />
+      <figcaption></figcaption>
+    </figure>
+  
+
+<p>接着一直解密即可得到flag（在解密的过程中不要在前面多复制了一个空格，否则可能发生错误）<br>(题目中的音谱应该是为了迷惑大家的）</p>
 
       </section>
 
@@ -190,28 +218,14 @@
       
         <nav class="article-nav">
           
-            <div class="article-nav-item layout-padding">
-  <article class="card-container article-nav-card content-padding--primary soft-size--large soft-style--box">
-    
-    <div class="card-text">
-      
-        <a href="/2021/12/12/%E9%87%91%E7%9B%BE%E6%9D%AF/" itemprop="url">
-          <h2 class="card-text--title text-ellipsis">金盾杯</h2>
-        </a>
-      
-      <div class="card-text--row">Newer</div>
-    </div>
-  </article>
-</div>
-          
           
             <div class="article-nav-item layout-padding">
   <article class="card-container article-nav-card content-padding--primary soft-size--large soft-style--box">
     
     <div class="card-text">
       
-        <a href="/2021/11/28/Crypto%E5%9C%A8%E7%BA%BF%E8%A7%A3%E5%AF%86%E7%BD%91%E7%AB%99/" itemprop="url">
-          <h2 class="card-text--title text-ellipsis">Crypto在线解密网站</h2>
+        <a href="/2021/11/29/%E5%8F%A4%E5%85%B8%E5%AF%86%E7%A0%81%E5%8E%9F%E7%90%86%E5%AE%9E%E7%8E%B0/" itemprop="url">
+          <h2 class="card-text--title text-ellipsis">古典密码原理实现</h2>
         </a>
       
       <div class="card-text--row">Older</div>
