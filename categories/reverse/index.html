@@ -227,7 +227,43 @@
                             }
                             siteTime();
                         </script>
+                        <!-- 新增访客统计代码 -->
+                        <div class="busuanzi-count">
+                            <script async="" src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+                            <span class="site-uv">
+      <i class="fa fa-user"></i>
+      访问量 <span class="busuanzi-value" id="busuanzi_value_site_uv"></span> 次
+                            <span class="post-meta-divider">|</span>
+                            </span>
+                            <div class="powered-by"></div>
+                            <span class="site-uv">
+      <i class="fa fa-eye"></i>
+      总访客 <span class="busuanzi-value" id="busuanzi_value_site_pv"></span> 人
+                            </span>
+                            <!--
+    <span class="site-pv">
+      <i class="fa fa-pencil"></i>
+      本站博客共 <span class="post-count">{{ totalcount(site) }}</span> 字
+    </span>
+    -->
+                        </div>
+                        <!-- 新增访客统计代码 END-->
 
+                        {%- if theme.footer.powered.enable %}
+                        <div class="powered-by">
+                            {{- __('footer.powered', next_url('https://hexo.io', 'Hexo', {class: 'theme-link'})) }} {%- if theme.footer.powered.version %} v{{ hexo_version }}{%- endif %}
+                        </div>
+                        {%- endif %} {%- if theme.footer.powered.enable and theme.footer.theme.enable %}
+                        <span class="post-meta-divider">|</span> {%- endif %} {%- if theme.footer.theme.enable %}
+                        <div class="theme-info">
+                            {%- set next_site = 'https://theme-next.org' %} {%- if theme.scheme !== 'Gemini' %} {%- set next_site = 'https://' + theme.scheme | lower + '.theme-next.org' %} {%- endif %} {{- __('footer.theme') }} – {{ next_url(next_site, 'NexT.' + theme.scheme, {class:
+                            'theme-link'}) }} {%- if theme.footer.theme.version %} v{{ next_version }}{%- endif %}
+                        </div>
+                        {%- endif %} {%- if theme.add_this_id %}
+                        <div class="addthis_inline_share_toolbox">
+                            <script src="//s7.addthis.com/js/300/addthis_widget.js#pubid={{ theme.add_this_id }}" async="async"></script>
+                        </div>
+                        {%- endif %} {{- next_inject('footer') }}
     </div>
 
 </footer>
