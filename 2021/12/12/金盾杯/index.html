@@ -148,9 +148,17 @@
   
 
 <p>有提示信息666c61677b35383561626436653435316134623466393665636630343036303136376264397d<br>0~f之间，首先猜测是十六进制数（如果不行的话备选方案是Base64）<br>十六进制转字符串得到flag{585abd6e451a4b4f96ecf04060167bd9}</p>
+<p>然后说一下当时我解题时候的想法<br>我拿到一个图片，一般喜欢stegsolve</p>
+
+    <figure class="figure-image">
+      <img src="/picture/金盾杯/hello2.png" alt="" loading="lazy" />
+      <figcaption></figcaption>
+    </figure>
+  
+<p>然后我就看啊看，看到很多类似这种的，我以为图片下面有一个二维码<br>就打开kali<br>binwalk + 文件路径/文件名<br>foremost+文件路径/文件名<br>发现并没有，然后我就不知道该怎么办了，哈哈</p>
 <hr>
 <h3 id="2、Hi-There"><a href="#2、Hi-There" class="headerlink" title="2、Hi There"></a>2、Hi There</h3><p>拿到文件，里面只有一个txt文档Hhbe1cie93bfTFbcc2hl94e2ea1c91rgab5fei3432Tse498<br>仔细观察看到这串看到这串字符有题目的标题和’F’’l’’a’’g’</p>
-<p>==H==hbe1c==i==e93bf==T==Fbcc2==h==l94e2==e==a1c91==r==gab5f==e==i3432Tsesza5498<br>Hhbe1cie93bfT==F==bcc2h==l==94e2e==a==1c91r==g==ab5fei3432Tse498</p>
+<p>==H==hbe1c==i==e93bf==T==Fbcc2==h==l94e2==e==a1c91==r==gab5f==e==i3432Tsesza5498<br>Hhbe1cie93bfT==F==bcc2h==l==94e2e==a==1c91r==g==ab5fei3432Tse498<br>这里的高亮出现了一点问题，后面矫正</p>
 <p>且都是隔五个出现一次的，所以就猜测是栏栅加密，且栏数是5</p>
 
     <figure class="figure-image">
@@ -168,6 +176,7 @@
   
 
 <p>所以提交flag{b9b91a3ee3c4cb441bce9539cf221f28}</p>
+<p>这道题也说一下我最开始的想法，我是只看到了’f’ ‘l’ ‘a’ ‘g’的，我就在想是换了位置的（因为我没有想到flag最后的字符串最后居然都是没有意义的），我就觉得每一小节字符串后面的数字就是他们换位置的密钥，就这样分组Hhbe1、cie93、bfTFbcc2、hl94、e2、ea1、c91、rgab5、fei3432、Tse498。我之前好像看到过类似于这种的分组加密的这种，但现在找不到了，后面找到了再写上</p>
 <hr>
 <h3 id="3、低音吉他谱"><a href="#3、低音吉他谱" class="headerlink" title="3、低音吉他谱"></a>3、低音吉他谱</h3><p>拿到文件，里面有一张图片和一个txt文档</p>
 
@@ -195,6 +204,15 @@
 
 <p>由大写字母和数字构成猜测是Base32<br>解密后得到的文本由大小写字母和数字组成猜测是Base64<br>再次解密后的文本由大写字母和数字构成猜测是Base32<br>再次解密后的文本由大写字母和数字构成猜测是Base32</p>
 <p>发现全是Base加密，直接上Base全家桶<br><a href="#api">mufeedvh/basecrack: Decode All Bases - Base Scheme Decoder (github.com)</a></p>
+<font size=2>
+安装教程链接里面有，我就记录一下常用的用法
+最好在cmd命令行中运行，而不是在git里面
+在解密的过程中不要在前面多复制了一个空格，否则可能发生错误
+python  basecrack.py  #输入这个之后回车（是python而不是python3！！），就可以把你要解密的Base输进去，在回车即可
+python  basecrack.py  -f  file.txt #将你要解密的Base字符放进file.txt文档
+
+</font>
+
 
     <figure class="figure-image">
       <img src="/picture/金盾杯/music4.png" alt="" loading="lazy" />
