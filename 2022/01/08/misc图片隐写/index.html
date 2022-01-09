@@ -22,7 +22,7 @@
 
   
 
-  <title>reverse ez_xor writeup | HappyCoder&#39;Home</title>
+  <title>misc图片隐写 | HappyCoder&#39;Home</title>
 
   
 
@@ -97,18 +97,18 @@
     <div class="header-content">
       <div class="post-text layout-block">
         <div class="layout-margin">
-          <h1 class="title-wrap">reverse ez_xor writeup</h1>
+          <h1 class="title-wrap">misc图片隐写</h1>
           <h2 class="title-sub-wrap">
             <strong>zhangkaibin</strong>
             <span>发布于</span>
-            <time  class="article-date" datetime="2021-11-28T11:17:01.000Z" itemprop="datePublished">2021-11-28</time>
+            <time  class="article-date" datetime="2022-01-08T04:23:05.000Z" itemprop="datePublished">2022-01-08</time>
           </h2>
           <ul class="wrap-list dark">
   
 </ul>
           <ul class="wrap-list dark">
   
-    <li><a href="/tags/re/">🏷️ re</a></li>
+    <li><a href="/tags/misc/">🏷️ misc</a></li>
   
 </ul>
         </div>
@@ -132,12 +132,36 @@
       
       
       <section class="article-entry markdown-body layout-margin content-padding--large soft-size--large soft-style--box">
-        <p>拿到ez_xor.exe附件直接丢进PE<br><img src="https://img-blog.csdnimg.cn/2a919819266940108748e2605589b227.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA5byA5b-D5pif5Lq6,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"></p>
-<p>可以看到是64位exe文件，丢进ida64<br>Shift+F12查看字符串（如果是笔记本电脑的话，F12自带热键，先按Fn，即Fn+Shift+F12）<br><img src="https://img-blog.csdnimg.cn/6204f03ae29740ff9039c7cfc41b3fa8.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA5byA5b-D5pif5Lq6,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"><br>一般在这里找有没有和flag相关的字符串，可以看到这里是有的，双击进入<br><img src="https://img-blog.csdnimg.cn/064b1084cb0745d6b4beb3bdc19f2c8a.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA5byA5b-D5pif5Lq6,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"><br>找到该字符串，点击上图所示，进入main方法<br>会进入流程图界面，按空格进入文本界面<br>可以看到汇编代码了，按F5（同理如果是笔记本记得按Fn+F5）反汇编，转换成C语言<br><img src="https://img-blog.csdnimg.cn/40c5945e9d804f2a8b9ce453e8960077.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA5byA5b-D5pif5Lq6,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"><br>现在就可以分析代码了，这里的C语言可能数据类型之类的会和我们平时的有点不一样<br>比如说这里的v3=0i64，0i64表示int64_t类型的0，其实就基本上可以理解为0<br>这里代码可以看到关键异或代码while ( (char)(v3 ^ v5[v3]) == dword_403020[v3] )<br><img src="https://img-blog.csdnimg.cn/c717f970db7d4487b7eafd0a6e1f18f2.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA5byA5b-D5pif5Lq6,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/6143bf343b1c42e3a388745da52b5818.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA5byA5b-D5pif5Lq6,size_20,color_FFFFFF,t_70,g_se,x_16" alt="在这里插入图片描述"><br>可以看到该字符串每个字符对应的ASCII码（这里按R键即可看到对应的字符）<br>现在已知dword_403020和v3（v3就是0~31），逐个进行异或即可得到flag</p>
-<p>写一个Python脚本</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs python">s=[<span class="hljs-number">0x35</span>, <span class="hljs-number">0x62</span>, <span class="hljs-number">0x37</span>, <span class="hljs-number">0x30</span>, <span class="hljs-number">0x33</span>, <span class="hljs-number">0x3D</span>, <span class="hljs-number">0x60</span>, <span class="hljs-number">0x63</span>, <span class="hljs-number">0x3F</span>, <span class="hljs-number">0x3D</span>, <span class="hljs-number">0x6C</span>,<span class="hljs-number">0x69</span>, <span class="hljs-number">0x6D</span>, <span class="hljs-number">0x6F</span>, <span class="hljs-number">0x68</span>, <span class="hljs-number">0x6D</span>, <span class="hljs-number">0x72</span>, <span class="hljs-number">0x77</span>, <span class="hljs-number">0x20</span>, <span class="hljs-number">0x70</span>, <span class="hljs-number">0x76</span>, <span class="hljs-number">0x73</span>,<span class="hljs-number">0x72</span>, <span class="hljs-number">0x2F</span>, <span class="hljs-number">0x2E</span>, <span class="hljs-number">0x21</span>, <span class="hljs-number">0x7E</span>, <span class="hljs-number">0x2B</span>, <span class="hljs-number">0x28</span>, <span class="hljs-number">0x25</span>, <span class="hljs-number">0x2C</span>, <span class="hljs-number">0x29</span>]<br>flag=[<span class="hljs-number">0</span> <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">32</span>)] <span class="hljs-comment">#从给出的代码很容易看到flag是32位的</span><br><span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">32</span>):<br>    flag[i]=i^s[i]<br><span class="hljs-built_in">print</span>(flag)<br></code></pre></td></tr></table></figure>
+        <h2 id="1、LSB-最低有效位Least-Significant-Bit"><a href="#1、LSB-最低有效位Least-Significant-Bit" class="headerlink" title="1、LSB(最低有效位Least Significant Bit)"></a>1、LSB(最低有效位Least Significant Bit)</h2><p>LSB替换隐写基本思想使用嵌入的秘密信息取代载体图像的最低比特位，原来的7个高位平面与替代秘密信息的最低位平面组成含隐藏信息的新图形</p>
+<p>例如在PNG图片的储存中，每个颜色会有8bit，LSB隐写就是修改了像素中的最低的1bit。在人眼中看来是看不住来区别的，也把信息隐藏起来了。如：把A转成16进制的0*61在转成二进制的01100001，在修改为红色通道的最低位为这些二进制串。<br>像素三原色(RGB)<br><strong>通过修改像素中最低为的1bit来达到隐藏的效果</strong><br>工具:stegsolve、zsteg、wbstego4(通常用于.bmp和.pdf)、Python脚本</p>
 
-<p>即可得出flag</p>
+    <figure class="figure-image">
+      <img src="/picture/misc6.png" alt="" loading="lazy" />
+      <figcaption></figcaption>
+    </figure>
+  
+<p>因为不确定Red、Blue、Green的排列顺序，所以需要依次选择RGB、BGR……</p>
+<p>zsteg(这个方法很厉害)<br>zsteg是一个命令行工具，linux下输入gem install zsteg进行安装<br>使用:zsteg 图片名<br>zsteg会把所有可能情况RGB、BGR……中的文本信息依次显示出来</p>
+<h2 id="2、CRC检验出错"><a href="#2、CRC检验出错" class="headerlink" title="2、CRC检验出错"></a>2、CRC检验出错</h2><p>当PNG文件头正常但无法正常打开文件，可能是CRC校验出错。可以尝试通过TweakPNG打开PNG，会弹处校验错误的提示，比如显示CRC是fe1a5ab6，正确的是b0a7a9f1，打开问winhex或010editor找到CRC值fe1a5ab6将其改为b0a7a9f1</p>
+<h2 id="3、图片高度或宽度错误"><a href="#3、图片高度或宽度错误" class="headerlink" title="3、图片高度或宽度错误"></a>3、图片高度或宽度错误</h2><p>有时CRC没有错误，但是图片的高度或宽度发生了错误，需要通过CRC计算出正确的宽度和高度</p>
+
+    <figure class="figure-image">
+      <img src="/picture/misc7.png" alt="" loading="lazy" />
+      <figcaption></figcaption>
+    </figure>
+  
+
+<p>前八个字节89 50 4E <strong>47 0D 0A 1A 0A</strong>为png的文件头，<strong>该段格式是固定的</strong><br>前四个字节<strong>00 00 00 0D</strong>（即为十进制的13）代表数据块的长度为13，数据块包含了png图片的宽高等信息，<strong>该段格式是固定的</strong><br>之后的四个字节<strong>49 48 44 52</strong>（即为ASCII码的IHDR）是文件头数据块的标示，<strong>该段格式也是固定的</strong></p>
+<p><font size=3 color='purple'>之后进入13位数据块，前8个字节<strong>00 00 01 69 00 00 03 25</strong>中：前四个字节00 00 01 69代表该图片的宽，<strong>该段数据是由图片的实际宽决定的</strong>，后四个字节00 00 03 25代表该图片的高，<strong>该段数据是由图片的实际高度决定的</strong></font><br>剩余的4位<strong>98 6B 9E 93</strong>为该png的CRC检验码</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment">#crc爆破宽高的脚本</span><br><span class="hljs-keyword">import</span> os<br><span class="hljs-keyword">import</span> binascii<br><span class="hljs-keyword">import</span> struct<br>crcbp=<span class="hljs-built_in">open</span>(<span class="hljs-string">&quot;flag.png&quot;</span>,<span class="hljs-string">&quot;rb&quot;</span>).read()<br><span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">1024</span>):<br>    <span class="hljs-keyword">for</span> j <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">1024</span>):<br>        data=crcbp[<span class="hljs-number">12</span>:<span class="hljs-number">16</span>]+struct.pack(<span class="hljs-string">&#x27;&gt;i&#x27;</span>,i)+struct.pack(<span class="hljs-string">&#x27;&gt;i&#x27;</span>,j)+crcbp[<span class="hljs-number">24</span>:<span class="hljs-number">29</span>]<br>        crc32=binascii.crc32(data)&amp;<span class="hljs-number">0xffffffff</span><br>        <span class="hljs-keyword">if</span> crc32== <span class="hljs-number">0x00BF122A</span>:  <span class="hljs-comment">#这里的值也需要根据图片的crc值进行更改</span><br>            <span class="hljs-built_in">print</span>(<span class="hljs-built_in">hex</span>(i),<span class="hljs-built_in">hex</span>(j))<br><br></code></pre></td></tr></table></figure>
+
+<h2 id="4、图片加密"><a href="#4、图片加密" class="headerlink" title="4、图片加密"></a>4、图片加密</h2><p>Bftools<br>在windows的cmd下，对加密过的图片文件进行解密<br>格式:<br>Bftools.exe  decode  braincopter  要加密的图片名称 -output  输出文件名<br>Bftools.exe  run  上一步输出文件名</p>
+<p>Stegdetect<br>Stegdetect工具探测加密方式，主要用于分析<strong>PEG</strong>文件，因此用stegdetcct用于检测到通过JSteg、JPHide、OutGuess、Invisible Secret、F5、appenddX和Camouflage这些隐写工具隐藏的信息<br>格式：<br>.\stegdetect  xxx.jpg<br>.\stegdetect  -s  敏感度  xxx.jpg<br> .\必不可少<br>  #敏感度最大为10，敏感度越大检测结果越准确，所以一般都是stegdetect  -s 10.0  xxx.jpg  
+    <figure class="figure-image">
+      <img src="/picture/misc8.png" alt="" loading="lazy" />
+      <figcaption></figcaption>
+    </figure>
+  <br>在stegdetect.exe所在位置右键“在Windows终端打开”,因为我下载了PowerShell</p>
 
       </section>
 
@@ -150,8 +174,8 @@
     
     <div class="card-text">
       
-        <a href="/2021/11/28/Crypto%E5%9C%A8%E7%BA%BF%E8%A7%A3%E5%AF%86%E7%BD%91%E7%AB%99/" itemprop="url">
-          <h2 class="card-text--title text-ellipsis">Crypto在线解密网站</h2>
+        <a href="/2022/01/09/misc%E5%8E%8B%E7%BC%A9%E6%96%87%E4%BB%B6%E5%A4%84%E7%90%86/" itemprop="url">
+          <h2 class="card-text--title text-ellipsis">misc压缩文件处理</h2>
         </a>
       
       <div class="card-text--row">Newer</div>
@@ -165,8 +189,8 @@
     
     <div class="card-text">
       
-        <a href="/2021/10/24/hello-world/" itemprop="url">
-          <h2 class="card-text--title text-ellipsis">Hello World</h2>
+        <a href="/2022/01/07/misc%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C%E5%92%8C%E9%9A%90%E5%86%99/" itemprop="url">
+          <h2 class="card-text--title text-ellipsis">misc文件操作</h2>
         </a>
       
       <div class="card-text--row">Older</div>

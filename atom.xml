@@ -6,7 +6,7 @@
   <link href="https://zhangkaibin0921.github.io/atom.xml" rel="self"/>
   
   <link href="https://zhangkaibin0921.github.io/"/>
-  <updated>2022-01-08T13:50:38.076Z</updated>
+  <updated>2022-01-09T11:34:55.286Z</updated>
   <id>https://zhangkaibin0921.github.io/</id>
   
   <author>
@@ -17,13 +17,61 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>misc图片隐写</title>
-    <link href="https://zhangkaibin0921.github.io/2022/01/08/%E5%9B%BE%E7%89%87%E9%9A%90%E5%86%99/"/>
-    <id>https://zhangkaibin0921.github.io/2022/01/08/%E5%9B%BE%E7%89%87%E9%9A%90%E5%86%99/</id>
-    <published>2022-01-08T04:23:05.000Z</published>
-    <updated>2022-01-08T13:50:38.076Z</updated>
+    <title>攻防世界simpleRAR</title>
+    <link href="https://zhangkaibin0921.github.io/2022/01/09/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8CsimpleRAR/"/>
+    <id>https://zhangkaibin0921.github.io/2022/01/09/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8CsimpleRAR/</id>
+    <published>2022-01-09T11:14:55.000Z</published>
+    <updated>2022-01-09T11:34:55.286Z</updated>
     
-    <content type="html"><![CDATA[<h2 id="1、LSB-最低有效位Least-Significant-Bit"><a href="#1、LSB-最低有效位Least-Significant-Bit" class="headerlink" title="1、LSB(最低有效位Least Significant Bit)"></a>1、LSB(最低有效位Least Significant Bit)</h2><p>LSB替换隐写基本思想使用嵌入的秘密信息取代载体图像的最低比特位，原来的7个高位平面与替代秘密信息的最低位平面组成含隐藏信息的新图形<br>例如在PNG图片的储存中，每个颜色会有8bit，LSB隐写就是修改了像素中的最低的1bit。在人眼中看来是看不住来区别的，也把信息隐藏起来了。如：把A转成16进制的0*61在转成二进制的01100001，在修改为红色通道的最低位为这些二进制串。<br>像素三原色(RGB)<br><strong>通过修改像素中最低为的1bit来达到隐藏的效果</strong><br>工具:stegsolve、zsteg、wbstego4(通常用于.bmp和.pdf)、Python脚本</p>    <figure class="figure-image">      <img src="/picture/misc6.png" alt="" loading="lazy" />      <figcaption></figcaption>    </figure>  <p>因为不确定Red、Blue、Green的排列顺序，所以需要依次选择RGB、BGR……</p><p>zsteg(这个方法很厉害)<br>zsteg是一个命令行工具，linux下输入gem install zsteg进行安装<br>使用:zsteg 图片名<br>zsteg会把所有可能情况RGB、BGR……中的文本信息依次显示出来</p><h2 id="2、CRC检验出错"><a href="#2、CRC检验出错" class="headerlink" title="2、CRC检验出错"></a>2、CRC检验出错</h2><p>当PNG文件头正常但无法正常打开文件，可能是CRC校验出错。可以尝试通过TweakPNG打开PNG，会弹处校验错误的提示，比如显示CRC是fe1a5ab6，正确的是b0a7a9f1，打开问winhex或010editor找到CRC值fe1a5ab6将其改为b0a7a9f1</p><h2 id="3、图片高度或宽度错误"><a href="#3、图片高度或宽度错误" class="headerlink" title="3、图片高度或宽度错误"></a>3、图片高度或宽度错误</h2><p>有时CRC没有错误，但是图片的高度或宽度发生了错误，需要通过CRC计算出正确的宽度和高度</p>    <figure class="figure-image">      <img src="/picture/misc7.png" alt="" loading="lazy" />      <figcaption></figcaption>    </figure>  <p>前八个字节89 50 4E <strong>47 0D 0A 1A 0A</strong>为png的文件头，<strong>该段格式是固定的</strong><br>前四个字节<strong>00 00 00 0D</strong>（即为十进制的13）代表数据块的长度为13，数据块包含了png图片的宽高等信息，<strong>该段格式是固定的</strong><br>之后的四个字节<strong>49 48 44 52</strong>（即为ASCII码的IHDR）是文件头数据块的标示，<strong>该段格式也是固定的</strong></p><p><font size=3 color='purple'>之后进入13位数据块，前8个字节<strong>00 00 01 69 00 00 03 25</strong>中：前四个字节00 00 01 69代表该图片的宽，<strong>该段数据是由图片的实际宽决定的</strong>，后四个字节00 00 03 25代表该图片的高，<strong>该段数据是由图片的实际高度决定的</strong></font><br>剩余的4位<strong>98 6B 9E 93</strong>为该png的CRC检验码</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment">#crc爆破宽高的脚本</span><br><span class="hljs-keyword">import</span> os<br><span class="hljs-keyword">import</span> binascii<br><span class="hljs-keyword">import</span> struct<br>crcbp=<span class="hljs-built_in">open</span>(<span class="hljs-string">&quot;flag.png&quot;</span>,<span class="hljs-string">&quot;rb&quot;</span>).read()<br><span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">1024</span>):<br>    <span class="hljs-keyword">for</span> j <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">1024</span>):<br>        data=crcbp[<span class="hljs-number">12</span>:<span class="hljs-number">16</span>]+struct.pack(<span class="hljs-string">&#x27;&gt;i&#x27;</span>,i)+struct.pack(<span class="hljs-string">&#x27;&gt;i&#x27;</span>,j)+crcbp[<span class="hljs-number">24</span>:<span class="hljs-number">29</span>]<br>        crc32=binascii.crc32(data)&amp;<span class="hljs-number">0xffffffff</span><br>        <span class="hljs-keyword">if</span> crc32== <span class="hljs-number">0x00BF122A</span>:<br>            <span class="hljs-built_in">print</span>(<span class="hljs-built_in">hex</span>(i),<span class="hljs-built_in">hex</span>(j))<br><br></code></pre></td></tr></table></figure><h2 id="4、图片加密"><a href="#4、图片加密" class="headerlink" title="4、图片加密"></a>4、图片加密</h2><p>Bftools<br>在windows的cmd下，对加密过的图片文件进行解密<br>格式:<br>Bftools.exe  decode  braincopter  要加密的图片名称 -output  输出文件名<br>Bftools.exe  run  上一步输出文件名</p><p>Stegdetect<br>Stegdetect工具探测加密方式，主要用于分析<strong>PEG</strong>文件，因此用stegdetcct用于检测到通过JSteg、JPHide、OutGuess、Invisible Secret、F5、appenddX和Camouflage这些隐写工具隐藏的信息<br>格式：<br>.\stegdetect  xxx.jpg<br>.\stegdetect  -s  敏感度  xxx.jpg<br> .\必不可少<br>  #敏感度最大为10，敏感度越大检测结果越准确，所以一般都是stegdetect  -s 10.0  xxx.jpg      <figure class="figure-image">      <img src="/picture/misc8.png" alt="" loading="lazy" />      <figcaption></figcaption>    </figure>  <br>在stegdetect.exe所在位置右键“在Windows终端打开”,因为我下载了PowerShell</p>]]></content>
+    <content type="html"><![CDATA[    <figure class="figure-image">      <img src="/picture/misc13.png" alt="" loading="lazy" />      <figcaption></figcaption>    </figure>  拿到压缩包里面只有一个flag.txt内容为flag is not here<p>把压缩包丢入010editor</p>    <figure class="figure-image">      <img src="/picture/misc10.png" alt="" loading="lazy" />      <figcaption></figcaption>    </figure>  <p>这是上一篇压缩文件分析中提到的的，有时候给出的RAR文件的头部各个字块会故意给错导致无法识别<br>文件块的第三个字节为类型块，也叫头类型<br>头类型是0x72表示是标记块<br>头类型是0x73表示是压缩文件头块<br>头类型是<font color='red'>0x74</font>表示是文件头块<br>头类型是0x75表示是注释头块</p><p>因为flag.txt文件的内容为flag is not here，所以可以找到下一个文件的文件头，把7A改成74即可看到了secret.png</p>    <figure class="figure-image">      <img src="/picture/misc11.png" alt="" loading="lazy" />      <figcaption></figcaption>    </figure>  <p>查看exif无果，把secret丢入010editor中，文件头是gif类型的，更改后缀名(但其实不更改也可以正常打开，我也不知道为啥)，然后看不出来什么了。</p><p>把图片丢入stegsolve中，更改颜色通道,看到了这个</p>    <figure class="figure-image">      <img src="/picture/misc12.png" alt="" loading="lazy" />      <figcaption></figcaption>    </figure>  <p>这里我还在想是不是高度错误了，尝试爆破宽高不知道为什么爆破不出来，不知道是不是因为是gif类型的</p><p>看看题目双图层</p><p>打开Photoshop，果然看到另一个图层保存为png后丢入stegsolve中</p>    <figure class="figure-image">      <img src="/picture/misc14.png" alt="" loading="lazy" />      <figcaption></figcaption>    </figure>  <p>合并就可以得到一张完整的二维码了，这里我发现了一个更方便的方法(因为我之前用ps和ppt试过)，就是用snipaste粘粘到桌面上就行了</p>    <figure class="figure-image">      <img src="/picture/misc9.png" alt="" loading="lazy" />      <figcaption></figcaption>    </figure>  ]]></content>
+    
+    
+      
+      
+    <summary type="html">
+    &lt;figure class=&quot;figure-image&quot;&gt;
+      &lt;img src=&quot;/picture/misc13.png&quot; alt=&quot;&quot; loading=&quot;lazy&quot; /&gt;
+      &lt;figcaption&gt;&lt;/figcaption&gt;
+    &lt;/figur</summary>
+      
+    
+    
+    
+    
+    <category term="misc" scheme="https://zhangkaibin0921.github.io/tags/misc/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>misc压缩文件处理</title>
+    <link href="https://zhangkaibin0921.github.io/2022/01/09/misc%E5%8E%8B%E7%BC%A9%E6%96%87%E4%BB%B6%E5%A4%84%E7%90%86/"/>
+    <id>https://zhangkaibin0921.github.io/2022/01/09/misc%E5%8E%8B%E7%BC%A9%E6%96%87%E4%BB%B6%E5%A4%84%E7%90%86/</id>
+    <published>2022-01-09T02:24:30.000Z</published>
+    <updated>2022-01-09T11:35:19.714Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="1、伪加密"><a href="#1、伪加密" class="headerlink" title="1、伪加密"></a>1、伪加密</h2><p>如果压缩文件是加密的，或文件头正常但解压缩错误，首先尝试文件是否为伪加密。zip文件是否加密是通过标识符来显示的，在每个文件的文件目录字段有一位专门标识了文件是否加密，将其设置为00表示该文件未加密，如果成功解压则表示文件为伪加密，如果解压出错说明文件为真加密<br>操作方法：使用winhex或010editor，找到文件头第九第十个字符，将其修改为0000. (其中50是第一个字符)<br>1、使用winhex打开文件搜索十六进制504B0102，可以看到每个加密文件的文件头字段<br>2、从50开始，第九个第十个字符为加密字段，将其设置为0000即可变为无加密状态<br>3、RAR文件由于有头部检验，使用伪加密时打开文件会出现报错，使用winhex修改标志位后如报错消失且正常解压缩，说明是伪加密。使用winhex打开RAR文件，找到第24个字节，将该字节尾数为4表示加密，0表示无加密，将尾数改为0即可破解伪加密</p><h2 id="2、破解压缩包密码"><a href="#2、破解压缩包密码" class="headerlink" title="2、破解压缩包密码"></a>2、破解压缩包密码</h2><p>明文攻击指已经知道加密的zip中部分文件的明文内容，利用这些内容推测出密钥并解密zip文件的攻击方法，相比与暴力破解，这种方法在破解密码较为复杂的压缩包时的效率更高<br>例如:假设一个加密的压缩包中有两个文件readme.txt和flag.txt，其中flag.txt的内容时我们希望知道的，而我们拥有readme.txt的明文内容，使用上述两个文件可以进行明文攻击<br>1、将readme.txt的明文文件压缩，变成readme1.zip<br>2、打开archpr，攻击类型选择明文，明文文件路径选择readme1.zip<br>(使用该方法要注意：1、有一个明文文件，压缩后CRC值与加密压缩包中的文件一致 2、明文文件的压缩算法需要与加密压缩文件的压缩算法一致)</p><p>有时候给出的RAR文件的头部各个字块会故意给错导致无法识别<br>文件块的第三个字节为类型块，也叫头类型<br>头类型是0x72表示是标记块<br>头类型是0x73表示是压缩文件头块<br>头类型是<font color='red'>0x74</font>表示是文件头块<br>头类型是0x75表示是注释头块</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h2 id=&quot;1、伪加密&quot;&gt;&lt;a href=&quot;#1、伪加密&quot; class=&quot;headerlink&quot; title=&quot;1、伪加密&quot;&gt;&lt;/a&gt;1、伪加密&lt;/h2&gt;&lt;p&gt;如果压缩文件是加密的，或文件头正常但解压缩错误，首先尝试文件是否为伪加密。zip文件是否加密是通过标识符来显示的，在</summary>
+      
+    
+    
+    
+    
+    <category term="misc" scheme="https://zhangkaibin0921.github.io/tags/misc/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>misc图片隐写</title>
+    <link href="https://zhangkaibin0921.github.io/2022/01/08/misc%E5%9B%BE%E7%89%87%E9%9A%90%E5%86%99/"/>
+    <id>https://zhangkaibin0921.github.io/2022/01/08/misc%E5%9B%BE%E7%89%87%E9%9A%90%E5%86%99/</id>
+    <published>2022-01-08T04:23:05.000Z</published>
+    <updated>2022-01-09T11:36:03.541Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="1、LSB-最低有效位Least-Significant-Bit"><a href="#1、LSB-最低有效位Least-Significant-Bit" class="headerlink" title="1、LSB(最低有效位Least Significant Bit)"></a>1、LSB(最低有效位Least Significant Bit)</h2><p>LSB替换隐写基本思想使用嵌入的秘密信息取代载体图像的最低比特位，原来的7个高位平面与替代秘密信息的最低位平面组成含隐藏信息的新图形</p><p>例如在PNG图片的储存中，每个颜色会有8bit，LSB隐写就是修改了像素中的最低的1bit。在人眼中看来是看不住来区别的，也把信息隐藏起来了。如：把A转成16进制的0*61在转成二进制的01100001，在修改为红色通道的最低位为这些二进制串。<br>像素三原色(RGB)<br><strong>通过修改像素中最低为的1bit来达到隐藏的效果</strong><br>工具:stegsolve、zsteg、wbstego4(通常用于.bmp和.pdf)、Python脚本</p>    <figure class="figure-image">      <img src="/picture/misc6.png" alt="" loading="lazy" />      <figcaption></figcaption>    </figure>  <p>因为不确定Red、Blue、Green的排列顺序，所以需要依次选择RGB、BGR……</p><p>zsteg(这个方法很厉害)<br>zsteg是一个命令行工具，linux下输入gem install zsteg进行安装<br>使用:zsteg 图片名<br>zsteg会把所有可能情况RGB、BGR……中的文本信息依次显示出来</p><h2 id="2、CRC检验出错"><a href="#2、CRC检验出错" class="headerlink" title="2、CRC检验出错"></a>2、CRC检验出错</h2><p>当PNG文件头正常但无法正常打开文件，可能是CRC校验出错。可以尝试通过TweakPNG打开PNG，会弹处校验错误的提示，比如显示CRC是fe1a5ab6，正确的是b0a7a9f1，打开问winhex或010editor找到CRC值fe1a5ab6将其改为b0a7a9f1</p><h2 id="3、图片高度或宽度错误"><a href="#3、图片高度或宽度错误" class="headerlink" title="3、图片高度或宽度错误"></a>3、图片高度或宽度错误</h2><p>有时CRC没有错误，但是图片的高度或宽度发生了错误，需要通过CRC计算出正确的宽度和高度</p>    <figure class="figure-image">      <img src="/picture/misc7.png" alt="" loading="lazy" />      <figcaption></figcaption>    </figure>  <p>前八个字节89 50 4E <strong>47 0D 0A 1A 0A</strong>为png的文件头，<strong>该段格式是固定的</strong><br>前四个字节<strong>00 00 00 0D</strong>（即为十进制的13）代表数据块的长度为13，数据块包含了png图片的宽高等信息，<strong>该段格式是固定的</strong><br>之后的四个字节<strong>49 48 44 52</strong>（即为ASCII码的IHDR）是文件头数据块的标示，<strong>该段格式也是固定的</strong></p><p><font size=3 color='purple'>之后进入13位数据块，前8个字节<strong>00 00 01 69 00 00 03 25</strong>中：前四个字节00 00 01 69代表该图片的宽，<strong>该段数据是由图片的实际宽决定的</strong>，后四个字节00 00 03 25代表该图片的高，<strong>该段数据是由图片的实际高度决定的</strong></font><br>剩余的4位<strong>98 6B 9E 93</strong>为该png的CRC检验码</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment">#crc爆破宽高的脚本</span><br><span class="hljs-keyword">import</span> os<br><span class="hljs-keyword">import</span> binascii<br><span class="hljs-keyword">import</span> struct<br>crcbp=<span class="hljs-built_in">open</span>(<span class="hljs-string">&quot;flag.png&quot;</span>,<span class="hljs-string">&quot;rb&quot;</span>).read()<br><span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">1024</span>):<br>    <span class="hljs-keyword">for</span> j <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">1024</span>):<br>        data=crcbp[<span class="hljs-number">12</span>:<span class="hljs-number">16</span>]+struct.pack(<span class="hljs-string">&#x27;&gt;i&#x27;</span>,i)+struct.pack(<span class="hljs-string">&#x27;&gt;i&#x27;</span>,j)+crcbp[<span class="hljs-number">24</span>:<span class="hljs-number">29</span>]<br>        crc32=binascii.crc32(data)&amp;<span class="hljs-number">0xffffffff</span><br>        <span class="hljs-keyword">if</span> crc32== <span class="hljs-number">0x00BF122A</span>:  <span class="hljs-comment">#这里的值也需要根据图片的crc值进行更改</span><br>            <span class="hljs-built_in">print</span>(<span class="hljs-built_in">hex</span>(i),<span class="hljs-built_in">hex</span>(j))<br><br></code></pre></td></tr></table></figure><h2 id="4、图片加密"><a href="#4、图片加密" class="headerlink" title="4、图片加密"></a>4、图片加密</h2><p>Bftools<br>在windows的cmd下，对加密过的图片文件进行解密<br>格式:<br>Bftools.exe  decode  braincopter  要加密的图片名称 -output  输出文件名<br>Bftools.exe  run  上一步输出文件名</p><p>Stegdetect<br>Stegdetect工具探测加密方式，主要用于分析<strong>PEG</strong>文件，因此用stegdetcct用于检测到通过JSteg、JPHide、OutGuess、Invisible Secret、F5、appenddX和Camouflage这些隐写工具隐藏的信息<br>格式：<br>.\stegdetect  xxx.jpg<br>.\stegdetect  -s  敏感度  xxx.jpg<br> .\必不可少<br>  #敏感度最大为10，敏感度越大检测结果越准确，所以一般都是stegdetect  -s 10.0  xxx.jpg      <figure class="figure-image">      <img src="/picture/misc8.png" alt="" loading="lazy" />      <figcaption></figcaption>    </figure>  <br>在stegdetect.exe所在位置右键“在Windows终端打开”,因为我下载了PowerShell</p>]]></content>
     
     
       
@@ -110,14 +158,14 @@
     <link href="https://zhangkaibin0921.github.io/2021/11/28/Crypto%E5%9C%A8%E7%BA%BF%E8%A7%A3%E5%AF%86%E7%BD%91%E7%AB%99/"/>
     <id>https://zhangkaibin0921.github.io/2021/11/28/Crypto%E5%9C%A8%E7%BA%BF%E8%A7%A3%E5%AF%86%E7%BD%91%E7%AB%99/</id>
     <published>2021-11-28T12:40:20.000Z</published>
-    <updated>2021-12-12T12:16:16.099Z</updated>
+    <updated>2022-01-09T02:36:07.488Z</updated>
     
-    <content type="html"><![CDATA[<p><a href="https://cmd5.com/">MD5</a><br><a href="http://tool.geekapp.cn/">MD5加密</a><br>[栏栅密码](<a href="http://ctf.bugku.com/tool/railfence">栅栏加密/解密 - Bugku CTF</a>)<br><a href="http://www.urlencode.com.cn/">url</a><br><a href="http://www.hiencode.com/rot13.html">ROT13</a><br><a href="http://www.txttool.com/t/?id=Mzg1">morse</a><br><a href="http://www.hiencode.com/quoted.html">Quoted-printable</a><br><a href="https://www.qqxiuzi.cn/bianma/kaisamima.php">凯撒</a><br><a href="https://quipqiup.com/">进阶凯撒爆破</a><br><a href="https://www.codeeeee.com/encrypt/rabbit.html">Rabbit</a><br><a href="http://tools.jb51.net/jisuanqi/factor_calc">分解质因数</a><br><a href="http://tool.geekapp.cn/base64.php">Base64</a><br><a href="https://ctf.bugku.com/tool/base32">Base32</a><br><a href="https://ctf.bugku.com/tool/base16">Base16</a><br><a href="http://code.mcdvisa.com/">中文电码</a><br><a href="https://www.xiao84.com/tools/103177.html">猪圈密码</a><br><a href="http://www.hiencode.com/uu.html">UUencode</a><br><a href="https://www.sojson.com/hexadecimal.html">十六进制转文本</a><br><a href="https://www.bugku.com/tools/jsfuck/#">jsfuck</a><br><a href="http://hi.pcmoe.net/buddha.html">与佛论禅+MD5+兽音+熊音+AES+BASE64</a><br><a href="http://www.hiencode.com/cvencode.html">核心价值观</a><br><a href="https://www.qqxiuzi.cn/bianma/rot5-13-18-47.php">ROT5/13/18/47编码转换</a><br><a href="http://tool.bugku.com/peigen/">培根加密</a><br><a href="https://www.qqxiuzi.cn/bianma/weijiniyamima.php">维吉尼亚加密</a><br><a href="https://www.sojson.com/encrypt.html">AES</a><br><a href="https://tool.oschina.net/encode?type=4">Unicode、UTF-8、ASCII、URL</a></p><hr>]]></content>
+    <content type="html"><![CDATA[<p><a href="https://cmd5.com/">MD5</a><br><a href="http://tool.geekapp.cn/">MD5加密</a><br><a href="http://ctf.bugku.com/tool/railfence">栏栅密码</a><br><a href="http://www.urlencode.com.cn/">url</a><br><a href="http://www.hiencode.com/rot13.html">ROT13</a><br><a href="http://www.txttool.com/t/?id=Mzg1">morse</a><br><a href="http://www.hiencode.com/quoted.html">Quoted-printable</a><br><a href="https://www.qqxiuzi.cn/bianma/kaisamima.php">凯撒</a><br><a href="https://quipqiup.com/">进阶凯撒爆破</a><br><a href="https://www.codeeeee.com/encrypt/rabbit.html">Rabbit</a><br><a href="http://tools.jb51.net/jisuanqi/factor_calc">分解质因数</a><br><a href="http://tool.geekapp.cn/base64.php">Base64</a><br><a href="https://ctf.bugku.com/tool/base32">Base32</a><br><a href="https://ctf.bugku.com/tool/base16">Base16</a><br><a href="http://code.mcdvisa.com/">中文电码</a><br><a href="https://www.xiao84.com/tools/103177.html">猪圈密码</a><br><a href="http://www.hiencode.com/uu.html">UUencode</a><br><a href="https://www.sojson.com/hexadecimal.html">十六进制转文本</a><br><a href="https://www.bugku.com/tools/jsfuck/#">jsfuck</a><br>[与佛论禅](<a href="https://www.keyfc.net/bbs/tools/tudoucode.aspx">与佛论禅 (keyfc.net)</a>)<br><a href="http://hi.pcmoe.net/buddha.html">与佛论禅+MD5+兽音+熊音+AES+BASE64</a><br><a href="http://www.hiencode.com/cvencode.html">核心价值观</a><br><a href="https://www.qqxiuzi.cn/bianma/rot5-13-18-47.php">ROT5/13/18/47编码转换</a><br><a href="http://tool.bugku.com/peigen/">培根加密</a><br><a href="https://www.qqxiuzi.cn/bianma/weijiniyamima.php">维吉尼亚加密</a><br><a href="https://www.sojson.com/encrypt.html">AES</a><br><a href="https://tool.oschina.net/encode?type=4">Unicode、UTF-8、ASCII、URL</a></p><hr>]]></content>
     
     
       
       
-    <summary type="html">&lt;p&gt;&lt;a href=&quot;https://cmd5.com/&quot;&gt;MD5&lt;/a&gt;&lt;br&gt;&lt;a href=&quot;http://tool.geekapp.cn/&quot;&gt;MD5加密&lt;/a&gt;&lt;br&gt;[栏栅密码](&lt;a href=&quot;http://ctf.bugku.com/tool/railfence</summary>
+    <summary type="html">&lt;p&gt;&lt;a href=&quot;https://cmd5.com/&quot;&gt;MD5&lt;/a&gt;&lt;br&gt;&lt;a href=&quot;http://tool.geekapp.cn/&quot;&gt;MD5加密&lt;/a&gt;&lt;br&gt;&lt;a href=&quot;http://ctf.bugku.com/tool/railfence&quot;&gt;栏栅密码&lt;</summary>
       
     
     
