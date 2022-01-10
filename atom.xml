@@ -6,7 +6,7 @@
   <link href="https://zhangkaibin0921.github.io/atom.xml" rel="self"/>
   
   <link href="https://zhangkaibin0921.github.io/"/>
-  <updated>2022-01-09T11:34:55.286Z</updated>
+  <updated>2022-01-10T08:44:26.734Z</updated>
   <id>https://zhangkaibin0921.github.io/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>RSA共模攻击</title>
+    <link href="https://zhangkaibin0921.github.io/2022/01/10/RSA%E5%85%B1%E6%A8%A1%E6%94%BB%E5%87%BB/"/>
+    <id>https://zhangkaibin0921.github.io/2022/01/10/RSA%E5%85%B1%E6%A8%A1%E6%94%BB%E5%87%BB/</id>
+    <published>2022-01-10T07:55:23.000Z</published>
+    <updated>2022-01-10T08:44:26.734Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="攻击条件"><a href="#攻击条件" class="headerlink" title="攻击条件"></a>攻击条件</h2><p>当两个用户使用相同的模数N、不同的私钥时，加密同一明文消息时，即存在同模攻击</p><h2 id="攻击原理"><a href="#攻击原理" class="headerlink" title="攻击原理"></a>攻击原理</h2><p>设两个用户的公钥分别为e<sub>1</sub>和e<sub>2</sub>，且两者互质。明文信息为m，密文分别为:</p><p>​                                            c<sub>1 </sub>=m<sup>e<sub>1 </sub></sup> mod  N<br>​                                            c<sub>2</sub>=m<sup>e<sub>2</sub></sup>   mod  N</p><p>当攻击者截获c<sub>1</sub>和c<sub>2</sub>后，就可以恢复出明文。用扩展欧几里得算法求出se<sub>1</sub>+te<sub>2</sub>=1 mod  n 的两个整数r和s，由此可得:<br>                                      c<sub>1</sub><sup>s</sup>c<sub>2</sub><sup>t</sup>≡m<sup>se<sub>1</sub></sup> m<sup>te<sub>2</sub></sup>  mod  n<br>                                                ≡m<sup>(se<sub>1</sub>+te<sub>2</sub>)</sup>  mod n<br>                                                ≡ m mod n</p><h2 id="例题"><a href="#例题" class="headerlink" title="例题"></a>例题</h2>    <figure class="figure-image">      <img src="/picture/c1.png" alt="" loading="lazy" />      <figcaption></figcaption>    </figure>  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> gmpy2<br><span class="hljs-keyword">from</span> Crypto.Util.number <span class="hljs-keyword">import</span> *<br><span class="hljs-comment">#数字n、c1、c2都太长了，我直接去了</span><br>n=<br>e1= <span class="hljs-number">2333</span><br>e2= <span class="hljs-number">23333</span><br>c1=<br>c2=<br>gcd, s, t = gmpy2.gcdext(e1, e2)<br><span class="hljs-comment">#广义欧几里得求出s,t  gcdext返回值为e1,e2最大公因数和s、t。 s*e1+t*e2=(e1,e2)</span><br><br><span class="hljs-comment">#s和t中必然有一位负数，将其变为正数，要使等式仍然成立，取逆元</span><br><span class="hljs-keyword">if</span> s &lt; <span class="hljs-number">0</span>:<br>    s = -s<br>    c1 = gmpy2.invert(c1, n)<br><span class="hljs-keyword">if</span> t &lt; <span class="hljs-number">0</span>:<br>    t = -t<br>    c2 = gmpy2.invert(c2, n)<br>plain = gmpy2.powmod(c1, s, n) * gmpy2.powmod(c2, t, n) % n<br><span class="hljs-built_in">print</span>(long_to_bytes(plain))<br><span class="hljs-comment">#将long转换成字符串，是Crypto.Util.number中的方法，这里用不了libnum.n2s(plain)因为plain太长了</span><br></code></pre></td></tr></table></figure><h2 id="gmpy2常用函数"><a href="#gmpy2常用函数" class="headerlink" title="gmpy2常用函数"></a>gmpy2常用函数</h2><ul><li>n=invert(m,phi)求mod phi的逆元 </li><li>pow(m,e,n)求c^d mod n </li><li>gmpy2.is_prime(n) 素性检测</li><li>gmpy2.gcd(a,b)  欧几里得算法，最大公约数 </li><li>gmpy2.gcdext(a,b)  扩展欧几里得算法</li></ul><h2 id="libnum常用函数"><a href="#libnum常用函数" class="headerlink" title="libnum常用函数"></a>libnum常用函数</h2><ul><li>数字型（不论是十六进制还是十进制）与字符串之间的转换：</li></ul><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> libnum<br>s=<span class="hljs-string">&quot;flag&#123;pcat&#125;&quot;</span><br><span class="hljs-built_in">print</span> libnum.s2n(s)<br><br><br><span class="hljs-keyword">import</span> libnum<br>n=<span class="hljs-number">0x666c61677b706361747d</span><br><span class="hljs-built_in">print</span> libnum.n2s(n)<br></code></pre></td></tr></table></figure><ul><li> 二进制与字符串之间的转换：</li></ul><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> libnum<br>b=‘01110000011000110110000101110100‘<br><span class="hljs-built_in">print</span> libnum.b2s(b)<br><span class="hljs-comment">#二进制的位数最好是8的倍数</span><br><br><br><span class="hljs-keyword">import</span> libnum<br>b=‘01110000011000110110000101110100‘<br><span class="hljs-built_in">print</span> libnum.b2s(b)<br><span class="hljs-comment">#二进制的位数最好是8的倍数</span><br></code></pre></td></tr></table></figure><ul><li>质数&amp;因数分解</li></ul><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs routeros"><span class="hljs-builtin-name">print</span> libnum.generate_prime(1024)<br><br><span class="hljs-builtin-name">print</span> libnum.factorize(1024)<br></code></pre></td></tr></table></figure><blockquote><p>本篇博客大部分摘自CTFwiki，记录的目的是为了加深自己的理解，也是为了方便自己的使用</p></blockquote>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h2 id=&quot;攻击条件&quot;&gt;&lt;a href=&quot;#攻击条件&quot; class=&quot;headerlink&quot; title=&quot;攻击条件&quot;&gt;&lt;/a&gt;攻击条件&lt;/h2&gt;&lt;p&gt;当两个用户使用相同的模数N、不同的私钥时，加密同一明文消息时，即存在同模攻击&lt;/p&gt;
+&lt;h2 id=&quot;攻击原理&quot;&gt;&lt;a hr</summary>
+      
+    
+    
+    
+    
+    <category term="Crypto" scheme="https://zhangkaibin0921.github.io/tags/Crypto/"/>
+    
+  </entry>
   
   <entry>
     <title>攻防世界simpleRAR</title>
