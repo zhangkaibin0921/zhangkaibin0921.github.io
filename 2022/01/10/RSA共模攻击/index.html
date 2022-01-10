@@ -134,8 +134,23 @@
       <section class="article-entry markdown-body layout-margin content-padding--large soft-size--large soft-style--box">
         <h2 id="攻击条件"><a href="#攻击条件" class="headerlink" title="攻击条件"></a>攻击条件</h2><p>当两个用户使用相同的模数N、不同的私钥时，加密同一明文消息时，即存在同模攻击</p>
 <h2 id="攻击原理"><a href="#攻击原理" class="headerlink" title="攻击原理"></a>攻击原理</h2><p>设两个用户的公钥分别为e<sub>1</sub>和e<sub>2</sub>，且两者互质。明文信息为m，密文分别为:</p>
-<p>​                                            c<sub>1 </sub>=m<sup>e<sub>1 </sub></sup> mod  N<br>​                                            c<sub>2</sub>=m<sup>e<sub>2</sub></sup>   mod  N</p>
-<p>当攻击者截获c<sub>1</sub>和c<sub>2</sub>后，就可以恢复出明文。用扩展欧几里得算法求出se<sub>1</sub>+te<sub>2</sub>=1 mod  n 的两个整数r和s，由此可得:<br>                                      c<sub>1</sub><sup>s</sup>c<sub>2</sub><sup>t</sup>≡m<sup>se<sub>1</sub></sup> m<sup>te<sub>2</sub></sup>  mod  n<br>                                                ≡m<sup>(se<sub>1</sub>+te<sub>2</sub>)</sup>  mod n<br>                                                ≡ m mod n</p>
+
+    <figure class="figure-image">
+      <img src="/picture/c2.png" alt="" loading="lazy" />
+      <figcaption></figcaption>
+    </figure>
+  
+
+<p>​    </p>
+<p>当攻击者截获c<sub>1</sub>和c<sub>2</sub>后，就可以恢复出明文。用扩展欧几里得算法求出se<sub>1</sub>+te<sub>2</sub>=1 mod  n 的两个整数r和s，由此可得:</p>
+
+    <figure class="figure-image">
+      <img src="/picture/c3.png" alt="" loading="lazy" />
+      <figcaption></figcaption>
+    </figure>
+                                        
+
+<p>​                                </p>
 <h2 id="例题"><a href="#例题" class="headerlink" title="例题"></a>例题</h2>
     <figure class="figure-image">
       <img src="/picture/c1.png" alt="" loading="lazy" />
