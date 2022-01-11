@@ -140,6 +140,42 @@
     </figure>
   
 <p>[图像]-&gt;[调整]-&gt;[曝光度]</p>
+<h2 id="2、Training-Stegano-1"><a href="#2、Training-Stegano-1" class="headerlink" title="2、Training-Stegano-1"></a>2、Training-Stegano-1</h2><p>拿到图片，丢入010editor</p>
+
+    <figure class="figure-image">
+      <img src="/picture/misc17.png" alt="" loading="lazy" />
+      <figcaption></figcaption>
+    </figure>
+  
+<p>大道至简，这题的flag就是steganoI，不需要套flag{}，记录这题想告诉我自己不要想太多吧，这题已经说了passwd:  了</p>
+<h2 id="3、pure-color"><a href="#3、pure-color" class="headerlink" title="3、pure_color"></a>3、pure_color</h2><p>首先题目名字color有关，拿到图片是一张纯白得图片，很容易想到LSB</p>
+
+    <figure class="figure-image">
+      <img src="/picture/misc18.png" alt="" loading="lazy" />
+      <figcaption></figcaption>
+    </figure>
+  
+<p>但是图片看起来只有半截，先爆破了一下宽高，发现没有问题，在试试LSB</p>
+
+    <figure class="figure-image">
+      <img src="/picture/misc19.png" alt="" loading="lazy" />
+      <figcaption></figcaption>
+    </figure>
+  
+<p>什么也没有只拿到了Adobe ImageReady，猜测和ps有关，搜了一下</p>
+
+    <figure class="figure-image">
+      <img src="/picture/misc20.png" alt="" loading="lazy" />
+      <figcaption></figcaption>
+    </figure>
+  
+<p>打开PS<br>[图像]-&gt;[自动色调]<br>即可得到flag</p>
+
+    <figure class="figure-image">
+      <img src="/picture/misc21.png" alt="" loading="lazy" />
+      <figcaption></figcaption>
+    </figure>
+  
 
       </section>
 
