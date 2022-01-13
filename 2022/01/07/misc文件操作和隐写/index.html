@@ -132,8 +132,9 @@
       
       
       <section class="article-entry markdown-body layout-margin content-padding--large soft-size--large soft-style--box">
-        <h2 id="文件类型识别"><a href="#文件类型识别" class="headerlink" title="文件类型识别"></a>文件类型识别</h2><p>1、File命令<br>当文件没有后缀名或者有后缀名而无法正常打开时，根据识别出的文件类型来修改后缀名即可正常打开文件(在Linux操作系统下使用该命令)<br>格式:  file 文件名</p>
-<p>2、十六进制查看器<br>通过winhex、010editor或notepad++可以查看文件头类型，根据文件头类型判断出文件类型</p>
+        <h2 id="文件类型识别、取证"><a href="#文件类型识别、取证" class="headerlink" title="文件类型识别、取证"></a>文件类型识别、取证</h2><p>1、file命令<br>当文件没有后缀名或者有后缀名而无法正常打开时，根据识别出的文件类型来修改后缀名即可正常打开文件(在Linux操作系统下使用该命令)<br>格式:  file 文件名</p>
+<p>2、strings命令<br>打印文件中可打印的字符，经常用来发现文件中的一些提示信息或是一些特殊的编码信息，常常用来发现题目的突破口<br>配合grep命令探测指定信息：<br>strings 文件名 | grep -i XXCTF<br>例如：strings webshell.pcapng | grep {      #查找带有{ 的字符串      </p>
+<p>3、十六进制查看器<br>通过winhex、010editor或notepad++可以查看文件头类型，根据文件头类型判断出文件类型</p>
 
     <figure class="figure-image">
       <img src="/picture/misc1.png" alt="" loading="lazy" />
@@ -141,7 +142,7 @@
     </figure>
   
 <p><font size=1 color='red'>winhex试用期已过窗口绕过方法：点击details(详细)，把打开的窗格最小化之后，即可正常使用winhex</font><br><font size=1 color='red'>notepad++查看十六进制需要下载一个HEX-Editor插件</font></p>
-<p>3、文件头残缺/错误<br>通常文件无法正常打开有两种情况，一种是文件头部残缺，另一种是文件头部字段错误。针对文件头部残缺的情况，使用winhex程序添加相应的文件头，支队头部字段错误可以找一个相同类型的文件进行替换<br>一般使用file命令，只显示data，那么就极有可能是文件头残缺或错误</p>
+<p>4、文件头残缺/错误<br>通常文件无法正常打开有两种情况，一种是文件头部残缺，另一种是文件头部字段错误。针对文件头部残缺的情况，使用winhex程序添加相应的文件头，支队头部字段错误可以找一个相同类型的文件进行替换<br>一般使用file命令，只显示data，那么就极有可能是文件头残缺或错误</p>
 
     <figure class="figure-image">
       <img src="/picture/misc2.png" alt="" loading="lazy" />
