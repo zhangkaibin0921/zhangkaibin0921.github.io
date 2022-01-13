@@ -132,7 +132,9 @@
       
       
       <section class="article-entry markdown-body layout-margin content-padding--large soft-size--large soft-style--box">
-        <h2 id="wireshark过滤器"><a href="#wireshark过滤器" class="headerlink" title="wireshark过滤器"></a>wireshark过滤器</h2><p>1、过滤IP<br>ip.src eq x.x.x.x or ip.dst eq x.x.x.x   或者  ip.addr   eq  x.x.x.x</p>
+        <div class="aplayer-box" data-url='/picture/赵英俊 - 送你一朵小红花.mp3' data-name='送你一朵小红花' data-artist='赵英俊' data-cover='/picture/flower.png' ></div>
+
+<h2 id="wireshark过滤器"><a href="#wireshark过滤器" class="headerlink" title="wireshark过滤器"></a>wireshark过滤器</h2><p>1、过滤IP<br>ip.src eq x.x.x.x or ip.dst eq x.x.x.x   或者  ip.addr   eq  x.x.x.x</p>
 <p>2、过滤端口<br>tcp.port eq 80 or udp.port eq 80<br>tcp.dstport == 80  只显tcp协议的目标端口为80<br>tcp.scrport == 80   只显tcp协议的源端口为80<br>tcp.port &gt;=1 and tcp.port&lt;=80   </p>
 <p>3、<font color=red>过滤协议</font><br>tcp/udp/arp/icmp/http/ftp/dns/ip……</p>
 <p>4、包长度过滤<br>一般长度较小的包，可能不会藏太多东西<br>udp.length == 26<br>tcp.len &gt;= 7<br>ip.len == 94<br>frame.len == 119  整个数据包的长度，从eth开始到最后</p>
@@ -378,7 +380,10 @@
                             }
                             siteTime();
                         </script>
+
     </div>
+
+
 
 </footer>
   </div>
@@ -393,6 +398,34 @@
 
   
   <!-- aplayer -->
+
+
+  <!-- aplayer 音频 start -->
+  <link rel="stylesheet" href="https://unpkg.com/aplayer@1.10.1/dist/APlayer.min.css">
+  <script type="text/javascript" src="https://unpkg.com/aplayer@1.10.1/dist/APlayer.min.js"></script>
+  <script type="text/javascript">
+    const aplayer = document.querySelectorAll(".aplayer-box");
+    aplayer && initaplayer(aplayer);
+    function initaplayer(els) {
+      let elsArr = Array.from(els);
+      elsArr.forEach(el => {
+        let params = {
+          container: el,
+          audio: { ...el.dataset },
+          theme: "#b7daff",
+          autoplay: false,
+          loop: false,
+          mutex: true,
+        }
+        if (el.dataset.lrc) {
+          params['lrcType'] = 3
+        }
+        new APlayer(params);
+      });
+    }
+  </script>
+  <!-- aplayer 音频 end -->
+  
 
 
 <!-- dplayer -->
