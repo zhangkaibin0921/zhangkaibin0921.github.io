@@ -4,6 +4,25 @@
   
     
     <entry>
+      <title>misc流量包文件分析</title>
+      <link href="/2022/01/13/misc%E6%B5%81%E9%87%8F%E5%8C%85%E6%96%87%E4%BB%B6%E5%88%86%E6%9E%90/"/>
+      <url>/2022/01/13/misc%E6%B5%81%E9%87%8F%E5%8C%85%E6%96%87%E4%BB%B6%E5%88%86%E6%9E%90/</url>
+      
+        <content type="html"><![CDATA[<h2 id="wireshark过滤器"><a href="#wireshark过滤器" class="headerlink" title="wireshark过滤器"></a>wireshark过滤器</h2><p>1、过滤IP<br>ip.src eq x.x.x.x or ip.dst eq x.x.x.x   或者  ip.addr   eq  x.x.x.x</p><p>2、过滤端口<br>tcp.port eq 80 or udp.port eq 80<br>tcp.dstport == 80  只显tcp协议的目标端口为80<br>tcp.scrport == 80   只显tcp协议的源端口为80<br>tcp.port &gt;=1 and tcp.port&lt;=80   </p><p>3、<font color=red>过滤协议</font><br>tcp/udp/arp/icmp/http/ftp/dns/ip……</p><p>4、包长度过滤<br>一般长度较小的包，可能不会藏太多东西<br>udp.length == 26<br>tcp.len &gt;= 7<br>ip.len == 94<br>frame.len == 119  整个数据包的长度，从eth开始到最后</p><p>5、过滤MAC<br>eth.dst == A0:00:00:04:C5:84 过滤目标mac</p><p>6、<font color=red>http模式过滤</font><br>http.request.method == “GET”<br>http.request.method == “POST”<br>http.request.uri == “/img/logo-edu.gif”<br>http contains “GET”<br>http contains “HTTP/1.”<br>http.request.method == “GET”  &amp;&amp; http contains “User-Agent:”<br><font color=red>http contains “flag”</font><br>http contains “key”<br>tcp contains “flag”<br><font color=red>tcp contains “command”</font><br><font color=red>tcp contains “ls”</font></p><hr><h2 id="简单使用"><a href="#简单使用" class="headerlink" title="简单使用"></a>简单使用</h2><p>1、协议分级<br>[统计]-&gt;[协议分级]</p>    <figure class="figure-image">      <img src="/picture/misc26.png" alt="" loading="lazy" />      <figcaption></figcaption>    </figure>  <p>从协议分级可以看出这个pcap文件里的UDP明显多于TCP，所以就主要分析这个文件的UDP</p><p>2、根据数据包特征进行筛选<br>比如查看数据包时，有的数据包有某些特征，比如有http(80)，就可以筛选这种特征出来<br>[右键]-&gt;[作为过滤器应用]-&gt;[选中]</p>    <figure class="figure-image">      <img src="/picture/misc27.png" alt="" loading="lazy" />      <figcaption></figcaption>    </figure>  <p>3、流汇聚<br>在关注的http数据包或tcp数据包中选择流汇聚，可以将HTTP流或TCP流汇聚或还原成数据，在弹出的框中可以看到数据内容</p>    <figure class="figure-image">      <img src="/picture/misc28.png" alt="" loading="lazy" />      <figcaption></figcaption>    </figure>      <figure class="figure-image">      <img src="/picture/misc20.png" alt="" loading="lazy" />      <figcaption></figcaption>    </figure>  <p>常见的HTTP流关键内容:<br>1、HTML中直接包含重要信息<br>2、上传或下载文件内容，通常包含文件名、hash值等关键信息<br>3、一句话木马、POST请求、内容包含eval、内容使用base64加密</p><p><font color=red>4、提取通过http传输的文件内容</font><br>[文件]-&gt;[导出对象]-&gt;[HTTP]</p>    <figure class="figure-image">      <img src="/picture/misc29.png" alt="" loading="lazy" />      <figcaption></figcaption>    </figure>  <p>5、手动提取文件内容<br>点击想要的数据包，选中media type位置(或其他位置)<br>[右键]-&gt;[导出分组字节流]<br>在弹出的框中将文件保存成二进制文件</p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> misc </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>misc攻防世界刷题</title>
       <link href="/2022/01/11/misc%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8C%E5%88%B7%E9%A2%98/"/>
       <url>/2022/01/11/misc%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8C%E5%88%B7%E9%A2%98/</url>

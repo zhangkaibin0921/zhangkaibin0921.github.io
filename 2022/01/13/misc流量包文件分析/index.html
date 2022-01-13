@@ -22,7 +22,7 @@
 
   
 
-  <title>RSA共模攻击和gmpy2、libnum常用函数 | HappyCoder&#39;Home</title>
+  <title>misc流量包文件分析 | HappyCoder&#39;Home</title>
 
   
 
@@ -97,18 +97,18 @@
     <div class="header-content">
       <div class="post-text layout-block">
         <div class="layout-margin">
-          <h1 class="title-wrap">RSA共模攻击和gmpy2、libnum常用函数</h1>
+          <h1 class="title-wrap">misc流量包文件分析</h1>
           <h2 class="title-sub-wrap">
             <strong>zhangkaibin</strong>
             <span>发布于</span>
-            <time  class="article-date" datetime="2022-01-10T07:55:23.000Z" itemprop="datePublished">2022-01-10</time>
+            <time  class="article-date" datetime="2022-01-13T06:12:15.000Z" itemprop="datePublished">2022-01-13</time>
           </h2>
           <ul class="wrap-list dark">
   
 </ul>
           <ul class="wrap-list dark">
   
-    <li><a href="/tags/Crypto/">🏷️ Crypto</a></li>
+    <li><a href="/tags/misc/">🏷️ misc</a></li>
   
 </ul>
         </div>
@@ -132,63 +132,53 @@
       
       
       <section class="article-entry markdown-body layout-margin content-padding--large soft-size--large soft-style--box">
-        <h2 id="攻击条件"><a href="#攻击条件" class="headerlink" title="攻击条件"></a>攻击条件</h2><p>当两个用户使用相同的模数N、不同的私钥时，加密同一明文消息时，即存在同模攻击</p>
-<h2 id="攻击原理"><a href="#攻击原理" class="headerlink" title="攻击原理"></a>攻击原理</h2><p>设两个用户的公钥分别为e<sub>1</sub>和e<sub>2</sub>，且两者互质。明文信息为m，密文分别为:</p>
+        <h2 id="wireshark过滤器"><a href="#wireshark过滤器" class="headerlink" title="wireshark过滤器"></a>wireshark过滤器</h2><p>1、过滤IP<br>ip.src eq x.x.x.x or ip.dst eq x.x.x.x   或者  ip.addr   eq  x.x.x.x</p>
+<p>2、过滤端口<br>tcp.port eq 80 or udp.port eq 80<br>tcp.dstport == 80  只显tcp协议的目标端口为80<br>tcp.scrport == 80   只显tcp协议的源端口为80<br>tcp.port &gt;=1 and tcp.port&lt;=80   </p>
+<p>3、<font color=red>过滤协议</font><br>tcp/udp/arp/icmp/http/ftp/dns/ip……</p>
+<p>4、包长度过滤<br>一般长度较小的包，可能不会藏太多东西<br>udp.length == 26<br>tcp.len &gt;= 7<br>ip.len == 94<br>frame.len == 119  整个数据包的长度，从eth开始到最后</p>
+<p>5、过滤MAC<br>eth.dst == A0:00:00:04:C5:84 过滤目标mac</p>
+<p>6、<font color=red>http模式过滤</font><br>http.request.method == “GET”<br>http.request.method == “POST”<br>http.request.uri == “/img/logo-edu.gif”<br>http contains “GET”<br>http contains “HTTP/1.”<br>http.request.method == “GET”  &amp;&amp; http contains “User-Agent:”<br><font color=red>http contains “flag”</font><br>http contains “key”<br>tcp contains “flag”<br><font color=red>tcp contains “command”</font><br><font color=red>tcp contains “ls”</font></p>
+<hr>
+<h2 id="简单使用"><a href="#简单使用" class="headerlink" title="简单使用"></a>简单使用</h2><p>1、协议分级<br>[统计]-&gt;[协议分级]</p>
 
     <figure class="figure-image">
-      <img src="/picture/c2.png" alt="" loading="lazy" />
+      <img src="/picture/misc26.png" alt="" loading="lazy" />
+      <figcaption></figcaption>
+    </figure>
+  
+<p>从协议分级可以看出这个pcap文件里的UDP明显多于TCP，所以就主要分析这个文件的UDP</p>
+<p>2、根据数据包特征进行筛选<br>比如查看数据包时，有的数据包有某些特征，比如有http(80)，就可以筛选这种特征出来<br>[右键]-&gt;[作为过滤器应用]-&gt;[选中]</p>
+
+    <figure class="figure-image">
+      <img src="/picture/misc27.png" alt="" loading="lazy" />
       <figcaption></figcaption>
     </figure>
   
 
-<p>​    </p>
-<p>当攻击者截获c<sub>1</sub>和c<sub>2</sub>后，就可以恢复出明文。用扩展欧几里得算法求出se<sub>1</sub>+te<sub>2</sub>=1 mod  n 的两个整数r和s，由此可得:</p>
+<p>3、流汇聚<br>在关注的http数据包或tcp数据包中选择流汇聚，可以将HTTP流或TCP流汇聚或还原成数据，在弹出的框中可以看到数据内容</p>
 
     <figure class="figure-image">
-      <img src="/picture/c3.png" alt="" loading="lazy" />
-      <figcaption></figcaption>
-    </figure>
-                                        
-
-<p>​                                </p>
-<h2 id="例题"><a href="#例题" class="headerlink" title="例题"></a>例题</h2>
-    <figure class="figure-image">
-      <img src="/picture/c1.png" alt="" loading="lazy" />
+      <img src="/picture/misc28.png" alt="" loading="lazy" />
       <figcaption></figcaption>
     </figure>
   
 
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> gmpy2<br><span class="hljs-keyword">from</span> Crypto.Util.number <span class="hljs-keyword">import</span> *<br><span class="hljs-comment">#数字n、c1、c2都太长了，我直接去了</span><br>n=<br>e1= <span class="hljs-number">2333</span><br>e2= <span class="hljs-number">23333</span><br>c1=<br>c2=<br>gcd, s, t = gmpy2.gcdext(e1, e2)<br><span class="hljs-comment">#广义欧几里得求出s,t  gcdext返回值为e1,e2最大公因数和s、t。 s*e1+t*e2=(e1,e2)</span><br><br><span class="hljs-comment">#s和t中必然有一位负数，将其变为正数，要使等式仍然成立，取逆元</span><br><span class="hljs-keyword">if</span> s &lt; <span class="hljs-number">0</span>:<br>    s = -s<br>    c1 = gmpy2.invert(c1, n)<br><span class="hljs-keyword">if</span> t &lt; <span class="hljs-number">0</span>:<br>    t = -t<br>    c2 = gmpy2.invert(c2, n)<br>plain = gmpy2.powmod(c1, s, n) * gmpy2.powmod(c2, t, n) % n<br><span class="hljs-built_in">print</span>(long_to_bytes(plain))<br><span class="hljs-comment">#将long转换成字符串，是Crypto.Util.number中的方法，这里用不了libnum.n2s(plain)因为plain太长了</span><br></code></pre></td></tr></table></figure>
+    <figure class="figure-image">
+      <img src="/picture/misc20.png" alt="" loading="lazy" />
+      <figcaption></figcaption>
+    </figure>
+  
 
-<h2 id="gmpy2常用函数"><a href="#gmpy2常用函数" class="headerlink" title="gmpy2常用函数"></a>gmpy2常用函数</h2><ul>
-<li>n=invert(m,phi)求mod phi的逆元 </li>
-<li>pow(m,e,n)求c^d mod n </li>
-<li>gmpy2.is_prime(n) 素性检测</li>
-<li>gmpy2.gcd(a,b)  欧几里得算法，最大公约数 </li>
-<li>gmpy2.gcdext(a,b)  扩展欧几里得算法</li>
-<li>gmpy2.iroot(x,n)  x开n次根</li>
-<li>gmpy2.mpz(n) 初始化一个大整数</li>
-</ul>
-<h2 id="libnum常用函数"><a href="#libnum常用函数" class="headerlink" title="libnum常用函数"></a>libnum常用函数</h2><ul>
-<li>数字型（不论是十六进制还是十进制）与字符串之间的转换：</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> libnum<br>s=<span class="hljs-string">&quot;flag&#123;pcat&#125;&quot;</span><br><span class="hljs-built_in">print</span> libnum.s2n(s)<br><br><br><span class="hljs-keyword">import</span> libnum<br>n=<span class="hljs-number">0x666c61677b706361747d</span><br><span class="hljs-built_in">print</span> libnum.n2s(n)<br></code></pre></td></tr></table></figure>
+<p>常见的HTTP流关键内容:<br>1、HTML中直接包含重要信息<br>2、上传或下载文件内容，通常包含文件名、hash值等关键信息<br>3、一句话木马、POST请求、内容包含eval、内容使用base64加密</p>
+<p><font color=red>4、提取通过http传输的文件内容</font><br>[文件]-&gt;[导出对象]-&gt;[HTTP]</p>
 
-<ul>
-<li> 二进制与字符串之间的转换：</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> libnum<br>b=‘01110000011000110110000101110100‘<br><span class="hljs-built_in">print</span> libnum.b2s(b)<br><span class="hljs-comment">#二进制的位数最好是8的倍数</span><br><br><br><span class="hljs-keyword">import</span> libnum<br>b=‘01110000011000110110000101110100‘<br><span class="hljs-built_in">print</span> libnum.b2s(b)<br><span class="hljs-comment">#二进制的位数最好是8的倍数</span><br></code></pre></td></tr></table></figure>
+    <figure class="figure-image">
+      <img src="/picture/misc29.png" alt="" loading="lazy" />
+      <figcaption></figcaption>
+    </figure>
+  
 
-<ul>
-<li>质数&amp;因数分解</li>
-</ul>
-<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs routeros"><span class="hljs-builtin-name">print</span> libnum.generate_prime(1024)<br><br><span class="hljs-builtin-name">print</span> libnum.factorize(1024)<br></code></pre></td></tr></table></figure>
-
-
-
-<blockquote>
-<p>本篇博客大部分摘自CTFwiki，记录的目的是为了加深自己的理解，也是为了方便自己的使用</p>
-</blockquote>
+<p>5、手动提取文件内容<br>点击想要的数据包，选中media type位置(或其他位置)<br>[右键]-&gt;[导出分组字节流]<br>在弹出的框中将文件保存成二进制文件</p>
 
       </section>
 
@@ -196,28 +186,14 @@
       
         <nav class="article-nav">
           
-            <div class="article-nav-item layout-padding">
-  <article class="card-container article-nav-card content-padding--primary soft-size--large soft-style--box">
-    
-    <div class="card-text">
-      
-        <a href="/2022/01/11/SQL%E6%B3%A8%E5%85%A5/" itemprop="url">
-          <h2 class="card-text--title text-ellipsis">SQL注入</h2>
-        </a>
-      
-      <div class="card-text--row">Newer</div>
-    </div>
-  </article>
-</div>
-          
           
             <div class="article-nav-item layout-padding">
   <article class="card-container article-nav-card content-padding--primary soft-size--large soft-style--box">
     
     <div class="card-text">
       
-        <a href="/2022/01/09/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8CsimpleRAR/" itemprop="url">
-          <h2 class="card-text--title text-ellipsis">攻防世界simpleRAR</h2>
+        <a href="/2022/01/11/misc%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8C%E5%88%B7%E9%A2%98/" itemprop="url">
+          <h2 class="card-text--title text-ellipsis">misc攻防世界刷题</h2>
         </a>
       
       <div class="card-text--row">Older</div>
