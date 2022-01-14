@@ -6,7 +6,7 @@
   <link href="https://zhangkaibin0921.github.io/atom.xml" rel="self"/>
   
   <link href="https://zhangkaibin0921.github.io/"/>
-  <updated>2022-01-14T02:01:37.483Z</updated>
+  <updated>2022-01-14T11:43:32.729Z</updated>
   <id>https://zhangkaibin0921.github.io/</id>
   
   <author>
@@ -17,13 +17,13 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>http请求和响应</title>
+    <title>http请求和响应、TCP网络五层架构</title>
     <link href="https://zhangkaibin0921.github.io/2022/01/14/http%E8%AF%B7%E6%B1%82%E5%92%8C%E5%93%8D%E5%BA%94/"/>
     <id>https://zhangkaibin0921.github.io/2022/01/14/http%E8%AF%B7%E6%B1%82%E5%92%8C%E5%93%8D%E5%BA%94/</id>
     <published>2022-01-14T01:23:09.000Z</published>
-    <updated>2022-01-14T02:01:37.483Z</updated>
+    <updated>2022-01-14T11:43:32.729Z</updated>
     
-    <content type="html"><![CDATA[<div class="aplayer-box" data-url='/picture/赵英俊 - 送你一朵小红花.mp3' data-name='送你一朵小红花' data-artist='赵英俊' data-cover='/picture/flower.png' ></div><p>http协议的特点:<br>基于tcp/ip协议<br>默认端口号为80<br>请求与响应一一对应<br>每次请求相互独立，是无状态协议(这也是为什么需要cookie)</p><p>HTTP常用有八种请求方式，常用get和post<br>get请求：请求参数在url地址中，url有长度限制；<font color=red>get方式只能传输字符型的数据</font><br>post请求：请求参数在请求体中，无大小限制；<font color=red>post方式能传输字符和字节型数据</font>(当你想要上传一张图片或音乐必须使用post方式)</p><p>响应状态码：服务器告诉浏览器本次请求和响应的状态<br>1×× ：服务器接收浏览器消息未完成，发送1××状态码<br>2×× ：成功，200<br>3×× ：重定向，302，,304<br>4×× ：客户端错误，404(没有找到对应资源)，405(请求方法不被允许)<br>5×× ：服务器错误，500(服务器内部出现异常)</p>]]></content>
+    <content type="html"><![CDATA[<div class="aplayer-box" data-url='/picture/赵英俊 - 送你一朵小红花.mp3' data-name='送你一朵小红花' data-artist='赵英俊' data-cover='/picture/flower.png' ></div><h2 id="HTTP基础知识"><a href="#HTTP基础知识" class="headerlink" title="HTTP基础知识"></a>HTTP基础知识</h2><p>http协议的特点:<br>基于tcp/ip协议<br>默认端口号为80<br>请求与响应一一对应<br>每次请求相互独立，是无状态协议(这也是为什么需要cookie)</p><p>HTTP常用有八种请求方式，常用get和post<br>get请求：请求参数在url地址中，url有长度限制；<font color=red>get方式只能传输字符型的数据</font><br>post请求：请求参数在请求体中，无大小限制；<font color=red>post方式能传输字符和字节型数据</font>(当你想要上传一张图片或音乐必须使用post方式)</p><p>响应状态码：服务器告诉浏览器本次请求和响应的状态<br>1×× ：服务器接收浏览器消息未完成，发送1××状态码<br>2×× ：成功，200<br>3×× ：重定向，302，,304<br>4×× ：客户端错误，404(没有找到对应资源)，405(请求方法不被允许)<br>5×× ：服务器错误，500(服务器内部出现异常)</p><h2 id="TCP网络五层架构"><a href="#TCP网络五层架构" class="headerlink" title="TCP网络五层架构"></a>TCP网络五层架构</h2>    <figure class="figure-image">      <img src="/picture/web2.png" alt="" loading="lazy" />      <figcaption></figcaption>    </figure>  <p>分层好处：<br>1、各层独立：限制了依赖关系的范围，各层之间使用标准化的接口，各层不需要知道上下层是如何工作的，增加或者修改一个应用层协议不会影响传输层协议<br>2、灵活性更好：比如路由器不需要应用层和传输层，分层后路由器就可以只用加载更少的几个协议层<br>3、易于测试和维护：提高了可测试性，可以独立的测试特定层，某一层有了更好的实现可以整体替换掉<br>4、能促进标准化：每一层之策清楚，方便标准化</p>]]></content>
     
     
       
@@ -43,7 +43,7 @@
     <link href="https://zhangkaibin0921.github.io/2022/01/13/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8C%E6%B5%81%E9%87%8F%E5%88%86%E6%9E%90%E9%A2%98/"/>
     <id>https://zhangkaibin0921.github.io/2022/01/13/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8C%E6%B5%81%E9%87%8F%E5%88%86%E6%9E%90%E9%A2%98/</id>
     <published>2022-01-13T09:20:39.000Z</published>
-    <updated>2022-01-14T02:00:48.071Z</updated>
+    <updated>2022-01-14T06:02:42.316Z</updated>
     
     <content type="html"><![CDATA[<div class="aplayer-box" data-url='/picture/赵英俊 - 送你一朵小红花.mp3' data-name='送你一朵小红花' data-artist='赵英俊' data-cover='/picture/flower.png' ></div><h2 id="1、功夫再高也怕菜刀"><a href="#1、功夫再高也怕菜刀" class="headerlink" title="1、功夫再高也怕菜刀"></a>1、功夫再高也怕菜刀</h2>    <figure class="figure-image">      <img src="/picture/misc31.png" alt="" loading="lazy" />      <figcaption></figcaption>    </figure>      <figure class="figure-image">      <img src="/picture/misc32.png" alt="" loading="lazy" />      <figcaption></figcaption>    </figure>  <p>开始追踪流</p>    <figure class="figure-image">      <img src="/picture/misc33.png" alt="" loading="lazy" />      <figcaption></figcaption>    </figure>  <p>flag.txt找了半天没找到到底要怎么才能获取<br>直接导出http对象</p>    <figure class="figure-image">      <img src="/picture/misc34.png" alt="" loading="lazy" />      <figcaption></figcaption>    </figure>  <p>1(22).php很大，打开看一下</p>    <figure class="figure-image">      <img src="/picture/misc35.png" alt="" loading="lazy" />      <figcaption></figcaption>    </figure>      <figure class="figure-image">      <img src="/picture/misc36.png" alt="" loading="lazy" />      <figcaption></figcaption>    </figure>  <p>看到了这个png的文件头，把从文件头开始到文件末尾复制到一个新的txt文本，导入到010editor中，再导出为png</p>    <figure class="figure-image">      <img src="/picture/misc37.png" alt="" loading="lazy" />      <figcaption></figcaption>    </figure>  <p>我以为这就是flag了，没想到不是，看别人的wp，知道pacp下面还有一个压缩包<br><font color=red>用binwalk分离不行，会得到很多东西，必须使用foremost分离</font>，得到一个压缩包，密码就是刚才得到的图片，得到flag</p><h2 id="2、wireshark-1"><a href="#2、wireshark-1" class="headerlink" title="2、wireshark-1"></a>2、wireshark-1</h2>    <figure class="figure-image">      <img src="/picture/misc38.png" alt="" loading="lazy" />      <figcaption></figcaption>    </figure>  <p>导出HTTP对象</p>    <figure class="figure-image">      <img src="/picture/misc39.png" alt="" loading="lazy" />      <figcaption></figcaption>    </figure>  <p>题目提示管理员登录网站的密码，所以看后三个和登录有关的文件。我先看了两个较大一点的，都是网站登录页面的html文件，打开第三个，passwd就直接写在里面了</p><h2 id="3、easycap"><a href="#3、easycap" class="headerlink" title="3、easycap"></a>3、easycap</h2>    <figure class="figure-image">      <img src="/picture/misc40.png" alt="" loading="lazy" />      <figcaption></figcaption>    </figure>  <p>打开，追踪流得到FLAG<br>flag是FLAG:385b87afc8671dee07550290d16a8071</p>]]></content>
     

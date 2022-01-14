@@ -4,11 +4,11 @@
   
     
     <entry>
-      <title>http请求和响应</title>
+      <title>http请求和响应、TCP网络五层架构</title>
       <link href="/2022/01/14/http%E8%AF%B7%E6%B1%82%E5%92%8C%E5%93%8D%E5%BA%94/"/>
       <url>/2022/01/14/http%E8%AF%B7%E6%B1%82%E5%92%8C%E5%93%8D%E5%BA%94/</url>
       
-        <content type="html"><![CDATA[<div class="aplayer-box" data-url='/picture/赵英俊 - 送你一朵小红花.mp3' data-name='送你一朵小红花' data-artist='赵英俊' data-cover='/picture/flower.png' ></div><p>http协议的特点:<br>基于tcp/ip协议<br>默认端口号为80<br>请求与响应一一对应<br>每次请求相互独立，是无状态协议(这也是为什么需要cookie)</p><p>HTTP常用有八种请求方式，常用get和post<br>get请求：请求参数在url地址中，url有长度限制；<font color=red>get方式只能传输字符型的数据</font><br>post请求：请求参数在请求体中，无大小限制；<font color=red>post方式能传输字符和字节型数据</font>(当你想要上传一张图片或音乐必须使用post方式)</p><p>响应状态码：服务器告诉浏览器本次请求和响应的状态<br>1×× ：服务器接收浏览器消息未完成，发送1××状态码<br>2×× ：成功，200<br>3×× ：重定向，302，,304<br>4×× ：客户端错误，404(没有找到对应资源)，405(请求方法不被允许)<br>5×× ：服务器错误，500(服务器内部出现异常)</p>]]></content>
+        <content type="html"><![CDATA[<div class="aplayer-box" data-url='/picture/赵英俊 - 送你一朵小红花.mp3' data-name='送你一朵小红花' data-artist='赵英俊' data-cover='/picture/flower.png' ></div><h2 id="HTTP基础知识"><a href="#HTTP基础知识" class="headerlink" title="HTTP基础知识"></a>HTTP基础知识</h2><p>http协议的特点:<br>基于tcp/ip协议<br>默认端口号为80<br>请求与响应一一对应<br>每次请求相互独立，是无状态协议(这也是为什么需要cookie)</p><p>HTTP常用有八种请求方式，常用get和post<br>get请求：请求参数在url地址中，url有长度限制；<font color=red>get方式只能传输字符型的数据</font><br>post请求：请求参数在请求体中，无大小限制；<font color=red>post方式能传输字符和字节型数据</font>(当你想要上传一张图片或音乐必须使用post方式)</p><p>响应状态码：服务器告诉浏览器本次请求和响应的状态<br>1×× ：服务器接收浏览器消息未完成，发送1××状态码<br>2×× ：成功，200<br>3×× ：重定向，302，,304<br>4×× ：客户端错误，404(没有找到对应资源)，405(请求方法不被允许)<br>5×× ：服务器错误，500(服务器内部出现异常)</p><h2 id="TCP网络五层架构"><a href="#TCP网络五层架构" class="headerlink" title="TCP网络五层架构"></a>TCP网络五层架构</h2>    <figure class="figure-image">      <img src="/picture/web2.png" alt="" loading="lazy" />      <figcaption></figcaption>    </figure>  <p>分层好处：<br>1、各层独立：限制了依赖关系的范围，各层之间使用标准化的接口，各层不需要知道上下层是如何工作的，增加或者修改一个应用层协议不会影响传输层协议<br>2、灵活性更好：比如路由器不需要应用层和传输层，分层后路由器就可以只用加载更少的几个协议层<br>3、易于测试和维护：提高了可测试性，可以独立的测试特定层，某一层有了更好的实现可以整体替换掉<br>4、能促进标准化：每一层之策清楚，方便标准化</p>]]></content>
       
       
       
