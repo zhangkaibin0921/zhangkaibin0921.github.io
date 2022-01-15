@@ -22,7 +22,7 @@
 
   
 
-  <title>messages | HappyCoder&#39;Home</title>
+  <title>RSA小学生刷题 | HappyCoder&#39;Home</title>
 
   
 
@@ -44,7 +44,7 @@
   <div class="root-container">
     
 <!-- header container -->
-<header class="header-container">
+<header class="header-container post">
   
     <div class="post-image" style="background-image: url(https://img.zcool.cn/community/015fc55a6ef507a801213466c389d1.jpg@1280w_1l_2o_100sh.jpg)"></div>
   
@@ -94,36 +94,107 @@
 
   
   
-
-  
-  
     <div class="header-content">
-      <div class="post-text layout-block layout-padding">
-        <h1 class="title-wrap">messages</h1>
-        
+      <div class="post-text layout-block">
+        <div class="layout-margin">
+          <h1 class="title-wrap">RSA小学生刷题</h1>
+          <h2 class="title-sub-wrap">
+            <strong>zhangkaibin</strong>
+            <span>发布于</span>
+            <time  class="article-date" datetime="2022-01-15T03:50:22.000Z" itemprop="datePublished">2022-01-15</time>
+          </h2>
+          <ul class="wrap-list dark">
+  
+</ul>
+          <ul class="wrap-list dark">
+  
+    <li><a href="/tags/Crypto/">🏷️ Crypto</a></li>
+  
+</ul>
+        </div>
       </div>
     </div>
+  
+
+  
   
   
 </header>
 
-    <!-- 分页(其他自定义页面) -->
+    <!-- 文章 -->
 
-<!-- 自定义页面 -->
-
+<!-- 文章内容 -->
 <div class="body-container">
   <article class="content-container layout-block post-container">
     <div class="article-info">
       
+      
+      
+      
       <section class="article-entry markdown-body layout-margin content-padding--large soft-size--large soft-style--box">
-        
+        <h2 id="风二西RSA-1"><a href="#风二西RSA-1" class="headerlink" title="风二西RSA_1"></a>风二西RSA_1</h2><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs stylus">import gmpy2<br>import libnum<br>import uuid<br>flag=<span class="hljs-string">&quot;flag&#123;&quot;</span>+str(uuid<span class="hljs-selector-class">.uuid4</span>())+<span class="hljs-string">&quot;&#125;&quot;</span><br><span class="hljs-function"><span class="hljs-title">print</span><span class="hljs-params">(flag)</span></span><br>m=libnum<span class="hljs-selector-class">.s2n</span>(flag)<br>p=libnum<span class="hljs-selector-class">.generate_prime</span>(<span class="hljs-number">512</span>)<br>q=libnum<span class="hljs-selector-class">.generate_prime</span>(<span class="hljs-number">512</span>)<br>n=p*<span class="hljs-selector-tag">q</span><br>e=<span class="hljs-number">1</span><br>c=pow(m,e,n)<br><span class="hljs-function"><span class="hljs-title">print</span><span class="hljs-params">(<span class="hljs-string">&quot;n=&quot;</span>,n)</span></span><br><span class="hljs-function"><span class="hljs-title">print</span><span class="hljs-params">(<span class="hljs-string">&quot;c=&quot;</span>,c)</span></span><br><span class="hljs-function"><span class="hljs-title">print</span><span class="hljs-params">(<span class="hljs-string">&quot;e=&quot;</span>,e)</span></span><br>n= 已给出太长我省略了<br>c= 已给出太长我省略了<br></code></pre></td></tr></table></figure>
+
+<p>这题是我试出来的<br>直接print(long_to_bytes(c))即可<br>因为long_to_bytes之后前面会多出<font color=red>‘b</font>，就像下面这样</p>
+
+    <figure class="figure-image">
+      <img src="/picture/c4.png" alt="" loading="lazy" />
+      <figcaption></figcaption>
+    </figure>
+  
+
+<p>但是可能long_to_bytes之后，它并不是字符串，我暴力不出来，不知道为啥</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs routeros"><span class="hljs-keyword">from</span> Crypto.Util.number import *<br><span class="hljs-attribute">e</span>=1<br>n =<br>c =<br><span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(10000000000000000):<br>    <span class="hljs-attribute">x</span>=long_to_bytes(c+n*i)<br>    <span class="hljs-keyword">if</span> x[2]==<span class="hljs-string">&#x27;f&#x27;</span>:<br>        <span class="hljs-builtin-name">print</span>(x)<br>        break<br>    <br></code></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="风二西RSA-2"><a href="#风二西RSA-2" class="headerlink" title="风二西RSA_2"></a>风二西RSA_2</h2><figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">import</span> gmpy<span class="hljs-number">2</span><br><span class="hljs-attribute">import</span> libnum<br><span class="hljs-attribute">import</span> uuid<br><span class="hljs-attribute">flag</span>=<span class="hljs-string">&quot;flag&#123;&quot;</span>+str(uuid.uuid<span class="hljs-number">4</span>())+<span class="hljs-string">&quot;&#125;&quot;</span><br><span class="hljs-attribute">print</span>(flag)<br><span class="hljs-attribute">m</span>=libnum.s<span class="hljs-number">2</span>n(flag)<br><span class="hljs-attribute">p1</span>=libnum.generate_prime(<span class="hljs-number">64</span>)<br><span class="hljs-attribute">q1</span>=libnum.generate_prime(<span class="hljs-number">64</span>)<br><span class="hljs-attribute">p2</span>=libnum.generate_prime(<span class="hljs-number">64</span>)<br><span class="hljs-attribute">q2</span>=libnum.generate_prime(<span class="hljs-number">64</span>)<br><span class="hljs-attribute">p3</span>=libnum.generate_prime(<span class="hljs-number">64</span>)<br><span class="hljs-attribute">q3</span>=libnum.generate_prime(<span class="hljs-number">64</span>)<br><span class="hljs-attribute">e</span>=<span class="hljs-number">1</span><br><span class="hljs-attribute">c1</span>=pow(m,e,p<span class="hljs-number">1</span>*q<span class="hljs-number">1</span>)<br><span class="hljs-attribute">c2</span>=pow(m,e,p<span class="hljs-number">2</span>*q<span class="hljs-number">2</span>)<br><span class="hljs-attribute">c3</span>=pow(m,e,p<span class="hljs-number">3</span>*q<span class="hljs-number">3</span>)<br><span class="hljs-attribute">print</span>(<span class="hljs-string">&quot;n1=&quot;</span>,p<span class="hljs-number">1</span>*q<span class="hljs-number">1</span>)<br><span class="hljs-attribute">print</span>(<span class="hljs-string">&quot;c1=&quot;</span>,c<span class="hljs-number">1</span>)<br><span class="hljs-attribute">print</span>(<span class="hljs-string">&quot;n2=&quot;</span>,p<span class="hljs-number">2</span>*q<span class="hljs-number">2</span>)<br><span class="hljs-attribute">print</span>(<span class="hljs-string">&quot;c2=&quot;</span>,c<span class="hljs-number">2</span>)<br><span class="hljs-attribute">print</span>(<span class="hljs-string">&quot;n3=&quot;</span>,p<span class="hljs-number">3</span>*q<span class="hljs-number">3</span>)<br><span class="hljs-attribute">print</span>(<span class="hljs-string">&quot;c3=&quot;</span>,c<span class="hljs-number">3</span>)<br><span class="hljs-attribute">n1</span>= <span class="hljs-number">172774622114813683746188230007837413819</span><br><span class="hljs-attribute">c1</span>= <span class="hljs-number">170260248491697016437095929037490480036</span><br><span class="hljs-attribute">n2</span>= <span class="hljs-number">160333927436069409658483084503168246581</span><br><span class="hljs-attribute">c2</span>= <span class="hljs-number">45134242975344810542214361639231372051</span><br><span class="hljs-attribute">n3</span>= <span class="hljs-number">170109598387116572557100744899522621873</span><br><span class="hljs-attribute">c3</span>= <span class="hljs-number">47903985600747367026642413789127948969</span><br><br></code></pre></td></tr></table></figure>
+
+<p>m=c1 % n1<br>m=c2 % n2<br>m=c3 % n3<br>又n1、n2、n3两两互素，中国剩余定理（不知道有没有可以直接计算中国剩余定理的函数，我没有找到）</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">from</span> gmpy2 <span class="hljs-keyword">import</span> *<br><span class="hljs-keyword">from</span> Crypto.Util.number <span class="hljs-keyword">import</span> *<br>n1 = <span class="hljs-number">172774622114813683746188230007837413819</span><br>c1 = <span class="hljs-number">170260248491697016437095929037490480036</span><br>n2 = <span class="hljs-number">160333927436069409658483084503168246581</span><br>c2 = <span class="hljs-number">45134242975344810542214361639231372051</span><br>n3 = <span class="hljs-number">170109598387116572557100744899522621873</span><br>c3 = <span class="hljs-number">47903985600747367026642413789127948969</span><br><span class="hljs-built_in">print</span>(gcd(n1,n2),gcd(n1,n3),gcd(n2,n3))<br>M1=n2*n3<br>M11=invert(M1,n1)<br>M2=n1*n3<br>M21=invert(M2,n2)<br>M3=n1*n2<br>M31=invert(M3,n3)<br>m=(c1*M1*M11+c2*M2*M21+c3*M3*M31)%(n1*n2*n3)<br><span class="hljs-built_in">print</span>(long_to_bytes(m))<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="风二西RSA-3"><a href="#风二西RSA-3" class="headerlink" title="风二西RSA_3"></a>风二西RSA_3</h2><p>这一题原理在同模攻击那里说过了，这一题也是同模攻击那一篇的例子</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><code class="hljs stylus">import libnum<br>import gmpy2<br>import uuid<br>flag=<span class="hljs-string">&quot;flag&#123;&quot;</span>+str(uuid<span class="hljs-selector-class">.uuid4</span>())+<span class="hljs-string">&quot;&#125;&quot;</span><br><span class="hljs-function"><span class="hljs-title">print</span><span class="hljs-params">(flag)</span></span><br>m=libnum<span class="hljs-selector-class">.s2n</span>(flag)<br>p=libnum<span class="hljs-selector-class">.generate_prime</span>(<span class="hljs-number">1024</span>)<br>q=libnum<span class="hljs-selector-class">.generate_prime</span>(<span class="hljs-number">1024</span>)<br>n1=p*<span class="hljs-selector-tag">q</span><br>n2=p*<span class="hljs-selector-tag">q</span><br>e1=<span class="hljs-number">2333</span><br>e2=<span class="hljs-number">23333</span><br>m=libnum<span class="hljs-selector-class">.s2n</span>(flag)<br>c1=pow(m,e1,n1)<br>c2=pow(m,e2,n2)<br><span class="hljs-function"><span class="hljs-title">print</span><span class="hljs-params">(<span class="hljs-string">&quot;n1=&quot;</span>,n1)</span></span><br><span class="hljs-function"><span class="hljs-title">print</span><span class="hljs-params">(<span class="hljs-string">&quot;n2=&quot;</span>,n2)</span></span><br><span class="hljs-function"><span class="hljs-title">print</span><span class="hljs-params">(<span class="hljs-string">&quot;e1=&quot;</span>,e1)</span></span><br><span class="hljs-function"><span class="hljs-title">print</span><span class="hljs-params">(<span class="hljs-string">&quot;e2=&quot;</span>,e2)</span></span><br><span class="hljs-function"><span class="hljs-title">print</span><span class="hljs-params">(<span class="hljs-string">&quot;c1=&quot;</span>,c1)</span></span><br><span class="hljs-function"><span class="hljs-title">print</span><span class="hljs-params">(<span class="hljs-string">&quot;c2=&quot;</span>,c2)</span></span><br>n1= 已给出太长我省略了<br>n2= 已给出太长我省略了<br>e1= <span class="hljs-number">2333</span><br>e2= <span class="hljs-number">23333</span><br>c1= 已给出太长我省略了<br>c2= 已给出太长我省略了<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">import</span> gmpy<span class="hljs-number">2</span><br><span class="hljs-attribute">from</span> Crypto.Util.number import *<br><span class="hljs-comment">#数字n、c1、c2都太长了，我直接去了</span><br><span class="hljs-attribute">n</span>=<br><span class="hljs-attribute">e1</span>= <span class="hljs-number">2333</span><br><span class="hljs-attribute">e2</span>= <span class="hljs-number">23333</span><br><span class="hljs-attribute">c1</span>=<br><span class="hljs-attribute">c2</span>=<br><span class="hljs-attribute">gcd</span>, s, t = gmpy<span class="hljs-number">2</span>.gcdext(e<span class="hljs-number">1</span>, e<span class="hljs-number">2</span>)<br><span class="hljs-comment">#广义欧几里得求出s,t  gcdext返回值为e1,e2最大公因数和s、t。 s*e1+t*e2=(e1,e2)</span><br><br><span class="hljs-comment">#s和t中必然有一位负数，将其变为正数，要使等式仍然成立，取逆元</span><br><span class="hljs-attribute">if</span> s &lt; <span class="hljs-number">0</span>:<br>    <span class="hljs-attribute">s</span> = -s<br>    <span class="hljs-attribute">c1</span> = gmpy<span class="hljs-number">2</span>.invert(c<span class="hljs-number">1</span>, n)<br><span class="hljs-attribute">if</span> t &lt; <span class="hljs-number">0</span>:<br>    <span class="hljs-attribute">t</span> = -t<br>    <span class="hljs-attribute">c2</span> = gmpy<span class="hljs-number">2</span>.invert(c<span class="hljs-number">2</span>, n)<br><span class="hljs-attribute">plain</span> = gmpy<span class="hljs-number">2</span>.powmod(c<span class="hljs-number">1</span>, s, n) * gmpy<span class="hljs-number">2</span>.powmod(c<span class="hljs-number">2</span>, t, n) % n<br><span class="hljs-attribute">print</span>(long_to_bytes(plain))<br><span class="hljs-comment">#将long转换成字符串，是Crypto.Util.number中的方法，这里用不了libnum.n2s(plain)因为plain太长了</span><br></code></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="风二西RSA-4"><a href="#风二西RSA-4" class="headerlink" title="风二西RSA_4"></a>风二西RSA_4</h2>
       </section>
 
       
       
+        <nav class="article-nav">
+          
+          
+            <div class="article-nav-item layout-padding">
+  <article class="card-container article-nav-card content-padding--primary soft-size--large soft-style--box">
+    
+    <div class="card-text">
+      
+        <a href="/2022/01/14/http%E8%AF%B7%E6%B1%82%E5%92%8C%E5%93%8D%E5%BA%94/" itemprop="url">
+          <h2 class="card-text--title text-ellipsis">http请求和响应、TCP网络五层架构</h2>
+        </a>
+      
+      <div class="card-text--row">Older</div>
+    </div>
+  </article>
+</div>
+          
+        </nav>
+      
 
-      
-      
+      <section class="page-message-container layout-padding">
+        
+
+
+  
+  
+
+  
+  
+
+
+      </section>
     </div>
     <div class="widget-info">
       <section class="widget-author widget-item layout-margin content-padding--primary soft-size--large soft-style--box">
@@ -160,6 +231,8 @@
     </div>
   </div>
 </section>
+
+      
 
       
 <section class="widet-notice widget-item layout-margin content-padding--primary soft-size--large soft-style--box">
@@ -205,7 +278,6 @@
     </div>
   </article>
 </div>
-
 
     <!-- footer container -->
 <footer id="footer" class="footer">
