@@ -142,7 +142,7 @@
   
 
 <p>​    </p>
-<p>当攻击者截获c<sub>1</sub>和c<sub>2</sub>后，就可以恢复出明文。用扩展欧几里得算法求出se<sub>1</sub>+te<sub>2</sub>=1 mod  n 的两个整数r和s，由此可得:</p>
+<p>当攻击者截获c<sub>1</sub>和c<sub>2</sub>后，就可以恢复出明文。用扩展欧几里得算法求出re<sub>1</sub>+se<sub>2</sub>=1 mod  n 的两个整数r和s，由此可得:</p>
 
     <figure class="figure-image">
       <img src="/picture/c3.png" alt="" loading="lazy" />
@@ -170,7 +170,10 @@
 <li>gmpy2.mpz(n) 初始化一个大整数</li>
 </ul>
 <h2 id="libnum常用函数"><a href="#libnum常用函数" class="headerlink" title="libnum常用函数"></a>libnum常用函数</h2><ul>
-<li>数字型（不论是十六进制还是十进制）与字符串之间的转换：</li>
+<li><p>libnum.invmod(a,b)   求mod b的逆元</p>
+</li>
+<li><p>数字型（不论是十六进制还是十进制）与字符串之间的转换：</p>
+</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> libnum<br>s=<span class="hljs-string">&quot;flag&#123;pcat&#125;&quot;</span><br><span class="hljs-built_in">print</span> libnum.s2n(s)<br><br><br><span class="hljs-keyword">import</span> libnum<br>n=<span class="hljs-number">0x666c61677b706361747d</span><br><span class="hljs-built_in">print</span> libnum.n2s(n)<br></code></pre></td></tr></table></figure>
 
