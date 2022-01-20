@@ -6,7 +6,7 @@
   <link href="https://zhangkaibin0921.github.io/atom.xml" rel="self"/>
   
   <link href="https://zhangkaibin0921.github.io/"/>
-  <updated>2022-01-18T06:40:16.602Z</updated>
+  <updated>2022-01-20T14:55:59.316Z</updated>
   <id>https://zhangkaibin0921.github.io/</id>
   
   <author>
@@ -21,16 +21,15 @@
     <link href="https://zhangkaibin0921.github.io/2022/01/18/%E5%90%84%E7%A7%8D%E7%BC%96%E7%A0%81%E7%89%B9%E5%BE%81/"/>
     <id>https://zhangkaibin0921.github.io/2022/01/18/%E5%90%84%E7%A7%8D%E7%BC%96%E7%A0%81%E7%89%B9%E5%BE%81/</id>
     <published>2022-01-18T06:38:46.000Z</published>
-    <updated>2022-01-18T06:40:16.602Z</updated>
+    <updated>2022-01-20T14:55:59.316Z</updated>
     
-    <content type="html"><![CDATA[<p>1、jsfuck<br> 组成：[] () + !<br>示例：[][(![]+[])[+[]]+([![]]+[][[]]</p><p>2、</p>]]></content>
+    <content type="html"><![CDATA[<p>1、jsfuck<br> 组成：[] () + !<br>示例：[][(![]+[])[+[]]+([![]]+[][[]]</p><p>2、brainfuck<br>组成：+-[].&lt;&gt;<br>示例：++++++++++[&gt;+++++++&gt;++++++++++&gt;+++&gt;+&lt;&lt;&lt;&lt;-]++.&gt;+.+++++++…+++.&gt;++.&lt;&lt;+++++++++++++++…+++.——.——–.&gt;+.&gt;</p><p>3、Ook编码：Ook! Ook!</p><p>4、培根<br>只有两种字符<br>每一段的长度为 5</p><p>5、base家族<br>base64：大小写字母，0<del>9，+，-,64位组成的<br>base32：使用32个可打印字符（字母A-Z和数字2-7）<br>base16：使用16个ASCII可打印字符（数字0-9和字母A-F）对任意字节数据进行编码。<br>base36：使用0</del>9的数字，加上所有26个字母，所有的字母要不全大写，要不全小写。<br>base58：58=9个阿拉伯数字（去掉0）+24个大写字母（去掉I和O）+25小写字母（去掉l）<br>base62：由10个数字、26个大写英文字母和26个小写英文字母组成<br>base85：:d]&gt;JA62bf&lt;^o]!;,or.=a;i@9/17‘@8oNU<br>base91:从94个可打印ASCII字符（0x21-0x7E）中，以下三个字符被省略以构建base91字母：- (破折号，0x2D)     \（反斜杠，0x5C）     ‘（撇号，0x27）<br>base92:比base91 多一个字符 〜</p><p>6、敲击码<br>敲击码是基于5×5方格波利比奥斯方阵来实现的，不同点是是用K字母被整合到C中。</p>    <figure class="figure-image">      <img src="/picture/c5.png" alt="" loading="lazy" />      <figcaption></figcaption>    </figure>  <p>7、url编码<br>特征：一个字符ascii码的十六进制，然后在前面加上%</p><p>任何特殊的字符（就是那些不是简单的七位ASCII，如汉字，当然也包括象 =,&amp;；，和 % 这些特殊的字符）将以百分符%用十六进制编码。</p><p>其实url编码就是一个字符ascii码的十六进制。不过稍微有些变动，需要在前面加上“%”。比如“\”，它的ascii码是92，92的十六进制是5c，所以“\”的url编码就是%5c。汉字的url编码呢？看例子：“胡”的ascii码是-17670，十六进制是BAFA，url编码是“%BA%FA”。</p><p>8、shellcode编码<br>源文本：The quick brown fox jumps over the lazy dog<br>编码后：\x54\x68\x65\x7f\x71\x75\x69\x63\x6b\x7f\x62\x72\x6f\x77\x6e\x7f\x66\x6f\x78\x7f\x6a\x75\x6d\x70\x73\x7f\x6f\x76\x65\x72\x7f\x74\x68\x65\x7f\x6c\x61\x7a\x79\x7f\x64\x6f\x67</p><p>9、Quoted-printable 编码<br>它是多用途互联网邮件扩展（MIME) 一种实现方式<br>示例：=E6=95=8F=E6=8D=B7=E7=9A=84=E6=A3=95=E8=89=B2=E7</p><blockquote><p>参考博客 <a href="https://blog.csdn.net/weixin_44255856/article/details/89792997?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522164268994116780271586776%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&request_id=164268994116780271586776&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~all~sobaiduend~default-1-89792997.pc_search_result_control_group&utm_term=ctf%E5%B8%B8%E8%A7%81%E7%BC%96%E7%A0%81&spm=1018.2226.3001.4187">这篇</a>、<a href="https://blog.csdn.net/weixin_54515836/article/details/113357816?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522164268628416780366556635%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&request_id=164268628416780366556635&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~all~baidu_landing_v2~default-2-113357816.pc_search_result_control_group&utm_term=ctf%E7%9B%B2%E6%96%87&spm=1018.2226.3001.4187">这篇</a>、<a href="https://www.cnblogs.com/daban/p/5680451.html">这篇</a></p></blockquote>]]></content>
     
     
       
       
     <summary type="html">&lt;p&gt;1、jsfuck&lt;br&gt; 组成：[] () + !&lt;br&gt;示例：[][(![]+[])[+[]]+([![]]+[][[]]&lt;/p&gt;
-&lt;p&gt;2、&lt;/p&gt;
-</summary>
+&lt;p&gt;2、brainfuck&lt;br&gt;组成：+-[].&amp;lt;&amp;gt;&lt;br&gt;示例：++++++++++[&amp;gt;+++++++&amp;gt;+++</summary>
       
     
     
