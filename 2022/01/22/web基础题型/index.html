@@ -22,7 +22,7 @@
 
   
 
-  <title>古典密码原理实现 | HappyCoder&#39;Home</title>
+  <title>web基础题型 | HappyCoder&#39;Home</title>
 
   
 
@@ -46,7 +46,7 @@
 <!-- header container -->
 <header class="header-container post">
   
-    <div class="post-image" style="background-image: url(/picture/cover/15.jpg)"></div>
+    <div class="post-image" style="background-image: url(https://img.zcool.cn/community/015fc55a6ef507a801213466c389d1.jpg@1280w_1l_2o_100sh.jpg)"></div>
   
 
   <!-- navbar -->
@@ -97,18 +97,18 @@
     <div class="header-content">
       <div class="post-text layout-block">
         <div class="layout-margin">
-          <h1 class="title-wrap">古典密码原理实现</h1>
+          <h1 class="title-wrap">web基础题型</h1>
           <h2 class="title-sub-wrap">
             <strong>zhangkaibin</strong>
             <span>发布于</span>
-            <time  class="article-date" datetime="2021-11-29T09:23:46.000Z" itemprop="datePublished">2021-11-29</time>
+            <time  class="article-date" datetime="2022-01-22T11:32:12.000Z" itemprop="datePublished">2022-01-22</time>
           </h2>
           <ul class="wrap-list dark">
   
 </ul>
           <ul class="wrap-list dark">
   
-    <li><a href="/tags/Crypto/">🏷️ Crypto</a></li>
+    <li><a href="/tags/web/">🏷️ web</a></li>
   
 </ul>
         </div>
@@ -132,57 +132,18 @@
       
       
       <section class="article-entry markdown-body layout-margin content-padding--large soft-size--large soft-style--box">
-        <h1 id="1、ceasar"><a href="#1、ceasar" class="headerlink" title="1、ceasar"></a>1、ceasar</h1>
+        <h2 id="PHP-erge-函数-00截断漏洞"><a href="#PHP-erge-函数-00截断漏洞" class="headerlink" title="PHP.erge()函数%00截断漏洞"></a>PHP.erge()函数%00截断漏洞</h2><p>erge()用途<br>用指定的模式匹配一个字符串中指定的字符串，如果匹配成功则返回true，否则返回false。搜索字母的字符是大小写敏感的。可选的参数规则包含一个数组的所有匹配表达式，它们被正则表达式的括号分组。<br>ereg(“^[0-9]+$“,$_<em>GET[‘password’])===true</em>#保证参数全是数字<br>strpos($_GET[‘password’],’admin’) #查找admin第一次在参数中出现的位置</p>
+
     <figure class="figure-image">
-      <img src="/picture/kaisa.png" alt="" loading="lazy" />
+      <img src="/picture/web3.png" alt="" loading="lazy" />
       <figcaption></figcaption>
     </figure>
   
-
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs python"><br>cipher=<span class="hljs-string">&quot;zhongguo&quot;</span>   <span class="hljs-comment">#明文</span><br>move=<span class="hljs-number">3</span>              <span class="hljs-comment">#移位数</span><br>t=<span class="hljs-string">&quot;&quot;</span>                <span class="hljs-comment">#密文</span><br><span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> cipher:<br>    <span class="hljs-keyword">if</span> <span class="hljs-string">&#x27;a&#x27;</span>&lt;=i&lt;=<span class="hljs-string">&#x27;z&#x27;</span>:<br>        t+=<span class="hljs-built_in">chr</span>(<span class="hljs-built_in">ord</span>(<span class="hljs-string">&#x27;a&#x27;</span>)+((<span class="hljs-built_in">ord</span>(i)-<span class="hljs-built_in">ord</span>(<span class="hljs-string">&#x27;a&#x27;</span>)+move)%<span class="hljs-number">26</span>))<br>    <span class="hljs-keyword">elif</span> <span class="hljs-string">&#x27;A&#x27;</span>&lt;=i&lt;=<span class="hljs-string">&#x27;Z&#x27;</span>:<br>        t+=<span class="hljs-built_in">chr</span>(<span class="hljs-built_in">ord</span>(<span class="hljs-string">&#x27;A&#x27;</span>)+((<span class="hljs-built_in">ord</span>(i)-<span class="hljs-built_in">ord</span>(<span class="hljs-string">&#x27;A&#x27;</span>)+move)%<span class="hljs-number">26</span>))<br>    <span class="hljs-keyword">else</span>:<br>        t+=i<br><span class="hljs-built_in">print</span>(t)<br>        <br><span class="hljs-comment">#如果要解密的话，秘钥变为负数</span><br><span class="hljs-comment">#如zhongguo加密后得到ckrqjjxr</span><br><span class="hljs-comment">#现需要解密，则直接将move取-3即可</span><br><br></code></pre></td></tr></table></figure>
-
-
-
-<h1 id="2、affine"><a href="#2、affine" class="headerlink" title="2、affine"></a>2、affine</h1>
-    <figure class="figure-image">
-      <img src="/picture/affine.png" alt="" loading="lazy" />
-      <figcaption></figcaption>
-    </figure>
-  
-
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment">#加密</span><br>cipher=<span class="hljs-string">&#x27;zhongguo&#x27;</span><span class="hljs-comment">#明文</span><br>t=<span class="hljs-string">&#x27;&#x27;</span><span class="hljs-comment">#密文</span><br>a=<span class="hljs-number">3</span><br>b=<span class="hljs-number">4</span> <span class="hljs-comment">#E(x)=ax+b,gcd(a,26)</span><br><span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> cipher:<br>    <span class="hljs-keyword">if</span> <span class="hljs-string">&#x27;a&#x27;</span>&lt;=i&lt;=<span class="hljs-string">&#x27;z&#x27;</span>:<br>        t+=<span class="hljs-built_in">chr</span>(<span class="hljs-built_in">ord</span>(<span class="hljs-string">&#x27;a&#x27;</span>)+((a*(<span class="hljs-built_in">ord</span>(i)-<span class="hljs-built_in">ord</span>(<span class="hljs-string">&#x27;a&#x27;</span>))+b)%<span class="hljs-number">26</span>))<br>    <span class="hljs-keyword">elif</span> <span class="hljs-string">&#x27;A&#x27;</span>&lt;=i&lt;=<span class="hljs-string">&#x27;Z&#x27;</span>:<br>        t+=<span class="hljs-built_in">chr</span>(<span class="hljs-built_in">ord</span>(<span class="hljs-string">&#x27;A&#x27;</span>)+((a*(<span class="hljs-built_in">ord</span>(i)-<span class="hljs-built_in">ord</span>(<span class="hljs-string">&#x27;A&#x27;</span>))+b)%<span class="hljs-number">26</span>))<br>    <span class="hljs-keyword">else</span>:<br>        t+=i<br><span class="hljs-built_in">print</span>(t)<br><br><br><span class="hljs-comment">#解密</span><br>t = <span class="hljs-string">&#x27;bzurwwmu&#x27;</span>  <span class="hljs-comment"># 密文</span><br>cipher = <span class="hljs-string">&#x27;&#x27;</span>  <span class="hljs-comment"># 明文</span><br>a = <span class="hljs-number">3</span><br>b = <span class="hljs-number">4</span><br><span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">1</span>, <span class="hljs-number">26</span>):<br>    <span class="hljs-keyword">if</span> (i*a) % <span class="hljs-number">26</span> == <span class="hljs-number">1</span>:<br>        a1 = i<br>        <span class="hljs-keyword">break</span><br><span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> t:<br>    <span class="hljs-keyword">if</span> <span class="hljs-string">&#x27;a&#x27;</span> &lt;= i &lt;= <span class="hljs-string">&#x27;z&#x27;</span>:<br>        cipher += <span class="hljs-built_in">chr</span>(<span class="hljs-built_in">ord</span>(<span class="hljs-string">&#x27;a&#x27;</span>)+((a1*(<span class="hljs-built_in">ord</span>(i)-<span class="hljs-built_in">ord</span>(<span class="hljs-string">&#x27;a&#x27;</span>)-b)) % <span class="hljs-number">26</span>))<br>    <span class="hljs-keyword">elif</span> <span class="hljs-string">&#x27;A&#x27;</span> &lt;= i &lt;= <span class="hljs-string">&#x27;Z&#x27;</span>:<br>        cipher += <span class="hljs-built_in">chr</span>(<span class="hljs-built_in">ord</span>(<span class="hljs-string">&#x27;A&#x27;</span>)+((a1*(<span class="hljs-built_in">ord</span>(i)-<span class="hljs-built_in">ord</span>(<span class="hljs-string">&#x27;A&#x27;</span>)-b)) % <span class="hljs-number">26</span>))<br>    <span class="hljs-keyword">else</span>:<br>        cipher += i<br><span class="hljs-built_in">print</span>(cipher)<br><br>    <br></code></pre></td></tr></table></figure>
-
-<h1 id="3、多表代换密码"><a href="#3、多表代换密码" class="headerlink" title="3、多表代换密码"></a>3、多表代换密码</h1><p>先说下这个方法必要的基础知识</p>
-<p>因为解密的时候需要矩阵求逆，所以写下方法，这个是最基本的方法</p>
-
-    <figure class="figure-image">
-      <img src="/picture/keniju1.jpg" alt="" loading="lazy" />
-      <figcaption></figcaption>
-    </figure>
-  
-
-<p>行列式怎么求好像也不太记得了，看个例子应该就能马上想起来了</p>
-
-    <figure class="figure-image">
-      <img src="/picture/keniju2.jpg" alt="" loading="lazy" />
-      <figcaption></figcaption>
-    </figure>
-  
-
-<p>可逆矩阵另一种比较简单一点的求法</p>
-
-    <figure class="figure-image">
-      <img src="/picture/keniju3.jpg" alt="" loading="lazy" />
-      <figcaption></figcaption>
-    </figure>
-  
-
-
-    <figure class="figure-image">
-      <img src="/picture/duobiao.jpg" alt="" loading="lazy" />
-      <figcaption></figcaption>
-    </figure>
-  
+<p>可以构造payload<br>?password=111%00admin      #因为ereg函数%00截断</p>
+<h2 id="PHP-sha1-函数漏洞"><a href="#PHP-sha1-函数漏洞" class="headerlink" title="PHP.sha1()函数漏洞"></a>PHP.sha1()函数漏洞</h2><p>PHP在处理哈希字符串时，会利用”!=”或”==”来对哈希值进行比较，它把每个以”0E”开头的哈希值都解释为0，所以如果两个不同的密码经过哈希以后，其哈希值都是以’0E’开头的，那么PHP会认为它们是相同的，都是0.<br>常见的sha1后以0E开头的值有aa3OFF9m、aaroZmOk、aaO8zKZF</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1M54y1q7Wc?spm_id_from=333.999.0.0">视频链接</a>，我是跟着这个视频学的</p>
+</blockquote>
 
       </section>
 
@@ -193,12 +154,10 @@
             <div class="article-nav-item layout-padding">
   <article class="card-container article-nav-card content-padding--primary soft-size--large soft-style--box">
     
-      <div class="card-cover" background-image-lazy data-img="/picture/cover/14.jpg"></div>
-    
     <div class="card-text">
       
-        <a href="/2021/12/12/%E9%87%91%E7%9B%BE%E6%9D%AF/" itemprop="url">
-          <h2 class="card-text--title text-ellipsis">金盾杯</h2>
+        <a href="/2022/01/23/webshell%E4%B8%8E%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E/" itemprop="url">
+          <h2 class="card-text--title text-ellipsis">webshell与文件上传漏洞</h2>
         </a>
       
       <div class="card-text--row">Newer</div>
@@ -210,12 +169,10 @@
             <div class="article-nav-item layout-padding">
   <article class="card-container article-nav-card content-padding--primary soft-size--large soft-style--box">
     
-      <div class="card-cover" background-image-lazy data-img="/picture/cover/13.jpg"></div>
-    
     <div class="card-text">
       
-        <a href="/2021/11/28/Crypto%E5%9C%A8%E7%BA%BF%E8%A7%A3%E5%AF%86%E7%BD%91%E7%AB%99/" itemprop="url">
-          <h2 class="card-text--title text-ellipsis">Crypto在线解密网站</h2>
+        <a href="/2022/01/22/hgame%E7%BA%BF%E4%B8%8A%E8%B5%9B/" itemprop="url">
+          <h2 class="card-text--title text-ellipsis">hgame线上赛</h2>
         </a>
       
       <div class="card-text--row">Older</div>

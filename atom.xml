@@ -6,7 +6,7 @@
   <link href="https://zhangkaibin0921.github.io/atom.xml" rel="self"/>
   
   <link href="https://zhangkaibin0921.github.io/"/>
-  <updated>2022-01-22T05:22:59.488Z</updated>
+  <updated>2022-01-23T11:33:35.474Z</updated>
   <id>https://zhangkaibin0921.github.io/</id>
   
   <author>
@@ -15,6 +15,50 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>webshell与文件上传漏洞</title>
+    <link href="https://zhangkaibin0921.github.io/2022/01/23/webshell%E4%B8%8E%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E/"/>
+    <id>https://zhangkaibin0921.github.io/2022/01/23/webshell%E4%B8%8E%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E/</id>
+    <published>2022-01-23T10:25:37.000Z</published>
+    <updated>2022-01-23T11:33:35.474Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="🎄webshell"><a href="#🎄webshell" class="headerlink" title="🎄webshell"></a><font id=1><strong>🎄webshell</strong></font></h2><p>🎄<font size=4 color=orange id=2><strong>什么是webshell</strong></font><br>webshell，简称网页后门，简单来说它是<font color=red>运行在web应用之上的远程控制程序</font></p><p>webshell其实就是一张网页，由PHP、JSP、ASP、APS.NET等这类web应用程序语言开发，但webshell并不具备常见网页的登录，例如登录、注册、信息展示等功能，一般会具备文件管理、端口扫描、提权、获取系统信息的功能。拥有比较完整功能的webshell，我们一般称之为<font color=red>大马</font>。功能简易的webshell称为<font color=red>小马</font>。除此之外还有一句话木马、菜刀马、脱裤马、内存马等等的名词，是对于webshell功能或特性的简称。</p><p>大马界面    <figure class="figure-image">      <img src="/picture/web4.png" alt="" loading="lazy" />      <figcaption></figcaption>    </figure>  </p><p>🎄<font size=4 color=orange id=3><strong>php一句话木马</strong></font></p><p><code>&lt;?php @eval($_POST[x]);?&gt;</code></p><p>@是错误控制运算符，当@放置在一个php表达式之前，该表达式可能产生的任何错误信息都将被忽略。<br>$_POST也可以改成$__GET或$_REQUEST，根据需求选择<br>例如：对该webshell发送一个POST请求，请求内容为x=phpinfo()</p>    <figure class="figure-image">      <img src="/picture/web5.png" alt="" loading="lazy" />      <figcaption></figcaption>    </figure>  <p>在根目录下新建一个php文档，把一句话木马写进去。<br>打开网站，post请求</p>    <figure class="figure-image">      <img src="/picture/web6 .png" alt="" loading="lazy" />      <figcaption></figcaption>    </figure>  <p>或者也可以尝试一些其他请求x=system(‘dir’);</p><p>🎄<font size=4 color=orange id=4><strong>webshell管理工具</strong></font></p><p>中国蚁剑是一款webshell管理工具，它主要面向于合法授权的渗透测试安全人员以及进行常规操作的网站管理员。中国蚁剑的核心代码模块均改版自伟大的中国菜刀。</p>    <figure class="figure-image">      <img src="/picture/web7.png" alt="" loading="lazy" />      <figcaption></figcaption>    </figure>  <p>一句话木马中的post参数就是为连接密码</p><p>中国蚁剑不支持edu.cn的域名，这是可以选用其他的webshell管理工具（中国菜刀、哥斯拉）</p><h2 id="🎄文件上传漏洞"><a href="#🎄文件上传漏洞" class="headerlink" title="🎄文件上传漏洞"></a><font id=1><strong>🎄文件上传漏洞</strong></font></h2><p>文件上传的功能是将<font color=red>文本文件上传至服务器</font>进行保存</p><p>文件上传漏洞是指文件上传功能<font color=red>没有对上传的文件进行合理严谨的过滤</font>，导致用户可以利用此功能，上传能<font color=red>被服务器解析执行的文件</font>，并通过此文件获得<font color=red>执行服务器端命令的能力。</font><br>（例如，如果对方是LAMP架构，是否能上传PHP的webshell到服务器端，然后通过访问上传后的文件地址，从而执行webshell中的代码</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h2 id=&quot;🎄webshell&quot;&gt;&lt;a href=&quot;#🎄webshell&quot; class=&quot;headerlink&quot; title=&quot;🎄webshell&quot;&gt;&lt;/a&gt;&lt;font id=1&gt;&lt;strong&gt;🎄webshell&lt;/strong&gt;&lt;/font&gt;&lt;/h2&gt;&lt;p&gt;🎄&lt;</summary>
+      
+    
+    
+    
+    
+    <category term="web" scheme="https://zhangkaibin0921.github.io/tags/web/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>web基础题型</title>
+    <link href="https://zhangkaibin0921.github.io/2022/01/22/web%E5%9F%BA%E7%A1%80%E9%A2%98%E5%9E%8B/"/>
+    <id>https://zhangkaibin0921.github.io/2022/01/22/web%E5%9F%BA%E7%A1%80%E9%A2%98%E5%9E%8B/</id>
+    <published>2022-01-22T11:32:12.000Z</published>
+    <updated>2022-01-23T00:59:33.124Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="PHP-erge-函数-00截断漏洞"><a href="#PHP-erge-函数-00截断漏洞" class="headerlink" title="PHP.erge()函数%00截断漏洞"></a>PHP.erge()函数%00截断漏洞</h2><p>erge()用途<br>用指定的模式匹配一个字符串中指定的字符串，如果匹配成功则返回true，否则返回false。搜索字母的字符是大小写敏感的。可选的参数规则包含一个数组的所有匹配表达式，它们被正则表达式的括号分组。<br>ereg(“^[0-9]+$“,$_<em>GET[‘password’])===true</em>#保证参数全是数字<br>strpos($_GET[‘password’],’admin’) #查找admin第一次在参数中出现的位置</p>    <figure class="figure-image">      <img src="/picture/web3.png" alt="" loading="lazy" />      <figcaption></figcaption>    </figure>  <p>可以构造payload<br>?password=111%00admin      #因为ereg函数%00截断</p><h2 id="PHP-sha1-函数漏洞"><a href="#PHP-sha1-函数漏洞" class="headerlink" title="PHP.sha1()函数漏洞"></a>PHP.sha1()函数漏洞</h2><p>PHP在处理哈希字符串时，会利用”!=”或”==”来对哈希值进行比较，它把每个以”0E”开头的哈希值都解释为0，所以如果两个不同的密码经过哈希以后，其哈希值都是以’0E’开头的，那么PHP会认为它们是相同的，都是0.<br>常见的sha1后以0E开头的值有aa3OFF9m、aaroZmOk、aaO8zKZF</p><blockquote><p><a href="https://www.bilibili.com/video/BV1M54y1q7Wc?spm_id_from=333.999.0.0">视频链接</a>，我是跟着这个视频学的</p></blockquote>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h2 id=&quot;PHP-erge-函数-00截断漏洞&quot;&gt;&lt;a href=&quot;#PHP-erge-函数-00截断漏洞&quot; class=&quot;headerlink&quot; title=&quot;PHP.erge()函数%00截断漏洞&quot;&gt;&lt;/a&gt;PHP.erge()函数%00截断漏洞&lt;/h2&gt;&lt;p&gt;erge</summary>
+      
+    
+    
+    
+    
+    <category term="web" scheme="https://zhangkaibin0921.github.io/tags/web/"/>
+    
+  </entry>
   
   <entry>
     <title>hgame线上赛</title>
@@ -412,26 +456,6 @@
     
     
     <category term="re" scheme="https://zhangkaibin0921.github.io/tags/re/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Hello World</title>
-    <link href="https://zhangkaibin0921.github.io/2021/10/24/hello-world/"/>
-    <id>https://zhangkaibin0921.github.io/2021/10/24/hello-world/</id>
-    <published>2021-10-24T08:30:40.072Z</published>
-    <updated>2022-01-17T08:00:20.124Z</updated>
-    
-    <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo new <span class="hljs-string">&quot;My New Post&quot;</span> <span class="hljs-comment">#双引号里面这篇博客的标题</span><br></code></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo server<br></code></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo generate<br></code></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p><h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo deploy<br></code></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://hexo.io/docs/&quot;&gt;documentation&lt;/a&gt; for</summary>
-      
-    
-    
-    
     
   </entry>
   
