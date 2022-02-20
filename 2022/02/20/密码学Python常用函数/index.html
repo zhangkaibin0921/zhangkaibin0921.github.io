@@ -1,0 +1,178 @@
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>密码学Python常用函数 | HappyCoder'Home</title><meta name="keywords" content="Crypto"><meta name="author" content="zhangkaibin"><meta name="copyright" content="zhangkaibin"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="这是个大坑啊，会慢慢填的  Python2和python3感觉差别还是挺大的（没有标注的代码默认是python3）Python2 在线工具 | 菜鸟工具 (runoob.com) python3字节转十六进制字符串 123s&#x3D;b&quot;flag&quot;print(s.hex())#打印结果：666c6167  十六进制数字转十进制(int函数的使用) 1234s&#x3D;b&quot;flag&amp;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="密码学Python常用函数">
+<meta property="og:url" content="https://zhangkaibin0921.github.io/2022/02/20/%E5%AF%86%E7%A0%81%E5%AD%A6Python%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0/index.html">
+<meta property="og:site_name" content="HappyCoder&#39;Home">
+<meta property="og:description" content="这是个大坑啊，会慢慢填的  Python2和python3感觉差别还是挺大的（没有标注的代码默认是python3）Python2 在线工具 | 菜鸟工具 (runoob.com) python3字节转十六进制字符串 123s&#x3D;b&quot;flag&quot;print(s.hex())#打印结果：666c6167  十六进制数字转十进制(int函数的使用) 1234s&#x3D;b&quot;flag&amp;">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://zhangkaibin0921.github.io/img/7.jpg">
+<meta property="article:published_time" content="2022-02-20T11:31:20.000Z">
+<meta property="article:modified_time" content="2022-02-20T12:07:00.981Z">
+<meta property="article:author" content="zhangkaibin">
+<meta property="article:tag" content="Crypto">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://zhangkaibin0921.github.io/img/7.jpg"><link rel="shortcut icon" href="/img/main.png"><link rel="canonical" href="https://zhangkaibin0921.github.io/2022/02/20/%E5%AF%86%E7%A0%81%E5%AD%A6Python%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: 'Just',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery@2/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery@2/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '密码学Python常用函数',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: false,
+  postUpdate: '2022-02-20 20:07:00'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="HappyCoder'Home" type="application/atom+xml">
+</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/tou.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data is-center"><div class="data-item"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">30</div></a></div><div class="data-item"><a href="/tags/"><div class="headline">Tags</div><div class="length-num">4</div></a></div><div class="data-item"><a href="/categories/"><div class="headline">Categories</div><div class="length-num">0</div></a></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> List</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/img/7.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">HappyCoder'Home</a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> List</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">密码学Python常用函数</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2022-02-20T11:31:20.000Z" title="Created 2022-02-20 19:31:20">2022-02-20</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2022-02-20T12:07:00.981Z" title="Updated 2022-02-20 20:07:00">2022-02-20</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="密码学Python常用函数"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post View:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><blockquote>
+<p>这是个大坑啊，会慢慢填的</p>
+</blockquote>
+<p>Python2和python3感觉差别还是挺大的（没有标注的代码默认是python3）<br><a target="_blank" rel="noopener" href="https://c.runoob.com/compile/6/">Python2 在线工具 | 菜鸟工具 (runoob.com)</a></p>
+<p>python3字节转十六进制字符串</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs routeros"><span class="hljs-attribute">s</span>=b&quot;flag&quot;<br><span class="hljs-builtin-name">print</span>(s.hex())<br><span class="hljs-comment">#打印结果：666c6167</span><br></code></pre></td></tr></table></figure>
+
+<p>十六进制数字转十进制(int函数的使用)</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs routeros"><span class="hljs-attribute">s</span>=b&quot;flag&quot;<br><span class="hljs-attribute">x</span>=s.hex()<br><span class="hljs-builtin-name">print</span>(int(x,16))   # x原本是十六进制转换为十进制<br><span class="hljs-comment">#打印结果：1718378855</span><br></code></pre></td></tr></table></figure>
+
+<figure class="highlight python-repl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs python-repl"><span class="hljs-meta">&gt;&gt;&gt;</span> <span class="python"><span class="hljs-built_in">int</span>(<span class="hljs-string">&#x27;12&#x27;</span>,<span class="hljs-number">16</span>)        <span class="hljs-comment"># 如果是带参数base的话，12要以字符串的形式进行输入，12 为 16进制 </span></span><br>18<br><span class="hljs-meta">&gt;&gt;&gt;</span> <span class="python"><span class="hljs-built_in">int</span>(<span class="hljs-string">&#x27;0xa&#x27;</span>,<span class="hljs-number">16</span>)  </span><br>10  <br><span class="hljs-meta">&gt;&gt;&gt;</span> <span class="python"><span class="hljs-built_in">int</span>(<span class="hljs-string">&#x27;10&#x27;</span>,<span class="hljs-number">8</span>)  </span><br>8<br></code></pre></td></tr></table></figure>
+
+<p>字符串转字节</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs routeros"><span class="hljs-attribute">s</span>=<span class="hljs-string">&quot;flag&quot;</span><br><span class="hljs-builtin-name">print</span>(s.encode())<br><span class="hljs-comment">#打印结果:b&#x27;flag&#x27;</span><br></code></pre></td></tr></table></figure>
+
+<p>字节转字符串</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs routeros"><span class="hljs-attribute">s</span>=b&quot;flag&quot;<br><span class="hljs-builtin-name">print</span>(s.decode(<span class="hljs-attribute">encoding</span>=<span class="hljs-string">&#x27;utf-8&#x27;</span>))<br><span class="hljs-comment">#打印结果:flag</span><br></code></pre></td></tr></table></figure>
+
+<p>字符转数字</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs perl"><span class="hljs-keyword">print</span>(<span class="hljs-keyword">ord</span>(<span class="hljs-string">&#x27;a&#x27;</span>))<br><span class="hljs-comment">#打印结果:97</span><br></code></pre></td></tr></table></figure>
+
+
+
+<p>python2字符串转十六进制</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs routeros"><span class="hljs-comment">#Python2</span><br><span class="hljs-attribute">s</span>=<span class="hljs-string">&quot;flag&quot;</span><br><span class="hljs-builtin-name">print</span> s.encode(<span class="hljs-string">&#x27;hex&#x27;</span>)<br><span class="hljs-comment">#打印结果：666c6167</span><br></code></pre></td></tr></table></figure>
+
+
+
+<hr>
+<blockquote>
+<p>[参考博客](<a target="_blank" rel="noopener" href="https://blog.csdn.net/ycf18331272870/article/details/88413838?ops_request_misc=%7B%22request_id%22:%22164535627316780261934174%22,%22scm%22:%2220140713.130102334..%22%7D&request_id=164535627316780261934174&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~all~baidu_landing_v2~default-1-88413838.pc_search_insert_es_download&utm_term=python3+%E5%AD%97%E7%AC%A6%E4%B8%B2%E8%BD%AC%E5%8D%81%E5%85%AD%E8%BF%9B%E5%88%B6&spm=1018.2226.3001.4187">python3 字符串、十六进制字符串、数字、字节之间的转换_羊驼的博客笔记-CSDN博客_python 十六进制字符串转十六进制</a>)<br>参考书目：CTF特训营</p>
+</blockquote>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">Author: </span><span class="post-copyright-info"><a href="mailto:undefined">zhangkaibin</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">Link: </span><span class="post-copyright-info"><a href="https://zhangkaibin0921.github.io/2022/02/20/%E5%AF%86%E7%A0%81%E5%AD%A6Python%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0/">https://zhangkaibin0921.github.io/2022/02/20/%E5%AF%86%E7%A0%81%E5%AD%A6Python%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Crypto/">Crypto</a></div><div class="post_share"><div class="social-share" data-image="/img/7.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/2022/02/14/sagemath%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8/"><img class="next-cover" src="/img/7.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">Next Post</div><div class="next_info">sagemath的安装与使用</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>Related Articles</span></div><div class="relatedPosts-list"><div><a href="/2021/11/28/Crypto%E5%9C%A8%E7%BA%BF%E8%A7%A3%E5%AF%86%E7%BD%91%E7%AB%99/" title="Crypto在线解密网站"><img class="cover" src="/picture/cover/13.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-11-28</div><div class="title">Crypto在线解密网站</div></div></a></div><div><a href="/2021/11/29/%E5%8F%A4%E5%85%B8%E5%AF%86%E7%A0%81%E5%8E%9F%E7%90%86%E5%AE%9E%E7%8E%B0/" title="古典密码原理实现"><img class="cover" src="/picture/cover/15.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-11-29</div><div class="title">古典密码原理实现</div></div></a></div><div><a href="/2022/01/10/RSA%E5%85%B1%E6%A8%A1%E6%94%BB%E5%87%BB/" title="RSA共模攻击和gmpy2、libnum常用函数"><img class="cover" src="/picture/cover/3.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-01-10</div><div class="title">RSA共模攻击和gmpy2、libnum常用函数</div></div></a></div><div><a href="/2022/01/15/RSA%E5%B0%8F%E5%AD%A6%E7%94%9F%E5%88%B7%E9%A2%98/" title="RSA小学生刷题"><img class="cover" src="/picture/cover/2.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-01-15</div><div class="title">RSA小学生刷题</div></div></a></div><div><a href="/2022/01/18/%E5%90%84%E7%A7%8D%E7%BC%96%E7%A0%81%E7%89%B9%E5%BE%81/" title="各种编码特征"><img class="cover" src="/picture/cover/12.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-01-18</div><div class="title">各种编码特征</div></div></a></div><div><a href="/2022/01/28/RSA%E8%84%9A%E6%9C%AC%E6%94%B6%E9%9B%86-%E4%B8%8D%E6%87%82%E5%8E%9F%E7%90%86%E7%9A%84%E9%82%A3%E7%A7%8D/" title="RSA脚本收集(不懂原理的那种)"><img class="cover" src="/picture/cover/16.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-01-28</div><div class="title">RSA脚本收集(不懂原理的那种)</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/tou.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">zhangkaibin</div><div class="author-info__description"></div></div><div class="card-info-data is-center"><div class="card-info-data-item"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">30</div></a></div><div class="card-info-data-item"><a href="/tags/"><div class="headline">Tags</div><div class="length-num">4</div></a></div><div class="card-info-data-item"><a href="/categories/"><div class="headline">Categories</div><div class="length-num">0</div></a></div></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/zhangkaibin0921" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:xxxxxx@gmail.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>Announcement</span></div><div class="announcement_content">一起向未来！</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Post</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2022/02/20/%E5%AF%86%E7%A0%81%E5%AD%A6Python%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0/" title="密码学Python常用函数"><img src="/img/7.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="密码学Python常用函数"/></a><div class="content"><a class="title" href="/2022/02/20/%E5%AF%86%E7%A0%81%E5%AD%A6Python%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0/" title="密码学Python常用函数">密码学Python常用函数</a><time datetime="2022-02-20T11:31:20.000Z" title="Created 2022-02-20 19:31:20">2022-02-20</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/02/14/sagemath%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8/" title="sagemath的安装与使用"><img src="/img/7.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="sagemath的安装与使用"/></a><div class="content"><a class="title" href="/2022/02/14/sagemath%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8/" title="sagemath的安装与使用">sagemath的安装与使用</a><time datetime="2022-02-14T11:19:16.000Z" title="Created 2022-02-14 19:19:16">2022-02-14</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/02/13/ctfshow-%E8%90%8C%E6%96%B0web1-7/" title="ctfshow 萌新web1~7"><img src="/img/7.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="ctfshow 萌新web1~7"/></a><div class="content"><a class="title" href="/2022/02/13/ctfshow-%E8%90%8C%E6%96%B0web1-7/" title="ctfshow 萌新web1~7">ctfshow 萌新web1~7</a><time datetime="2022-02-13T12:28:50.000Z" title="Created 2022-02-13 20:28:50">2022-02-13</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/02/13/misc%E5%85%B6%E4%BB%96%E4%B8%80%E4%BA%9B%E7%9F%A5%E8%AF%86%E7%82%B9/" title="misc其他一些知识点"><img src="/img/7.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="misc其他一些知识点"/></a><div class="content"><a class="title" href="/2022/02/13/misc%E5%85%B6%E4%BB%96%E4%B8%80%E4%BA%9B%E7%9F%A5%E8%AF%86%E7%82%B9/" title="misc其他一些知识点">misc其他一些知识点</a><time datetime="2022-02-13T11:29:39.000Z" title="Created 2022-02-13 19:29:39">2022-02-13</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/02/13/misc%E9%9F%B3%E9%A2%91/" title="misc音频隐写"><img src="/picture/cover/1.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="misc音频隐写"/></a><div class="content"><a class="title" href="/2022/02/13/misc%E9%9F%B3%E9%A2%91/" title="misc音频隐写">misc音频隐写</a><time datetime="2022-02-13T10:45:39.000Z" title="Created 2022-02-13 18:45:39">2022-02-13</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2022 By zhangkaibin</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Read Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Switch Between Light And Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle between single-column and double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="Setting"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="Back To Top"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
