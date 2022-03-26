@@ -4,6 +4,25 @@
   
     
     <entry>
+      <title>misc内存取证</title>
+      <link href="/2022/03/26/misc%E5%86%85%E5%AD%98%E5%8F%96%E8%AF%81/"/>
+      <url>/2022/03/26/misc%E5%86%85%E5%AD%98%E5%8F%96%E8%AF%81/</url>
+      
+        <content type="html"><![CDATA[<h2 id="volatility安装"><a href="#volatility安装" class="headerlink" title="volatility安装"></a>volatility安装</h2><p>我是用kali安装的<br><a href="https://www.volatilityfoundation.org/releases">https://www.volatilityfoundation.org/releases</a><br><img src="/picture/misc93.png"></p><p>看下kali的环境变量  <code>echo $PATH</code><br><img src="/picture/misc95.png"></p><p><img src="/picture/misc94.png"><br>可能会没有权限改名<br>terminal中用root用户使用mv指令<br>然后也用mv指令把刚才改名的那一个移动到任意一个环境变量中即可<br><code>mv /usr/local/sbin/volatility_2.6_lin64_standalone volatility</code><br><img src="/picture/misc96.png"><br>这就可以用了</p><h2 id="volatility使用"><a href="#volatility使用" class="headerlink" title="volatility使用"></a>volatility使用</h2><p>获取镜像基本信息<br><code>volatility -f ./memory imageinfo</code></p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> misc </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>命令执行漏洞</title>
       <link href="/2022/03/23/%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E/"/>
       <url>/2022/03/23/%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E/</url>
