@@ -4,6 +4,63 @@
   
     
     <entry>
+      <title>漏洞扫描工具</title>
+      <link href="/2022/04/10/%E6%BC%8F%E6%B4%9E%E6%89%AB%E6%8F%8F%E5%B7%A5%E5%85%B7/"/>
+      <url>/2022/04/10/%E6%BC%8F%E6%B4%9E%E6%89%AB%E6%8F%8F%E5%B7%A5%E5%85%B7/</url>
+      
+        <content type="html"><![CDATA[<h2 id="xray"><a href="#xray" class="headerlink" title="xray"></a>xray</h2><p><a href="https://docs.xray.cool/#/README">简介 - xray 安全评估工具文档</a></p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> web </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>nmap使用</title>
+      <link href="/2022/04/09/nmap%E4%BD%BF%E7%94%A8/"/>
+      <url>/2022/04/09/nmap%E4%BD%BF%E7%94%A8/</url>
+      
+        <content type="html"><![CDATA[<p>nmap是一个免费开放的网络扫描和嗅探的工具包,也叫网络映射器.</p><p>nmap强大之处在于简单.易用. 看一下nmap的基本功能</p><ul><li>探测一组主机是否在线</li><li>扫描主机端口,嗅探所提供的网络服务.</li><li>推断出主机所用的操作系统</li><li>丰富的脚本功能</li></ul><figure class="highlight dns"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs dns">-<span class="hljs-keyword">A</span>   　　　　　　　　:全面扫描. 综合扫描. 是一种完整扫描目标信息的扫描方式.   <br><br> --exclude　　　　　 : 排除指定的地址  例: nmap  <span class="hljs-number">192.168.1.0</span>/<span class="hljs-number">24</span>  --exclude <span class="hljs-number">192.168.1.1</span> 那么就不会对<span class="hljs-number">192.168.1.1</span>进行扫描,<br><br>--excludefile 　　　　: 排除指定的地址列表  例: nmap  <span class="hljs-number">192.168.1.0</span>/<span class="hljs-number">24</span>  --excludefile list.txt 那么就不会对list.txt里面的地址进行扫描,<br><br>-iL　　　　　　　　  : 扫描一个列表文件  例  nmap  -iL  list.txt<br><br>-sP　　　　　　　　: Ping扫描,效率高,返回信息少.  　　例: nmap -sP <span class="hljs-number">192.168.1.110</span> <br><br>-sV　　　　　　　　  : 版本探测 ,通过相应的端口探测对应的服务,根据服务的指纹识别出相应的版本.<br><br></code></pre></td></tr></table></figure><figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">nmap</span> <span class="hljs-number">192.168.1.110</span>     单个目标扫描<br><br><span class="hljs-attribute">nmap</span> <span class="hljs-number">192.168.1.110</span>    <span class="hljs-number">192.168.1.22</span>  <span class="hljs-number">192</span>.<span class="hljs-number">168</span>.<span class="hljs-number">1</span>. <span class="hljs-number">33</span>  多个目标扫描<br><br><span class="hljs-attribute">nmap</span> <span class="hljs-number">192.168.43.10</span>,<span class="hljs-number">20</span>,<span class="hljs-number">30</span>    多个目标扫描简写<br><br><span class="hljs-attribute">nmap</span> <span class="hljs-number">192.168.1.1</span>-<span class="hljs-number">30</span>　　      指定范围段扫描<br><br><span class="hljs-attribute">nmap</span> <span class="hljs-number">192</span>.<span class="hljs-number">168</span>.<span class="hljs-number">1</span>.*　　      扫描整个C段<br></code></pre></td></tr></table></figure><figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs vim">端口扫描：<span class="hljs-keyword">nmap</span> -sS  地址<br>默认扫描：<span class="hljs-keyword">nmap</span> 地址<br>指定端口扫描：<span class="hljs-keyword">nmap</span> –<span class="hljs-keyword">p</span> 端口 地址<br>完整扫描到端口、服务及版本：<span class="hljs-keyword">nmap</span> –v –sV 地址<br></code></pre></td></tr></table></figure>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> web </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>docker简单使用</title>
+      <link href="/2022/04/02/docker%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8/"/>
+      <url>/2022/04/02/docker%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8/</url>
+      
+        <content type="html"><![CDATA[<h2 id="安装docker-compose命令"><a href="#安装docker-compose命令" class="headerlink" title="安装docker-compose命令"></a>安装docker-compose命令</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash">apt upgrade<br><br>pip3 install docker-compose<br>docker-compose -v <br></code></pre></td></tr></table></figure><h2 id="开启漏洞环境"><a href="#开启漏洞环境" class="headerlink" title="开启漏洞环境"></a>开启漏洞环境</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">cd</span>  /django/CVE-2020-9402<br>sudo docker-compose build <span class="hljs-comment">#将镜像拉到本地</span><br>sudo docker-compose up -d<span class="hljs-comment">#启动漏洞环境</span><br>cat   阅读README文件,README文件中含有此项漏洞环境中的所有信息，包括但不限于漏洞介绍、搭建命令、访问方式以及测试验证指南<br></code></pre></td></tr></table></figure>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> web </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>分组密码DES</title>
       <link href="/2022/03/27/%E5%88%86%E7%BB%84%E5%AF%86%E7%A0%81DES/"/>
       <url>/2022/03/27/%E5%88%86%E7%BB%84%E5%AF%86%E7%A0%81DES/</url>
